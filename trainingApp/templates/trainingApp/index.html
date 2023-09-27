@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of trainings</title>
+</head>
+<body>
+    <header>
+
+    </header>
+
+    <main>
+    {% if list_training %}
+        <ul>
+        {% for training in list_training %}
+            <li>
+                <a href="{% url 'form' training.id %}">
+                    {{ training.name_training }}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Sorry!! No training are available.</p>
+    {% endif %}
+    </main>
+
+    <footer>
+
+    </footer>
+</body>
+</html>
