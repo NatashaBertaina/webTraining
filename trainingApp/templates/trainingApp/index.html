@@ -15,7 +15,7 @@
         <ul>
         {% for training in list_training %}
             <li>
-                <a href="{% url 'form' training.id %}">
+                <a href="{% url 'trainingApp:form' training.id %}">
                     {{ training.name_training }}
                 </a>
             </li>

@@ -24,14 +24,16 @@ class Deploy(models.Model):
     training = models.ForeignKey(Training, on_delete=models.CASCADE)
     deploy_image = models.ImageField(upload_to="trainingApp/images", blank=True)
     deploy_sound = models.FileField(upload_to="trainingApp/sound", blank=True)
+    question_text = models.CharField(max_length=500)
 
     def __str__(self):
         return f"Deploy ID: {self.id}"
 
 class Question(models.Model):
     deploy = models.ForeignKey(Deploy, on_delete=models.CASCADE)
-    question_text = models.CharField(max_length=500)
     choice_text = models.CharField(max_length=200)
+    is_correct = models.BooleanField(default=False)
+    count_choice = models.IntegerField(default=0)
 
     def __str__(self):
         return self.choice_text

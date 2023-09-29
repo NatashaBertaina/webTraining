@@ -4,8 +4,11 @@ from django.conf.urls.static import static
 
 from . import views
 
+app_name = 'trainingApp'
+
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("<int:training_id>/", views.form, name="form"),
-    path("<int:training_id>/results/", views.results, name="results"),
+    path("", views.IndexView.as_view(), name="index"),
+    path("<int:pk>/", views.FormView.as_view(), name="form"),
+    path("<int:pk>/results/", views.ResultsView.as_view(), name="results"),
+    path("<int:training_id>/answer/", views.answer, name="answer"),
 ]

@@ -11,23 +11,74 @@
     </header>
 
     <main>
-        <form action="{% url 'trainingApp:results' training.id}" method="post">
+        <form action="{% url 'trainingApp:answer' training.id %}" method="post">
         {% csrf_token %}
         <fieldset>
             <legend><h1>{{ training.name_training }}</h1></legend>
-            <ul>
             {% for deploy in training.deploy_set.all %}
-                <img src="{{ deploy.deploy_image.url }}" alt="Function Image">
-                <audio controls>
-                    <source src="{{ deploy.deploy_sound.url }}" type="audio/mpeg">
-                </audio>
-                {% for question in deploy.question_set.all %}
-                    <legend><h2>{{ question.question_text }}</h2></legend>
-                    <input type="radio" name="choice" id="choice {{ forloop.counter }}" value="{{ deploy.id }}">
-                    <label for="choice{{ forloop.counter }}">{{ question.choice_text }}</label><br>
-                {% endfor %}
+                {% if deploy.pk == 1 %}
+                        <img src="{{ deploy.deploy_image.url }}" alt="Function Image">
+                        <audio controls>
+                            <source src="{{ deploy.deploy_sound.url }}" type="audio/mpeg">
+                        </audio>
+
+                        <legend><h2>{{ deploy.question_text }}</h2></legend>
+                    <ul>
+                        {% for question in deploy.question_set.all %}
+                            <input type="radio" name="choice" id="choice {{ forloop.counter }}" value="{{ question.id }}">
+                            <label for="choice{{ forloop.counter }}">{{ question.choice_text }}</label><br>
+                        {% endfor %}
+                    </ul>
+                {% endif%}
             {% endfor %}
-            </ul>
+            {% for deploy in training.deploy_set.all %}
+                {% if deploy.pk == 2 %}
+                    <img src="{{ deploy.deploy_image.url }}" alt="Function Image">
+                    <audio controls>
+                        <source src="{{ deploy.deploy_sound.url }}" type="audio/mpeg">
+                    </audio>
+
+                    <legend><h2>{{ deploy.question_text }}</h2></legend>
+                <ul>
+                    {% for question in deploy.question_set.all %}
+                        <input type="radio" name="choice" id="choice {{ forloop.counter }}" value="{{ question.id }}">
+                        <label for="choice{{ forloop.counter }}">{{ question.choice_text }}</label><br>
+                    {% endfor %}
+                </ul>
+                {% endif%}
+            {% endfor %}
+            {% for deploy in training.deploy_set.all %}
+                {% if deploy.pk == 3 %}
+                    <img src="{{ deploy.deploy_image.url }}" alt="Function Image">
+                    <audio controls>
+                        <source src="{{ deploy.deploy_sound.url }}" type="audio/mpeg">
+                    </audio>
+
+                    <legend><h2>{{ deploy.question_text }}</h2></legend>
+                <ul>
+                    {% for question in deploy.question_set.all %}
+                        <input type="radio" name="choice" id="choice {{ forloop.counter }}" value="{{ question.id }}">
+                        <label for="choice{{ forloop.counter }}">{{ question.choice_text }}</label><br>
+                    {% endfor %}
+                </ul>
+                {% endif%}
+            {% endfor %}
+            {% for deploy in training.deploy_set.all %}
+                {% if deploy.pk == 4 %}
+                    <img src="{{ deploy.deploy_image.url }}" alt="Function Image">
+                    <audio controls>
+                        <source src="{{ deploy.deploy_sound.url }}" type="audio/mpeg">
+                    </audio>
+
+                    <legend><h2>{{ deploy.question_text }}</h2></legend>
+                <ul>
+                    {% for question in deploy.question_set.all %}
+                        <input type="radio" name="choice" id="choice {{ forloop.counter }}" value="{{ question.id }}">
+                        <label for="choice{{ forloop.counter }}">{{ question.choice_text }}</label><br>
+                    {% endfor %}
+                </ul>
+                {% endif%}
+            {% endfor %}
         </fieldset>
         <input type="submit" value="Results">
         </form>
