@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{ training.name_training }}</h1>
+
+    <img src="{{ deploy.deploy_image.url }}" alt="Imagen de Despliegue">
+    <audio controls>
+        <source src="{{ deploy.deploy_sound.url }}" type="audio/mpeg">
+        Tu navegador no soporta la reproducción de audio.
+    </audio>
+
+    <h2>{{ question.choice_text }}</h2>
+    <form method="post" action="{% url 'trainingApp:question' training.id question.id %}">
+        {% csrf_token %}
+        <input type="radio" name="choice" value="{{ question.id }}">
+        <label for="choice">{{ question.choice_text }}</label><br>
+
+        <!-- Agrega botones para avanzar y retroceder entre preguntas -->
+        <a href="{% url 'trainingApp:question' training.id question.id-1 %}">Anterior</a>
+        <a href="{% url 'trainingApp:question' training.id question.id+1 %}">Siguiente</a>
+
+        <input type="submit" value="Responder">
+</body>
+</html>

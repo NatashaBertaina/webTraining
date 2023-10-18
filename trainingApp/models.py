@@ -5,9 +5,6 @@ from django.utils import timezone
 from django.contrib import admin
 from django.core.files.storage import FileSystemStorage
 
-ifs = FileSystemStorage(location="/media/images")
-sfs = FileSystemStorage(location="/media/sound")
-
 class Training(models.Model):
     name_training = models.CharField(max_length=200)
     pub_date = models.DateTimeField("upload date")

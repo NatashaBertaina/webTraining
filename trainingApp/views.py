@@ -1,12 +1,10 @@
-from typing import Any
-from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.views.generic.edit import FormView
 
-
+from .forms import QuestionForm
 from .models import Training, Deploy, Question
 
 
@@ -19,8 +17,11 @@ class IndexView(generic.ListView):
 
 
 class FormView(FormView):
-    #model = Training
+    model = Training
     template_name = "trainingApp/form.html"
+    image = Deploy.objects.values('deploy_image')
+    sound = Deploy.objects.values('deploy_sound')
+    form_class = QuestionForm
 
 
 class ResultsView(generic.DetailView):
