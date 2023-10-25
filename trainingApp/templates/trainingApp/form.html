@@ -12,17 +12,32 @@
 
     <main>
         <h1>{{ training.name_training }}</h1>
-        <section>
-            <form method="post">
+        
+        <form method="POST">
             {% csrf_token %}
-                <h3>{{ deploy.question_text_p }}</h3>
-                <fieldset>
-                    <legend>Choose an option:</legend>
-                    <input type="checkbox" name="choice_text" id="choice {{ forloop.counter }}" value="{{ choice_text.id }}"/>
-                    <label for="choice {{ forloop.counter }}">{{ choice_text }}</label><br>
-                </fieldset>
-            </form>
-        </section>
+            
+            <div class="form-deploy">
+                <img src="{{ form.instance.deploy_image.url }}" alt="Displayed Image">
+                <audio controls>
+                    <source  src="{{ form.instance.deploy_sound.url }}" type="audio/mpeg">
+            Your browser does not support audio playback.
+                </audio>
+            </div>
+            <div class="form-question">
+                <p>What you saw and/or heard is a function of what type: (check one option below)</p>
+            </div>
+            <div class="form-choice">
+                <ul>
+                    {% for field in form.visible_fields %}
+                        <li>
+                            {{ field }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <input type="submit" value="send">
+        </form>
+
     </main>
 
     <footer>

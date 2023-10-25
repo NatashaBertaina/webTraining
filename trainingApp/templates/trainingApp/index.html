@@ -11,19 +11,22 @@
     </header>
 
     <main>
-    {% if list_training %}
-        <ul>
-        {% for training in list_training %}
-            <li>
-                <a href="{% url 'trainingApp:form' training.id %}">
-                    {{ training.name_training }}
-                </a>
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>Sorry!! No training are available.</p>
-    {% endif %}
+        <h1>List of Training:</h1>
+
+        
+        {% if list_training %}
+            <ul>
+            {% for training in list_training %}
+                <li>
+                    <a href="{% url 'trainingApp:question' training.id %}">
+                        {{ training.name_training }}
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>Sorry!! No training are available.</p>
+        {% endif %}
     </main>
 
     <footer>
