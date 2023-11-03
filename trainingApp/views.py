@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404, render
+import random
+
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
-from django.views import generic
+from django.views import generic, View
 from django.views.generic.edit import FormView
 from random import shuffle, choice
 
@@ -17,24 +18,58 @@ class IndexView(generic.ListView):
         return Training.objects.order_by("pub_date")[:5]
 
 
-class QuestionFormView(FormView):
-    form_class = QuestionForm
-    template_name = 'trainingApp/form.html'
+class DeployDetailView(View):
+    template_name = 'trainingApp/forms.html'
 
-    def get_form(self):
-        deploy =Deploy.objects.filter(deploy_image__isnull=False, deploy_sound__isnull=False).order_by('?').first()
-        if deploy:
-            return self.form_class(instance=deploy)
-        return None
+    def get(self, request, deploy_id):
+        deploy = get_object_or_404(Deploy, pk=deploy_id)
+
+        form = QuestionForm(instance=deploy)
+
+        #crear una lista random con los despliegues
+        rnd_deploy = list(Deploy.objects.values_list('pk', flat=True))
+        request.session['rnd_deploy'] = random.shuffle(rnd_deploy)
+        #Guardo el índice de la lista
+        request.session['index'] = 0
+
+
+        return render(request, self.template_name, {'deploy': deploy, 'form': form})
     
-    def form_valid(self, form):
-        deploy = form.instance
-        options = ['ch_d1', 'ch_d2', 'ch_d3', 'ch_d4']
-        selected_option = choice(options)
-        deploy.user_response = selected_option
-        deploy.save()
+    def post(self, request, deploy_id): 
+        deploy = get_object_or_404(Deploy, pk=deploy_id)
+        form = QuestionForm(request.POST, instance=deploy)
+        if form.is_valid():
+            form.save()
 
-        return HttpResponseRedirect('trainingApp/results.html')
+            #Redirijimos al usuario al siguiente depliegue
+            #next_deploy = self.get_next_deploy(deploy)
+            #if next_deploy:
+                #return redirect('forms', deploy_id=next_deploy.id)
+            #else:
+                #return redirect('results')
+
+        else:
+            #Con lo siguiente, si el formulario no es válido, renderizaré la plantilla con el formulario una vez más, resaltando lo que falta para poder enviarlo.
+            return render(request, self.template_name, {'deploy':deploy, 'form':form})
+
+    def next_deploy(request):
+        if 'rnd_deploy' in request.session and 'index' in request.session:
+            deploy_new = request.session['rnd_deploy']
+            index = request.session['index']
+
+            if index < len(deploy_new) - 1:
+                request.session['index'] += 1
+            
+        return render(request, 'forms.html')
+    
+    def prev_deploy(request):
+        if 'rnd_deploy' in request.session and 'index' in request.session:
+            index = request.session['index']
+
+            if index > 0:
+                request.session['index'] -= 1
+        
+        return render(request, 'forms.html')
 
 
 class ResultsView(generic.DetailView):
@@ -42,20 +77,3 @@ class ResultsView(generic.DetailView):
     template_name = "trainingApp/results.html"
 
 
-def answer(request, training_id):
-    training = get_object_or_404(Training, pk=training_id)
-    try:
-        selected_choice = training.question_set.get(pk=request.POST["choice"])
-    except (KeyError, Deploy.DoesNotExist):
-        return render(
-            request,
-            "trainingApp/form.html",
-            {
-                "training": training,
-                "error_message": "You didn't select a choice.",
-            },
-        )
-    else:
-        selected_choice.count_choice += 1 
-        selected_choice.save()
-        return HttpResponseRedirect(reverse("trainingApp:results", args=(training.id,)))

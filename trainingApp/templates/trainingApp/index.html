@@ -3,22 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'trainingApp/style/style.css' %}">
+
     <title>List of trainings</title>
 </head>
 <body>
     <header>
-
+        <nav class="navbar navbar-light back">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="/static/trainingApp/images/Logo1.png" alt="logo_ibio" width="60" height="60">
+                    Trainings
+                </a>
+            </div>
+        </nav>
     </header>
 
     <main>
         <h1>List of Training:</h1>
 
-        
+        <div class="container">
         {% if list_training %}
-            <ul>
+            <ul class="list-group">
             {% for training in list_training %}
-                <li>
-                    <a href="{% url 'trainingApp:question' training.id %}">
+                <li class="list-group-item">
+                    <a href="{% url 'trainingApp:forms' training.id %}">
                         {{ training.name_training }}
                     </a>
                 </li>
@@ -27,10 +42,21 @@
         {% else %}
             <p>Sorry!! No training are available.</p>
         {% endif %}
+        </div>
     </main>
 
-    <footer>
-
+    <footer class="back">
+        <div class="row">
+            <div class="col align-self-start">
+                <p class="h6">Contact:</p>
+                <p>sonounoteam@gmail.com</p>
+            </div>
+            <div class="col align-self-center"></div>
+            <div class="col 
+            align-self-end">
+                <img src="/static/trainingApp/images/Logo2.png" alt="logos conicet-UM" width="60" height="60">
+            </div>
+        </div>
     </footer>
 </body>
 </html>

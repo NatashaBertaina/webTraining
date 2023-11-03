@@ -13,16 +13,6 @@
     <main>
         <h1>{{ training.name_training }}</h1>
 
-        <ul>
-        {% for question in deploy.question_set.all %}
-            {% if question.is_correct %}
-                <li>
-                    {{ question.choice_text }} -- {{ question.count_choice }} 
-                    <p>Thats is correct!</p>
-                </li>
-            {% endif %}
-        {% endfor %}
-        </ul>
 
         <a href="{% url 'trainingApp:form' training.id %}">Do you want to do the training one more time?</a>
     </main>

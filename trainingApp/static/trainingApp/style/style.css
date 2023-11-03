@@ -1,0 +1,66 @@
+.back{
+    background-color: rgb(97, 119, 59);
+}
+
+main{
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+}
+
+h1 {
+    text-align: center;
+    text-decoration-line: underline;
+    margin-bottom: 3rem;
+}
+
+form{
+    padding: 0rem 4rem 0rem 4rem;
+}
+
+.form-deploy {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 2fr 1fr 1fr 1fr;
+    grid-template-areas:
+    "image image image"
+    "audio audio audio"
+    "question question question";
+}
+
+.form-deploy-image {
+    grid-area: image;
+}
+
+.im{
+    margin: 1rem 0rem 1rem 0rem;
+    padding-top: 1rem;
+    border-style: groove;
+    border-width: 1px;
+    border-color: rgb(97, 119, 59);
+}
+
+.form-deploy-audio {
+    grid-area: audio;
+}
+
+.form-question{
+    grid-area: question;
+    margin: 1rem 0rem 1rem 0rem;
+}
+
+.page-button {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-areas:
+    ".  pagination  .";
+    margin: 1rem;
+}
+
+.container-pagination {
+    grid-area: pagination;
+}
+
+footer{
+    padding: 1rem 3rem 1rem 3rem;
+}

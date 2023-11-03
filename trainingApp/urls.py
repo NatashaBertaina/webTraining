@@ -8,7 +8,6 @@ app_name = 'trainingApp'
 
 urlpatterns = [
     path("", views.IndexView.as_view(), name="index"),
-    path("<int:pk>/", views.QuestionFormView.as_view(), name="question"),
+    path("<int:deploy_id>/", views.DeployDetailView.as_view(), name="forms"),
     path("<int:pk>/results/", views.ResultsView.as_view(), name="results"),
-    path("<int:training_id>/answer/", views.answer, name="answer"),
 ]
