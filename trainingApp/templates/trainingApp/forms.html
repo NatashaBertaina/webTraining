@@ -18,7 +18,7 @@
         <nav class="navbar navbar-light back">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="/static/trainingApp/images/Logo1.png" alt="logo_ibio" width="60" height="60">
+                    <img src="/static/trainingApp/images/logo1.png" alt="logo_ibio" width="60" height="60">
                     Trainings
                 </a>
             </div>
@@ -59,12 +59,12 @@
                         <nav aria-label="...">
                             <ul class="pagination">
                                 <li class="page-item disabled">
-                                    <a class="page-link" href="{% url 'trainingApp:forms' deploy.id %}" tabindex="-1" aria-disabled="true">
+                                    <a class="page-link" href="{% url 'trainingApp:prev' %}" tabindex="-1" aria-disabled="true">
                                             Previous
                                     </a>
                                 </li>
                                 <li class="page-item">
-                                    <a class="page-link" href="{% url 'trainingApp:forms' deploy.id %}">Next</a>
+                                    <a class="page-link" href="{% url 'trainingApp:next' %}">Next</a>
                                 </li>
                             </ul>
                         </nav>
@@ -89,7 +89,7 @@
             <div class="col align-self-center"></div>
             <div class="col 
             align-self-end">
-                <img src="/static/trainingApp/images/Logo2.png" alt="logos conicet-UM" width="60" height="60">
+                <img src="/static/trainingApp/images/logo2.png" alt="logos conicet-UM" width="60" height="60">
             </div>
         </div>
     </footer>
