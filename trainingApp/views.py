@@ -76,7 +76,5 @@ def prev_deploy(request):
 
 
 
-class ResultsView(generic.DetailView):
+class ResultsView(generic.ListView):
     template_name = "trainingApp/results.html"
-
-    
