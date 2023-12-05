@@ -4,12 +4,17 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic, View
 from django.views.generic.edit import FormView
-from random import shuffle, choice
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
 from .forms import QuestionForm
 from .models import Training, Deploy
 
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.models import User
+from django.db import IntegrityError
+from django.contrib.auth.decorators import login_required
+
+cont = 0
 
 class IndexView(generic.ListView):
     template_name = "trainingApp/index.html"
@@ -22,47 +27,48 @@ class IndexView(generic.ListView):
 class DeployDetailView(View):
     template_name = 'trainingApp/forms.html'
 
+
     def get(self, request, deploy_id):
         deploy = get_object_or_404(Deploy, pk=deploy_id)
 
-        form = QuestionForm(instance=deploy)
-
+        self.form = QuestionForm(instance=deploy)
+        
         #crear una lista random con los despliegues
         request.session['rnd_deploy'] = list(Deploy.objects.values_list('pk', flat=True))
         #Guardo el índice de la lista
-        request.session['index'] = request.session.get('index', 0)
+        #request.session['index'] = request.session.get('index', 0)
+        request.session['index'] = 0
 
-
-        return render(request, self.template_name, {'deploy': deploy, 'form': form})
+        return render(request, self.template_name, {'deploy': deploy, 'form':self.form})
     
     def post(self, request, deploy_id): 
         deploy = get_object_or_404(Deploy, pk=deploy_id)
-        form = QuestionForm(request.POST, instance=deploy)
-        if form.is_valid():
-            form.save()
+        self.form = QuestionForm(request.POST, instance=deploy)
+        if self.form.is_valid():
+            self.form.save()
             return redirect('next_deploy_view')
-            #Redirijimos al usuario al siguiente depliegue
-            #next_deploy = self.get_next_deploy(deploy)
-            #if next_deploy:
-                #return redirect('forms', deploy_id=next_deploy.id)
-            #else:
-                #return redirect('results')
+            
 
         else:
             #Con lo siguiente, si el formulario no es válido, renderizaré la plantilla con el formulario una vez más, resaltando lo que falta para poder enviarlo.
-            return render(request, self.template_name, {'deploy':deploy, 'form':form})
-
+            return render(request, self.template_name, {'deploy':deploy, 'form':self.form})
+        
+@login_required
 def next_deploy(request):
+    global cont
     rnd_deploy = request.session.get('rnd_deploy')
-    index = request.session.get('index', 0)
+        #index = request.session.get('index', 0)
+    print(rnd_deploy)
+    print(cont)
 
-    if rnd_deploy and index < len(rnd_deploy) - 1:
-        request.session['index'] += 1
-        next_deploy_id = rnd_deploy[request.session['index']]
-        return redirect('forms', deploy_id=next_deploy_id)
-    else: 
-        return redirect('results')
+    if cont < (len(rnd_deploy) - 1):
+        cont += 1
+        print(cont)
+        return redirect('trainingApp:forms', deploy_id=request.session['rnd_deploy'][cont])
+    else:
+        return redirect('trainingApp:results')
 
+@login_required
 def prev_deploy(request):
     index = request.session.get('index', 0)
     rnd_deploy = request.session.get('rnd_deploy')
@@ -70,31 +76,33 @@ def prev_deploy(request):
     if rnd_deploy and index > 0:
         request.session['index'] -= 1
         prev_deploy_id = rnd_deploy[request.session['index']]
-        return redirect('forms', deploy_id=prev_deploy_id)
+        return redirect('trainingApp:forms', deploy_id=prev_deploy_id)
     else:
-        return redirect('forms', deploy_id=request.session['rnd_deploy'][index])
+        return redirect('trainingApp:forms', deploy_id=request.session['rnd_deploy'][index])
 
 
-
-def results(request):
-    rnd_deploy = request.session.get('rnd_deploy')
-    if rnd_deploy:
-        paginator = Paginator(rnd_deploy, 1)
-        page = request.GET.get('page')
-        try:
-            deploy_list = paginator.page(page)
-        except PageNotAnInteger:
-            deploy_list = paginator.page(1)
-        except EmptyPage:
-            deploy_list = paginator.page(paginator.num_pages)
-
-        return render(request, 'result.html', {'deploy_list':deploy_list})
-    
-    else:
-        return render
-
-
-class ResultsView(generic.DetailView):
-    model = Training
+class ResultsView(generic.ListView):
     template_name = "trainingApp/results.html"
 
+
+##Logica de users
+
+def home(request):
+    return render(request, 'trainingApp/home.html')
+
+def signup(request):
+    if request.method == 'GET':
+        return render(request, 'trainingApp/signup.html', {"form": UserCreationForm})
+    else:
+
+        if request.POST["password1"] == request.POST["password2"]:
+            try:
+                user = User.objects.create_user(
+                    request.POST["username"], password=request.POST["password1"])
+                user.save()
+                login(request, user)
+                return redirect('trainingApp:training')
+            except IntegrityError:
+                return render(request, 'trainingApp/signup.html', {"form": UserCreationForm, "error": "Username already exists."})
+        else:
+            return render(request, 'trainingApp/signup.html', {"form": UserCreationForm, "error": "Passwords did not match."})

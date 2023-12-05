@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.utils import timezone
 from django.contrib import admin
+from django.contrib.auth.models import User
 
 class Training(models.Model):
     name_training = models.CharField(max_length=200)
@@ -24,28 +25,27 @@ class Deploy(models.Model):
     ch_d3 = models.CharField(max_length=50, null=True)
     ch_d4 = models.CharField(max_length=50, null=True)
 
-    #Respuesta correcta
-    correct_answer = models.CharField(max_length=50, null=True)
+    user_response = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return f"Deploy: {self.id}"
-
-# Clase intermedia entre el training y usuario, para guardar respuestas asociadas a un training y al usuario
+  
+    
 class User_Training(models.Model):
     #foreing Key de training
     training = models.ForeignKey(Training, on_delete=models.CASCADE)
     #foreing Key de usuario
-    User = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):
         return f"User_Training: {self.id}"
-
+    
 #Clase para guardar la respuesta del usuario de cada deploy
 class deploy_Answer(models.Model):
     #foreing Key de User_Training
     User_Training = models.ForeignKey(User_Training, on_delete=models.CASCADE)
     #foreing Key de deploy
-    deploy = models.ForeignKey(deploy, on_delete=models.CASCADE)
+    deploy = models.ForeignKey(Deploy, on_delete=models.CASCADE)
 
     #Respuesta a deploy
     user_response = models.CharField(max_length=50, null=True)
