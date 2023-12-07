@@ -8,8 +8,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
-from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
+from .forms import SignupForm
+from django.contrib import messages
 
 ##Logica de users
 
@@ -18,20 +19,18 @@ def home(request):
 
 def signup(request):
     if request.method == 'GET':
-        return render(request, 'userApp/signup.html', {"form": UserCreationForm})
+        form = SignupForm()
+        return render(request, 'userApp/signup.html', {"form": form})
     else:
-
-        if request.POST["password1"] == request.POST["password2"]:
-            try:
-                user = User.objects.create_user(
-                    request.POST["username"], password=request.POST["password1"])
-                user.save()
-                login(request, user)
-                return redirect('trainingApp:training')
-            except IntegrityError:
-                return render(request, 'userApp/signup.html', {"form": UserCreationForm, "error": "Username already exists."})
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request,"Your account is crated successfully")
+            login(request, user)
+            return redirect('trainingApp:training')
         else:
-            return render(request, 'userApp/signup.html', {"form": UserCreationForm, "error": "Passwords did not match."})
+            messages.error(request, "Error")
+            return render(request, 'userApp/signup.html', {"form": form})
         
 @login_required
 def signout(request):
@@ -43,10 +42,11 @@ def signin(request):
     if request.method == 'GET':
         return render(request, 'userApp/signin.html', {"form": AuthenticationForm})
     else:
-        user = authenticate(
-            request, username=request.POST['username'], password=request.POST['password'])
+        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         if user is None:
-            return render(request, 'userApp/signin.html', {"form": AuthenticationForm, "error": "Username or password is incorrect."})
-
-        login(request, user)
-        return redirect('trainingApp:training')
+            messages.error(request, "Username or Password incorrect")
+            return render(request, 'userApp/signin.html', {"form": AuthenticationForm})
+        else:
+            login(request, user)
+            messages.success(request,f"Your are logged in as {request.POST['username']}")
+            return redirect('trainingApp:training')
