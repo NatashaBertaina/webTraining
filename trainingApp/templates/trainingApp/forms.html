@@ -1,97 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "userApp/base.html" %}
 
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'trainingApp/style/style.css' %}">
-
-    <title>{{ training.name_training }}</title>
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-light back">
-            <div class="container">
-                <a class="navbar-brand" href="#">
-                    <img src="/static/trainingApp/images/logo1.png" alt="logo_ibio" width="60" height="60">
-                    Trainings
-                </a>
-            </div>
-        </nav>
-    </header>
+{% block content %}
+ 
+<main>
     
-    <main>
-        
-        <form method="POST" action="{% url 'trainingApp:forms' deploy.id %}">
-            {% csrf_token %}
+    <form method="POST" action="{% url 'trainingApp:forms' deploy.id %}">
+        {% csrf_token %}
 
-            <section class="form-deploy">
-                <div class="form-deploy-image">
-                    <img src="{{ form.instance.deploy_image.url }}" class="img-fluid im" alt="Displayed Image">
-                </div>
-                <div class="form-deploy-audio">
-                    <audio controls>
-                        <source  src="{{ form.instance.deploy_sound.url }}" type="audio/mpeg">
-                        Your browser does not support audio playback.
-                    </audio>
-                </div>
-                <div class="form-question">
-                    <p class="h5">What you saw and/or heard is a function of what type: (check one option below)</p>
-                </div>
-                <div class="form-choice">
-                    <ul>
-                        {% for field in form.visible_fields %}
-                            <li>
-                                {{ field }}
+        <section class="form-deploy">
+            <div class="form-deploy-image">
+                <img src="{{ form.instance.deploy_image.url }}" class="img-fluid im" alt="Displayed Image">
+            </div>
+            <div class="form-deploy-audio">
+                <audio controls>
+                    <source  src="{{ form.instance.deploy_sound.url }}" type="audio/mpeg">
+                    Your browser does not support audio playback.
+                </audio>
+            </div>
+            <div class="form-question">
+                <p class="h5">What you saw and/or heard is a function of what type: (check one option below)</p>
+            </div>
+            <div class="form-choice">
+                <ul>
+                    {% for field in form.visible_fields %}
+                        <li>
+                            {{ field }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+        <section class="page-button">
+            <div class="container-pagination">
+                <div class="row justify-content-center">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="{% url 'trainingApp:prev' %}" tabindex="-1" aria-disabled="true">
+                                        Previous
+                                </a>
                             </li>
-                        {% endfor %}
-                    </ul>
+                            <li class="page-item">
+                                <a class="page-link" href="{% url 'trainingApp:next' %}">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-            </section>
-            <section class="page-button">
-                <div class="container-pagination">
-                    <div class="row justify-content-center">
-                        <nav aria-label="...">
-                            <ul class="pagination">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="{% url 'trainingApp:prev' %}" tabindex="-1" aria-disabled="true">
-                                            Previous
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="{% url 'trainingApp:next' %}">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </section>
-            <section class="bar-p">
-                <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                </div>
-            </section>
-        </form>
-
-    </main>
-
-    <footer class="back">
-        <div class="row">
-            <div class="col align-self-start">
-                <p class="h6">Contact:</p>
-                <p>sonounoteam@gmail.com</p>
             </div>
-            <div class="col align-self-center"></div>
-            <div class="col 
-            align-self-end">
-                <img src="/static/trainingApp/images/logo2.png" alt="logos conicet-UM" width="60" height="60">
+        </section>
+        <section class="bar-p">
+            <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
             </div>
-        </div>
-    </footer>
-</body>
-</html>
+        </section>
+    </form>
+
+</main>
+{% endblock %}

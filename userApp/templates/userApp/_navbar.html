@@ -15,21 +15,21 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a href="/trainingApp" class="nav-link">Home</a>
+          <a href="/" class="nav-link">Home</a>
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="/trainingApp/training">Trainings</a>
+          <a class="nav-link" href="/trainingApp/">Trainings</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/trainingApp/logout">Logout</a>
+          <a class="nav-link" href="/userApp/logout">Logout</a>
         </li>
         {% else %}
         <li class="nav-item">
-          <a href="/trainingApp/signin" class="nav-link">Login</a>
+          <a href="/userApp/signin" class="nav-link">Login</a>
         </li>
         <li class="nav-item">
-          <a href="/trainingApp/signup" class="nav-link">Register</a>
+          <a href="/userApp/signup" class="nav-link">Register</a>
         </li>
         {% endif %}
       </ul>

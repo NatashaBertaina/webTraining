@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'trainingApp.apps.TrainingappConfig',
+    'userApp.apps.UserappConfig',
+
 
     'bootstrap5',
 ]
@@ -68,6 +70,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # Enable {{ STATIC_URL }} and {{ MEDIA_URL }}
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
             ],
         },
     },
@@ -135,5 +140,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')#Define ruta
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ##Si no esta autenticado se redirecciona al signup
-LOGIN_REDIRECT_URL = 'trainingApp:signup'
-LOGIN_URL = 'trainingApp:signup'
+LOGIN_REDIRECT_URL = 'userApp:signup'
+LOGIN_URL = 'userApp:signup'
