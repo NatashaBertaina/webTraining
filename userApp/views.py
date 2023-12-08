@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import SignupForm
 from django.contrib import messages
+from .models import Trainee
 
 ##Logica de users
 
@@ -25,8 +26,16 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
+            # Crear el objeto Trainee y se relaciona con el usuario
+            Trainee.objects.create(
+                user=user,
+                age=form.cleaned_data['age'],
+                educationalLevel=form.cleaned_data['educationalLevel'],
+                occupation=form.cleaned_data['occupation']
+            )
             messages.success(request,"Your account is crated successfully")
             login(request, user)
+            
             return redirect('trainingApp:training')
         else:
             messages.error(request, "Error")
