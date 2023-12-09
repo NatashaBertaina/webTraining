@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic, View
 from django.views.generic.edit import FormView
+from django.views.generic import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import QuestionForm
 from .models import Training, Deploy
@@ -13,13 +14,18 @@ from django.contrib.auth.decorators import login_required
 
 cont = 0
 
-class IndexView(generic.ListView):
-    template_name = "trainingApp/index.html"
-    context_object_name = "list_training"
-
-    def get_queryset(self):
-        return Training.objects.order_by("pub_date")[:5]
-
+class TrainingList(ListView):
+    model = Training 
+    template_name = "trainingApp/training_List.html"
+    context_object_name = "training_list"
+    queryset = Training.objects.all().order_by('id')
+    paginate_by = 1  # Especifica la cantidad de objetos por página
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['message'] = 'Listado de productos'
+        return context
 
 class DeployDetailView(View):
     template_name = 'trainingApp/forms.html'

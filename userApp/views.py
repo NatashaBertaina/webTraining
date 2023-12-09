@@ -16,7 +16,7 @@ from .models import Trainee
 ##Logica de users
 
 def home(request):
-    return render(request, 'userApp/home.html')
+    return render(request, 'home.html')
 
 def signup(request):
     if request.method == 'GET':
@@ -36,7 +36,7 @@ def signup(request):
             messages.success(request,"Your account is crated successfully")
             login(request, user)
             
-            return redirect('trainingApp:training')
+            return redirect('trainingApp:training_List')
         else:
             messages.error(request, "Error")
             return render(request, 'userApp/signup.html', {"form": form})
@@ -58,4 +58,4 @@ def signin(request):
         else:
             login(request, user)
             messages.success(request,f"Your are logged in as {request.POST['username']}")
-            return redirect('trainingApp:training')
+            return redirect('trainingApp:training_List')

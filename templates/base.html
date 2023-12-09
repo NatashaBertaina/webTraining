@@ -14,21 +14,12 @@
   </head>
   <body>
     <!-- Se incluye la navbar -->
-    {% include 'userApp/_navbar.html' %}
+    {% include '_navbar.html' %}
     
     <div class="container my-2">
-      
-      <!-- Logica para mostrar mensajes del modulo message de django -->
-      {% for message in messages %}
-      <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
-          {% if form.errors %}
-          <strong>Message: </strong> {{form.errors}}
-          {% else %}
-          <strong>Message: </strong> {{message}}
-          {% endif %}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-      {% endfor %}
+
+      <!-- Se incluye mensajes -->
+      {% include 'message.html' %}  
 
       {% block content %}
       {% endblock content %}
@@ -36,7 +27,7 @@
     </div>
 
     <!-- Se incluye el footer -->
-    {% include 'userApp/footer.html' %}
+    {% include 'footer.html' %}
     
   </body>
 </html>
