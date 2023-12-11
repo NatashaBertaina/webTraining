@@ -1,10 +1,10 @@
 from django import forms
-from .models import Deploy
+from .models import DeployAnswer
 
 class QuestionForm(forms.ModelForm):
 
     class Meta:
-        model = Deploy
+        model = DeployAnswer
         fields = ['user_response']
 
     def __init__(self, *args, **kwargs):

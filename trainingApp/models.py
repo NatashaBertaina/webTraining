@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from userApp.models import Trainee
 
 
 class Training(models.Model):
@@ -44,12 +45,13 @@ class Deploy(models.Model):
     def __str__(self):
         return f"Deploy: {self.id}"
   
-"""""
+
 class TraineeTraining(models.Model):
     #foreing Key de training
     training = models.ForeignKey(Training, on_delete=models.CASCADE)
     #foreing Key de trainee
     trainee = models.ForeignKey(Trainee, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField("upload date")
     
     def __str__(self):
         return f"User_Training: {self.id}"
@@ -67,4 +69,4 @@ class DeployAnswer(models.Model):
 
     def __str__(self):
         return f"deploy_Answer: {self.id}"
-"""
+    

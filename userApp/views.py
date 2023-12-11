@@ -12,12 +12,14 @@ from django.contrib.auth.decorators import login_required
 from .forms import SignupForm
 from django.contrib import messages
 from .models import Trainee
+from django.db import transaction
 
 ##Logica de users
 
 def home(request):
     return render(request, 'home.html')
 
+@transaction.atomic
 def signup(request):
     if request.method == 'GET':
         form = SignupForm()
