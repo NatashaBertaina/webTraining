@@ -11,5 +11,5 @@ urlpatterns = [
     path("<int:deploy_id>/", views.DeployDetailView.as_view(), name="forms"),
     path("next/", views.next_deploy, name="next"),
     path("prev/", views.prev_deploy, name="prev"),
-    path("<int:pk>/results/", views.ResultsView.as_view(), name="results"),
+    path("results/", views.ResultsView.as_view(), name="results"),
 ]
