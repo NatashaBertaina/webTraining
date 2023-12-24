@@ -6,8 +6,8 @@ from django.views import generic, View
 from django.views.generic.edit import FormView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from .forms import QuestionForm
-from .models import Training, Deploy
+from .forms import Form_a, Form_b
+from .models import Training, Deploy_a, Deploy_b, Ans_a, Ans_b
 
 cont = 0
 
@@ -15,32 +15,34 @@ class IndexView(generic.ListView):
     template_name = "trainingApp/index.html"
     context_object_name = "list_training"
 
-    def get_queryset(self):
-        return Training.objects.order_by("pub_date")[:5]
-
+#Agregar vista de los distintos bloques existentes por entrenamiento.
+    
+#class BlockView(generic.ListView):
 
 class DeployDetailView(View):
     template_name = 'trainingApp/forms.html'
 
 
     def get(self, request, deploy_id):
-        deploy = get_object_or_404(Deploy, pk=deploy_id)
+        deploy = get_object_or_404(Deploy_a, pk=deploy_id)
 
-        self.form = QuestionForm(instance=deploy)
-        
-        #crear una lista random con los despliegues
-        request.session['rnd_deploy'] = list(Deploy.objects.values_list('pk', flat=True))
-        #Guardo el índice de la lista
-        #request.session['index'] = request.session.get('index', 0)
-        request.session['index'] = 0
+        self.form = Form_a(instance=deploy)
 
         return render(request, self.template_name, {'deploy': deploy, 'form':self.form})
     
     def post(self, request, deploy_id): 
-        deploy = get_object_or_404(Deploy, pk=deploy_id)
-        self.form = QuestionForm(request.POST, instance=deploy)
+        deploy = get_object_or_404(Deploy_a, pk=deploy_id)
+        self.form = Form_a(request.POST, instance=deploy)
+
         if self.form.is_valid():
             self.form.save()
+
+            form_data = self.form.cleaned_data
+            resp = form_data.get('user_response')
+            obj = Ans_a.objects.create(user_response=resp)
+            
+            #Cambiar la forma de paginación. Próximo a implementar
+
             return redirect('next_deploy_view')
             
 
@@ -78,3 +80,6 @@ def prev_deploy(request):
 
 class ResultsView(generic.ListView):
     template_name = "trainingApp/results.html"
+
+    def get(self, request):
+        return render(request, self.template_name)

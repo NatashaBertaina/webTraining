@@ -53,14 +53,14 @@ class Deploy_b(models.Model):
     
 
 
-class DeployAnswerA(models.Model):
+class Ans_a(models.Model):
     question = models.ForeignKey(Deploy_a, on_delete=models.CASCADE)
     user_response = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return self.user_response
 
-class DeployAnswerB(models.Model):
+class Ans_b(models.Model):
     question = models.ForeignKey(Deploy_b, on_delete=models.CASCADE)
     user_response = models.CharField(max_length=50, null=True)
 
