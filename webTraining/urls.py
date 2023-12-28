@@ -1,8 +1,8 @@
 """
-URL configuration for webTraining project.
+URL configuration for SiteWeb project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+    https://docs.djangoproject.com/en/5.0/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -19,7 +19,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from userApp import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('trainingApp/', include('trainingApp.urls')),
+    path("", views.home, name='home'),
+    path("training/", include("training.urls")),
+    path('userApp/', include('userApp.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

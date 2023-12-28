@@ -1,15 +1,15 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.decorators import login_required
 
 from . import views
+from .views import IndexView, BlockView, DeployForm
 
 app_name = 'trainingApp'
 
 urlpatterns = [
-    path("", views.IndexView.as_view(), name="index"),
-    path("<int:deploy_id>/", views.DeployDetailView.as_view(), name="forms"),
-    #path("next/", views.next_deploy, name="next"),
-    #path("prev/", views.prev_deploy, name="prev"),
-    path("results/", views.ResultsView.as_view(), name="results"),
+    path("", login_required(IndexView.as_view()), name="Training_list"),
+    path("<int:training_id>/", login_required(BlockView.as_view()), name="Block_list"),
+    path("<int:block_id>/", login_required(DeployForm.as_view()), name="form"),
 ]

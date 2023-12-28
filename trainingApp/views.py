@@ -1,85 +1,100 @@
-import random
-
-from django.shortcuts import render, get_object_or_404, redirect
+from typing import Any
+from django.db.models.query import QuerySet
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views import generic, View
-from django.views.generic.edit import FormView
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import ListView
+from django.views import View
+from django.utils import timezone
+from django.contrib import messages
 
-from .forms import Form_a, Form_b
-from .models import Training, Deploy_a, Deploy_b, Ans_a, Ans_b
+from .forms import FormA, FormB
+from .models import List_Training, Block, Deploy_a, Deploy_b, Ans_a, Trainee, TraineeBlock
 
-cont = 0
 
-class IndexView(generic.ListView):
-    template_name = "trainingApp/index.html"
-    context_object_name = "list_training"
 
-#Agregar vista de los distintos bloques existentes por entrenamiento.
+
+class IndexView(ListView):
+    model = List_Training
+    template_name = 'training/list_training.html'
+    context_object_name = 'training_available'
+
+    #Esto debe ir cambiando según nivel del usuario.
+    queryset = List_Training.objects.filter(label__contains='E')
+    #queryset = List_Training.objects.order_by('label')
+
+    paginate_by = 1
     
-#class BlockView(generic.ListView):
 
-class DeployDetailView(View):
-    template_name = 'trainingApp/forms.html'
+class BlockView(ListView):
+    model = Block
+    template_name = 'training/list_block.html'
+
+    queryset = Block.objects.all().order_by('id')
 
 
-    def get(self, request, deploy_id):
-        deploy = get_object_or_404(Deploy_a, pk=deploy_id)
+class DeployForm(View):
+    template_name = 'training/forms.html'
 
-        self.form = Form_a(instance=deploy)
+    def get(self, request, block_id):
+        deploys = Deploy_a.objects.filter(block_id=block_id)
 
-        return render(request, self.template_name, {'deploy': deploy, 'form':self.form})
+        current_deploy_index = request.session.get('current_deploy_index', 0)
+        current_deploy = deploys[current_deploy_index]
+
+        #verificación si es la primera vez que el usuario ingresa al entrenamiento
+        self.initialize_trainee_block(request, block_id)
+
+        self.form = FormA(instance=current_deploy)
+
+        return render(request, self.template_name, {'deploy': current_deploy, 'form': self.form})
     
-    def post(self, request, deploy_id): 
-        deploy = get_object_or_404(Deploy_a, pk=deploy_id)
-        self.form = Form_a(request.POST, instance=deploy)
+    def post(self, request, block_id):
+        deploys = Deploy_a.objects.filter(block_id=block_id)
+
+        current_deploy_index = request.session.get('current_deploy_index', 0)
+        current_deploy = deploys[current_deploy_index]
+
+        self.form = FormA(request.POST, instance=current_deploy)
 
         if self.form.is_valid():
-            self.form.save()
+            deploy_answer = Ans_a(
+                question_id = current_deploy,
+                user_response = self.form.cleaned_data['user_response']
+            )
+            deploy_answer.save()
 
-            form_data = self.form.cleaned_data
-            resp = form_data.get('user_response')
-            obj = Ans_a.objects.create(user_response=resp)
-            
-            #Cambiar la forma de paginación. Próximo a implementar
+            #Avanzar al siguiente deploy
+            current_deploy_index += 1
+            if current_deploy_index >= deploys.count():
+                request.session['current_deploy_index'] = 0
+                block = Block.objects.get(pk=block_id)
 
-            return redirect('next_deploy_view')
-            
+                messages.success(request, f"You have completed {block.block}, now you can continue with your training")
 
+                return redirect('list_block')
+
+            #Guardamos el índice actual de la sesión
+            request.session['current_deploy_index'] = current_deploy_index
+
+            return redirect('training:form', block_id=block_id)
+        
         else:
-            #Con lo siguiente, si el formulario no es válido, renderizaré la plantilla con el formulario una vez más, resaltando lo que falta para poder enviarlo.
-            return render(request, self.template_name, {'deploy':deploy, 'form':self.form})
-
-def next_deploy(request):
-    global cont
-    rnd_deploy = request.session.get('rnd_deploy')
-        #index = request.session.get('index', 0)
-    print(rnd_deploy)
-    print(cont)
-
-    if cont < (len(rnd_deploy) - 1):
-        cont += 1
-        print(cont)
-        return redirect('trainingApp:forms', deploy_id=request.session['rnd_deploy'][cont])
-    else:
-        return redirect('trainingApp:results')
-
-
-def prev_deploy(request):
-    index = request.session.get('index', 0)
-    rnd_deploy = request.session.get('rnd_deploy')
+            #Si el formulario no es válido, se renderiza la plantilla con el formulario nuevamente, resaltando lo que falta para que pueda ser enviado
+            return render(request, self.template_name, {'deploy': current_deploy, 'form': self.form})
+        
     
-    if rnd_deploy and index > 0:
-        request.session['index'] -= 1
-        prev_deploy_id = rnd_deploy[request.session['index']]
-        return redirect('trainingApp:forms', deploy_id=prev_deploy_id)
-    else:
-        return redirect('trainingApp:forms', deploy_id=request.session['rnd_deploy'][index])
+    def initialize_trainee_block(self, request, block_id):
+        #Verifica si es la primera vez que el usuario ingresa al entrenamiento
+        if 'current_trainee_block_id' not in request.session:
+            user = request.user
+            trainee = Trainee.objects.get(user_id=user.id)
 
+            # Se crea un nuevo objeto TraineeTraining y se guarda en la base de datos
+            trainee_block = TraineeBlock.objects.create(
+                trainee=trainee,
+                block=get_object_or_404(Block, pk=block_id),
+                pub_date=timezone.now()
+            )
 
-
-class ResultsView(generic.ListView):
-    template_name = "trainingApp/results.html"
-
-    def get(self, request):
-        return render(request, self.template_name)
+            # Almacena el ID del TraineeTraining en la sesión
+            request.session['current_trainee_block_id'] = trainee_block.id
