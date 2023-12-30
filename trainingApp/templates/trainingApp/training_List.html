@@ -2,23 +2,37 @@
     {% extends "base.html" %}
 
     {% block content %}
+
     <main>
         <h1>List of Training:</h1>
-
         <div class="container">
         {% if training_list %}
-            <ul class="list-group">
-            {% for training in training_list %}
-                <li class="list-group-item">
-                    <a href="{% url 'trainingApp:forms' training.id %}">{{ training.name_training }} </a>
-                </li>
-            {% endfor %}
-            </ul>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Difficulty</th>
+                        <th>Duration (minutes)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for training in training_list %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'trainingApp:forms' training.id %}">{{ training.name_training }}</a>
+                        </td>
+                        <td>{{ training.difficulty }}</td>
+                        <td>{{ training.estimatedDuration }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         {% else %}
             <p>Sorry!! No training are available.</p>
         {% endif %}
         </div>
     </main>
+     
     
     <!-- Pagination-->
         <div class="mt-2">

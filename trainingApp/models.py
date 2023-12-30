@@ -9,17 +9,17 @@ from userApp.models import Trainee
 class Training(models.Model):
     #Enumeracion para el tipo de entrenamiento
     class TrainingType(models.TextChoices):
-        Basic = 'Basico'
-        Intemediate = 'Intermedio'
-        Advanced = 'Avanzado'
+        Easy = 'Easy'
+        Intemediate = 'Intemediate'
+        Advanced = 'Advanced'
     
     name_training = models.CharField(max_length=200)
     pub_date = models.DateTimeField("upload date")
     modificationDate = models.DateTimeField(auto_now= True)
-    Type = models.CharField(
+    difficulty = models.CharField(
         max_length=20,
         choices=TrainingType.choices,
-        default=TrainingType.Basic
+        default=TrainingType.Easy
     )
     estimatedDuration = models.IntegerField(default=0)
 
