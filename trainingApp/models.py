@@ -28,24 +28,31 @@ class Training(models.Model):
     def __str__(self):
         return self.name_training
 
-
+class DeployType(models.Model):
+    name_type = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
+    
+    def __str__(self):
+        return f"{self.name_type}"
+    
 class Deploy(models.Model):
     training = models.ForeignKey(Training, on_delete=models.CASCADE)
+    deploy_type = models.ForeignKey(DeployType, on_delete=models.CASCADE, null=True)
     question = models.CharField(max_length=50, null=True)
     deploy_image = models.ImageField(upload_to="trainingApp/images", blank=True)
     deploy_sound = models.FileField(upload_to="trainingApp/sound", blank=True)
-    ch_d1 = models.CharField(max_length=50, null=True)
-    ch_d2 = models.CharField(max_length=50, null=True)
-    ch_d3 = models.CharField(max_length=50, null=True)
-    ch_d4 = models.CharField(max_length=50, null=True)
-
      #Respuesta correcta
-    user_response = models.CharField(max_length=50, null=True)
+    correct_answer = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return f"Deploy: {self.id}"
-  
 
+class Choice(models.Model):
+    deploy = models.ForeignKey(Deploy, on_delete=models.CASCADE)
+    choice = models.CharField(max_length=50, null=True)
+    def __str__(self):
+        return f"id: {self.id}, fk: {self.deploy}"
+    
 class TraineeTraining(models.Model):
     #foreing Key de training
     training = models.ForeignKey(Training, on_delete=models.CASCADE)

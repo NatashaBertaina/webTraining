@@ -6,7 +6,9 @@ from .models import Trainee
 
 class SignupForm(UserCreationForm):
     age = forms.IntegerField(initial=18)
-    educationalLevel = forms.ChoiceField(choices=Trainee.EducationalLevel.choices, initial=Trainee.EducationalLevel.High_School)
+    educationalLevel = forms.ChoiceField(choices=Trainee.EducationalLevel.choices,
+                                         initial=Trainee.EducationalLevel.High_School,
+                                         widget=forms.RadioSelect(),)
     occupation = forms.CharField(max_length=50)
 
     class Meta:

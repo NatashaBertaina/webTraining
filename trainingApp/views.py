@@ -63,10 +63,12 @@ class DeployDetailView(View):
 
             # Avanzar al siguiente deploy
             current_deploy_index += 1
+            #Si se llega al final del trainings entonces se lo redicciona al home y se resetea el current_deploy_index
             if current_deploy_index >= deploys.count():
-                request.session['current_deploy_index'] = 0
-                training = Training.objects.get(pk=training_id)
-
+                request.session['current_deploy_index'] = 0   
+                del request.session['current_trainee_training_id']
+                
+                training = Training.objects.get(pk=training_id) 
                 messages.success(request,f" You have completed {training.name_training}")
 
                 return redirect('home')
