@@ -8,35 +8,41 @@ from django.utils import timezone
 from django.contrib import messages
 
 from .forms import FormA, FormB
-from .models import List_Training, Block, Deploy_a, Deploy_b, Ans_a, Trainee, TraineeBlock
+from .models import Training, Block, Deploy, Ans, Trainee, TraineeBlock
 
 
 
 
 class IndexView(ListView):
-    model = List_Training
+    model = Training
     template_name = 'training/list_training.html'
     context_object_name = 'training_available'
 
     #Esto debe ir cambiando según nivel del usuario.
-    queryset = List_Training.objects.filter(label__contains='E')
-    #queryset = List_Training.objects.order_by('label')
+    queryset = Training.objects.filter(level__contains='E')
+    #queryset = List_Training.objects.order_by('level')
 
-    paginate_by = 1
+    paginate_by = 10
     
 
 class BlockView(ListView):
     model = Block
     template_name = 'training/list_block.html'
+    context_object_name = 'block_available'
 
     queryset = Block.objects.all().order_by('id')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['message'] = 'Listado de bloques '
+        return context
 
 
 class DeployForm(View):
     template_name = 'training/forms.html'
 
     def get(self, request, block_id):
-        deploys = Deploy_a.objects.filter(block_id=block_id)
+        deploys = Deploy.objects.filter(block_id=block_id)
 
         current_deploy_index = request.session.get('current_deploy_index', 0)
         current_deploy = deploys[current_deploy_index]
@@ -49,17 +55,18 @@ class DeployForm(View):
         return render(request, self.template_name, {'deploy': current_deploy, 'form': self.form})
     
     def post(self, request, block_id):
-        deploys = Deploy_a.objects.filter(block_id=block_id)
+        deploys = Deploy.objects.filter(block_id=block_id)
 
         current_deploy_index = request.session.get('current_deploy_index', 0)
         current_deploy = deploys[current_deploy_index]
 
-        self.form = FormA(request.POST, instance=current_deploy)
+        form = FormA(request.POST, instance=current_deploy)
 
-        if self.form.is_valid():
-            deploy_answer = Ans_a(
+        if form.is_valid():
+            deploy_answer = Ans(
+                trainee_block_id = request.session.get('current_trainee_block_id'),
                 question_id = current_deploy,
-                user_response = self.form.cleaned_data['user_response']
+                user_response = form.cleaned_data['user_response']
             )
             deploy_answer.save()
 
@@ -67,11 +74,12 @@ class DeployForm(View):
             current_deploy_index += 1
             if current_deploy_index >= deploys.count():
                 request.session['current_deploy_index'] = 0
-                block = Block.objects.get(pk=block_id)
+                del request.session['current_trainee_block_id']
 
+                block = Block.objects.get(pk=block_id)
                 messages.success(request, f"You have completed {block.block}, now you can continue with your training")
 
-                return redirect('list_block')
+                return redirect('home')
 
             #Guardamos el índice actual de la sesión
             request.session['current_deploy_index'] = current_deploy_index
@@ -80,7 +88,7 @@ class DeployForm(View):
         
         else:
             #Si el formulario no es válido, se renderiza la plantilla con el formulario nuevamente, resaltando lo que falta para que pueda ser enviado
-            return render(request, self.template_name, {'deploy': current_deploy, 'form': self.form})
+            return render(request, self.template_name, {'deploy': current_deploy, 'form': form})
         
     
     def initialize_trainee_block(self, request, block_id):
