@@ -19,7 +19,7 @@
                 </audio>
             </div>
             <div class="form-question">
-                <p class="h5">What you saw and/or heard is a function of what type: (check one option below)</p>
+                <p class="h5">{{ form.instance.question}}</p>
             </div>
             <div class="form-choice">
                 <ul>
@@ -29,11 +29,6 @@
                         </li>
                     {% endfor %}
                 </ul>
-            </div>
-        </section>
-        <section class="bar-p">
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
             </div>
         </section>
         
