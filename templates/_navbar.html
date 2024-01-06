@@ -22,6 +22,9 @@
           <a class="nav-link" href="/trainingApp/">Trainings</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="{% url 'userApp:profile' user.username %}">Profile</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/userApp/logout">Logout</a>
         </li>
         {% else %}

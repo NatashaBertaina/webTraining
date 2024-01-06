@@ -9,11 +9,11 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import SignupForm
+from .forms import SignupForm,UserUpdateForm,TraineeUpdateForm
 from django.contrib import messages
 from .models import Trainee
 from django.db import transaction
-
+from django.contrib.auth.mixins import LoginRequiredMixin  #LoginRequiredMixin se utiliza como un mixin para requerir que un usuario esté autenticado antes de acceder a una vista específica.
 ##Logica de users
 
 def home(request):
@@ -61,3 +61,36 @@ def signin(request):
             login(request, user)
             messages.success(request,f"Your are logged in as {request.POST['username']}")
             return redirect('trainingApp:training_List')
+
+
+class ProfileView(LoginRequiredMixin, View):
+    login_url = 'signup' # Esta propiedad especifica la URL a la cual se redirigirá a los usuarios no autenticados cuando intenten acceder a la vista protegida por este mixin.
+    template_name = "userApp/profile.html"
+
+    def get(self, request, username):
+        user = User.objects.get(username= username)
+        trainee = Trainee.objects.get(user_id=user.id)
+        
+        # Crea una instancia del formulario combinado y pasa el objeto user y Trainee como instancia
+        userform = UserUpdateForm(instance=user)
+        traineeform = TraineeUpdateForm(instance=trainee)
+
+        return render(request, self.template_name, {"userform": userform, "traineeform": traineeform})
+
+    def post(self, request, username):
+        user = User.objects.get(username= username)
+        trainee = Trainee.objects.get(user_id=user.id)
+
+        # Crea una instancia del formulario combinado y pasa el objeto Trainee como instancia
+        userform = UserUpdateForm(request.POST, instance=user)
+        traineeform = TraineeUpdateForm(request.POST,instance=trainee)
+        
+        if userform.is_valid() and traineeform.is_valid():
+            userform.save()
+            traineeform.save()
+            messages.success(request,"Your profile has been updated")
+            return redirect('userApp:profile', user.username)  # Redirige a la página de perfil después de guardar los cambios
+
+        else:
+            messages.error(request," error")
+            return redirect('userApp:profile', user.username) 
