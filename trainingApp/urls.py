@@ -9,7 +9,7 @@ from .views import IndexView, BlockView, DeployForm
 app_name = 'trainingApp'
 
 urlpatterns = [
-    path("", login_required(IndexView.as_view()), name="Training_list"),
-    path("<int:training_id>/", login_required(BlockView.as_view()), name="Block_list"),
+    path("", login_required(IndexView.as_view()), name="list_training"),
+    path("<int:training_id>/", login_required(BlockView.as_view()), name="list_block"),
     path("<int:block_id>/", login_required(DeployForm.as_view()), name="form"),
 ]

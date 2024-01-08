@@ -6,6 +6,7 @@ from django.views.generic import ListView
 from django.views import View
 from django.utils import timezone
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .forms import FormA, FormB
 from .models import Training, Block, Deploy, Ans, Trainee, TraineeBlock
