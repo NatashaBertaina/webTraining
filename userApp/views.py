@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views import View
 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
@@ -6,8 +7,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import transaction
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import SignupForm
+from .forms import SignupForm, UserUpdateForm, TraineeUpdateForm
 from .models import Trainee
 
 #Lógica de users
@@ -58,3 +60,34 @@ def signin(request):
             login(request, user)
             messages.success(request, f"Your are logged in as {request.POST['username']}")
             return redirect('training:list_training')
+        
+class ProfileView(LoginRequiredMixin, View):
+    #Con esto se especifica a donde se redigirá el usuario no autenticado
+    login_url = 'signup'
+    template_name = 'userApp/profile.html'
+
+    def get(self, request, username):
+        user = User.objects.get(username=username)
+        trainee = Trainee.objects.get(user_id=user.id)
+
+        userForm = UserUpdateForm(instance=user)
+        traineeForm = TraineeUpdateForm(instance=trainee)
+
+        return render(request, self.template_name, {"userForm": userForm, "traineeForm": traineeForm})
+    
+    def post(self, request, username):
+        user = User.objects.get(username=username)
+        trainee = Trainee.objects.get(user_id=user.id)
+
+        userForm = UserUpdateForm(request.POST, instance=user)
+        traineeForm = TraineeUpdateForm(request.POST, instance=trainee)
+
+        if userForm.is_valid() and traineeForm.is_valid():
+            userForm.save()
+            traineeForm.save()
+            messages.success(request, "Your profile has been updated")
+            return redirect('userApp:profile', user.username)
+        
+        else:
+            messages.error(request, "error")
+            return redirect('userApp:profile', user.username)
