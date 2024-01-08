@@ -27,6 +27,10 @@ class Training(models.Model):
         return self.pub_date >=timezone.now() - datetime.timedelta(days=1)
     def __str__(self):
         return self.name_training
+    
+    #Metodo que trae la cantidad de veces que se realizo un training por un trainee especifico
+    def get_num_trainee_trainings(self, trainee_id):
+        return TraineeTraining.objects.filter(training=self, trainee_id=trainee_id).count()
 
 class DeployType(models.Model):
     name_type = models.CharField(max_length=100)

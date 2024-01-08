@@ -7,7 +7,7 @@ from django.views.generic.edit import FormView
 from django.views.generic import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import QuestionForm
-from .models import Training, Deploy, DeployAnswer, TraineeTraining,Trainee
+from .models import Training, Deploy, DeployAnswer, TraineeTraining,Trainee,TraineeTraining
 from django.utils import timezone
 
 from django.contrib.auth.models import User
@@ -16,6 +16,7 @@ from django.contrib import messages
 
 cont = 0
 
+#Vista para ver la lista de trainings
 class TrainingList(ListView):
     model = Training 
     template_name = "trainingApp/training_List.html"
@@ -26,9 +27,15 @@ class TrainingList(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['message'] = 'Listado de productos'
+        user = self.request.user
+        trainee = Trainee.objects.get(user_id=user.id)
+        
+        # Añado un diccionario al context donde esta el id de cada training con la cantidad de veces realizado por el trainee
+        context['num_trainee_trainings'] = {training.id: training.get_num_trainee_trainings(trainee.id) for training in context['training_list']}
+        
         return context
 
+#Vista para ver los deploys de un training y resolverlos
 class DeployDetailView(View):
     template_name = 'trainingApp/forms.html'
 

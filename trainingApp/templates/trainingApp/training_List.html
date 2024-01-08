@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<!-- Se carga un filtro para obtener la clave de un diccionario -->
+{% load custom_filters %}
 <main class="mt-5">
     <h1>List of Trainings</h1>
     <div class="container">
@@ -12,6 +14,7 @@
                         <th>Name</th>
                         <th>Difficulty</th>
                         <th>Duration (minutes)</th>
+                        <th>Cantidad de intentos realizados</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,6 +25,7 @@
                             </td>
                             <td>{{ training.difficulty }}</td>
                             <td>{{ training.estimatedDuration }}</td>
+                            <td>{{ num_trainee_trainings|get_value:training.id }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
