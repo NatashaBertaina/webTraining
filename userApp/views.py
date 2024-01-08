@@ -14,7 +14,10 @@ from django.contrib import messages
 from .models import Trainee
 from django.db import transaction
 from django.contrib.auth.mixins import LoginRequiredMixin  #LoginRequiredMixin se utiliza como un mixin para requerir que un usuario esté autenticado antes de acceder a una vista específica.
-##Logica de users
+from django.contrib.auth.views import PasswordChangeView, PasswordResetDoneView
+from django.urls import reverse_lazy
+from django.contrib.auth.forms import PasswordChangeForm
+##Logica de users 
 
 def home(request):
     return render(request, 'home.html')
@@ -62,7 +65,7 @@ def signin(request):
             messages.success(request,f"Your are logged in as {request.POST['username']}")
             return redirect('trainingApp:training_List')
 
-
+#Vista para modificar datos del user y trainee
 class ProfileView(LoginRequiredMixin, View):
     login_url = 'signup' # Esta propiedad especifica la URL a la cual se redirigirá a los usuarios no autenticados cuando intenten acceder a la vista protegida por este mixin.
     template_name = "userApp/profile.html"
@@ -94,3 +97,12 @@ class ProfileView(LoginRequiredMixin, View):
         else:
             messages.error(request," error")
             return redirect('userApp:profile', user.username) 
+
+#Vista para modificar password
+class MyPasswordChangeView(PasswordChangeView):
+    template_name= "userApp/passwordChange.html"
+    success_url = reverse_lazy('userApp:passwordResetDone')  #la URL a la que se redirigirá al usuario después de cambiar exitosamente la contraseña.
+    
+#Vista una vez modificada la password exisitamente
+class MyPasswordResetDoneView(PasswordResetDoneView):
+    template_name= "userApp/passwordResetDone.html"
