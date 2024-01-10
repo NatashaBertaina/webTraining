@@ -2,40 +2,37 @@
 
 {% block content %}
 
-<!-- Se carga un filtro para obtener la clave de un diccionario -->
-{% load custom_filters %}
+{% load tz %}
+<!-- SQLite almacena las fechas y horas en formato UTC, pero no almacena la información de la zona horaria.
+    Django asume que las fechas y horas almacenadas en la base de datos son UTC y las convierte automáticamente a la zona horaria configurada en settings.py
+    la biblioteca de zona horaria con {% load tz %} se usa al principio de la plantilla para poder utilizar el filtro timezone. -->
 <main class="mt-5">
-    <h1>List of Trainings</h1>
+    <h1>List of reviews</h1>
     <div class="container">
-        {% if training_list %}
+        {% if trainee_training_list %}
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Difficulty</th>
-                        <th>Duration (minutes)</th>
-                        <th>Cantidad de intentos realizados</th>
-                        <th>Revision</th>
+                        <th>Number</th>
+                        <th>Date</th>
+                        <th>Time</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for training in training_list %}
+                    {% for trainee_training in trainee_training_list %}
                         <tr>
                             <td>
-                                <a href="{% url 'trainingApp:forms' training.id %}" class="text-primary">{{ training.name_training }}</a>
+                                <a href="{% url 'trainingApp:review' trainee_training.id %}" class="text-primary"> {{ trainee_training.item_number }}</a>
                             </td>
-                            <td>{{ training.difficulty }}</td>
-                            <td>{{ training.estimatedDuration }}</td>
-                            <td>{{ num_trainee_trainings|get_value:training.id }}</td>
-                            <td>
-                                <a href="{% url 'trainingApp:review_list' training.id %}" class="text-primary">review</a>
-                            </td>
+                            <td>{{ trainee_training.pub_date|timezone:"America/Buenos_Aires"|date:"Y-m-d" }}</td>
+                            <td>{{ trainee_training.pub_date|timezone:"America/Buenos_Aires"|time:"H:i:s" }}</td>
+                        </tr>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         {% else %}
-            <p class="lead">Sorry, no trainings are available.</p>
+            <p class="lead">Sorry, no reviews available.</p>
         {% endif %}
     </div>
 </main>

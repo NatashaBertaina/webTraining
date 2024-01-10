@@ -14,7 +14,7 @@ class Training(models.Model):
         Advanced = 'Advanced'
     
     name_training = models.CharField(max_length=200)
-    pub_date = models.DateTimeField("upload date")
+    pub_date = models.DateTimeField("upload date", auto_now_add=True)
     modificationDate = models.DateTimeField(auto_now= True)
     difficulty = models.CharField(
         max_length=20,
@@ -63,6 +63,7 @@ class TraineeTraining(models.Model):
     #foreing Key de trainee
     trainee = models.ForeignKey(Trainee, on_delete=models.CASCADE)
     pub_date = models.DateTimeField("upload date")
+    state = models.CharField(max_length=100,default="in_progress")
     
     def __str__(self):
         return f"User_Training: {self.id}"
