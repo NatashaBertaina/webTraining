@@ -10,7 +10,7 @@
         <ul class="list-group">
         {% for block in block_available %}
             <li class="list-group-item">
-                <a href="{% url 'training:form' block.id %}">
+                <a href="{% url 'trainingApp:forms' block.id %}">
                     {{ block.block }}
                 </a>
             </li>

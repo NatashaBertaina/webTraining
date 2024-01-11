@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -12,7 +12,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import SignupForm, UserUpdateForm, TraineeUpdateForm
 from .models import Trainee
 
-#Lógica de users
 
 def home(request):
     return render(request, 'home.html')
@@ -39,6 +38,7 @@ def signup(request):
             login(request, user)
 
             return redirect('training:list_training')
+        
         else:
             messages.error(request, "Error")
             return render(request, 'userApp/signup.html', {"form": form})
