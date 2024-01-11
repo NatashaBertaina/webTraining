@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
 from django.views import View
-
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.db import transaction
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordChangeView, PasswordResetDoneView
+
+from django.db import transaction
+from django.urls import reverse_lazy
 
 from .forms import SignupForm, UserUpdateForm, TraineeUpdateForm
 from .models import Trainee
@@ -16,6 +18,8 @@ from .models import Trainee
 def home(request):
     return render(request, 'home.html')
 
+
+#Lógica de registro
 
 @transaction.atomic
 def signup(request):
@@ -43,6 +47,7 @@ def signup(request):
             messages.error(request, "Error")
             return render(request, 'userApp/signup.html', {"form": form})
 
+
 @login_required
 def signout(request):
     logout(request)
@@ -60,7 +65,9 @@ def signin(request):
             login(request, user)
             messages.success(request, f"Your are logged in as {request.POST['username']}")
             return redirect('training:list_training')
-        
+
+
+#Vista para modificar datos
 class ProfileView(LoginRequiredMixin, View):
     #Con esto se especifica a donde se redigirá el usuario no autenticado
     login_url = 'signup'
@@ -91,3 +98,12 @@ class ProfileView(LoginRequiredMixin, View):
         else:
             messages.error(request, "error")
             return redirect('userApp:profile', user.username)
+
+
+#Vista de recuperación de password
+class MyPasswordChangeView(PasswordChangeView):
+    template_name = "userApp/passwordChange.html"
+    success_url = reverse_lazy('userApp:passwordResetDone')
+
+class MyPasswordResetDoneView(PasswordResetDoneView):
+    template_name = "userApp/passwordResetDone.html"

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Profile</h1>
+
+        <form action="" method="POST" class="mb-4">
+        {% csrf_token %}
+        {{ userform.as_p }}
+        {{ traineeform.as_p }}
+        <button type="submit" class="btn btn-primary">
+            Update
+        </button>
+        </form>
+
+        <a href="/userApp/changePassword" class="btn btn-secondary">
+        Change Password
+        </a>
+
+        <p class="text-danger mt-3">
+        {{ error }}
+        </p>
+    </div>
+    
+{% endblock %}
