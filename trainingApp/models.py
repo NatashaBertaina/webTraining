@@ -12,7 +12,12 @@ class Training(models.Model):
         Easy = 'Easy'
         Intemediate = 'Intemediate'
         Advanced = 'Advanced'
-    
+        
+    class StateTraining(models.TextChoices):
+        Active = 'Active'
+        inactive = 'Inactive'
+        in_progress = 'in_progress'
+        
     name_training = models.CharField(max_length=200)
     pub_date = models.DateTimeField("upload date", auto_now_add=True)
     modificationDate = models.DateTimeField(auto_now= True)
@@ -22,6 +27,11 @@ class Training(models.Model):
         default=TrainingType.Easy
     )
     estimatedDuration = models.IntegerField(default=0)
+    state_training= models.CharField(
+        max_length=20,
+        choices=StateTraining.choices,
+        default=StateTraining.in_progress
+    )
 
     def was_published_recently(self):
         return self.pub_date >=timezone.now() - datetime.timedelta(days=1)

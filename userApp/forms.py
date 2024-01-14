@@ -19,7 +19,7 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username','first_name', 'last_name', 'email']     
+        fields = ['username','first_name', 'last_name', 'email']    
     
     def __init__(self, *args, **kwargs):
         super(UserUpdateForm, self).__init__(*args, **kwargs)
@@ -32,7 +32,9 @@ class TraineeUpdateForm(forms.ModelForm):
     class Meta:
         model = Trainee
         fields = ['age', 'educationalLevel', 'occupation']
-    
+        widgets = {
+            'educationalLevel': forms.RadioSelect(),
+        } 
     def __init__(self, *args, **kwargs):
         super(TraineeUpdateForm, self).__init__(*args, **kwargs)
         if self.instance:

@@ -22,7 +22,7 @@ class TrainingList(ListView):
     model = Training 
     template_name = "trainingApp/training_List.html"
     context_object_name = "training_list"
-    queryset = Training.objects.all().order_by('id')
+    queryset = Training.objects.filter(state_training = 'Active').order_by('id')
     paginate_by = 5  # Especifica la cantidad de objetos por página
     
     
