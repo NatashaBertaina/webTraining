@@ -64,6 +64,7 @@ class TraineeTraining(models.Model):
     trainee = models.ForeignKey(Trainee, on_delete=models.CASCADE)
     pub_date = models.DateTimeField("upload date")
     state = models.CharField(max_length=100,default="in_progress")
+    time_spent = models.DurationField(null=True, blank=True)
     
     def __str__(self):
         return f"User_Training: {self.id}"

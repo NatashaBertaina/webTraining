@@ -7,14 +7,15 @@ from django.views.generic.edit import FormView
 from django.views.generic import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import QuestionForm
-from .models import Training, Deploy, DeployAnswer, TraineeTraining,Trainee,TraineeTraining,DeployType,Choice
+from .models import Training, Deploy, DeployAnswer, TraineeTraining,Trainee,TraineeTraining,DeployType,Choice,DeployType
 from django.utils import timezone
 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from operator import attrgetter
-cont = 0
+from datetime import datetime
+from datetime import datetime, timedelta
 
 #Vista para ver la lista de trainings
 class TrainingList(ListView):
@@ -40,7 +41,7 @@ class DeployDetailView(View):
     template_name = 'trainingApp/forms.html'
 
     def get(self, request, training_id):
-        deploys = Deploy.objects.filter(training_id=training_id)
+        deploys = Deploy.objects.filter(training_id=training_id).order_by('deploy_type_id')
         current_deploy_index = request.session.get('current_deploy_index', 0)
         current_deploy = deploys[current_deploy_index]
         
@@ -79,8 +80,25 @@ class DeployDetailView(View):
                 trainee_training = TraineeTraining.objects.get(pk=current_trainee_training_id)
                 trainee_training.state = "Completed"
                 trainee_training.save()
+                
+                # Logica para el tiempo empleado
+                start_time_str = request.session.get('start_time')
+                start_time = datetime.fromisoformat(start_time_str)
+                tiempo_transcurrido = datetime.now() - start_time
+
+                # Obtener la duración total en segundo
+                duracion_total = tiempo_transcurrido.total_seconds()
+
+                # Convertir la duración total a un objeto timedelta
+                duracion_timedelta = timedelta(seconds=duracion_total)
+
+                # Guardar la instancia en la base de datos
+                trainee_training.time_spent = duracion_timedelta
+                trainee_training.save()
+                
                 #Se borra de la session los datos temporales
                 del request.session['current_trainee_training_id']
+                del request.session['start_time']
                 
                 training = Training.objects.get(pk=training_id) 
                 messages.success(request,f" You have completed:  {training.name_training}")
@@ -115,6 +133,9 @@ class DeployDetailView(View):
 
             # Almacena el ID del TraineeTraining en la sesión
             request.session['current_trainee_training_id'] = trainee_training.id
+            # Se guarda el tiempo de inicio del training
+            request.session['start_time'] = datetime.now().isoformat()
+
 
 #Vista de todos los intentos realizados por el trainee para un training
 class ReviewList(ListView):

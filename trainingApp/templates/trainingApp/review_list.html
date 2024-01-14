@@ -16,6 +16,7 @@
                         <th>Number</th>
                         <th>Date</th>
                         <th>Time</th>
+                        <th>Time Spent</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,7 @@
                             </td>
                             <td>{{ trainee_training.pub_date|timezone:"America/Buenos_Aires"|date:"Y-m-d" }}</td>
                             <td>{{ trainee_training.pub_date|timezone:"America/Buenos_Aires"|time:"H:i:s" }}</td>
+                            <td>{{ trainee_training.time_spent }}</td>
                         </tr>
                         </tr>
                     {% endfor %}
