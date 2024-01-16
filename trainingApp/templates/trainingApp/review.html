@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main>
+    <form method="POST" action="{% url 'trainingApp:review' deploy_answer.trainee_Training_id %}">
+        {% csrf_token %}
+        <section class="form-deploy">
+            <div class="form-deploy-image">
+                <img src="{{ deploy.deploy_image.url }}" class="img-fluid im" alt="Displayed Image">
+            </div>
+            <div class="form-deploy-audio">
+                <audio controls>
+                    <source src="{{ deploy.deploy_sound.url }}" type="audio/mpeg">
+                    Your browser does not support audio playback.
+                </audio>
+            </div>
+            <div class="form-question">
+                <p class="h5">What you saw and/or heard is a function of what type: (check one option below)</p>
+            </div>
+            <div class="form-choice">
+                {% for choice in choice %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDisabled" id="{{ chice.choice }}" {% if deploy_answer.user_response == choice.choice %}checked{% endif %} disabled>
+                        <label class="form-check-label" for="{{ choice.choice }}">
+                            {{ choice.choice }}
+                        </label>
+                    </div>
+                {% endfor %}
+
+                {% if deploy.answer.user_response == deploy.correct_answer %}
+                    <p class="mt-2">
+                        Correct answer
+                    </p>
+                {% elif deploy_answer.user_response %}
+                    <p class="mt-2">
+                        Wrong answer. The correct answer is {{ deploy.correct_answer }}
+                    </p>
+                {% endif %}
+            </div>
+        </section>
+
+        <button type="submit" class="btn btn-primary">
+            Next
+        </button>
+    </form>
+</main>
+
+{% endblock %}

@@ -24,6 +24,6 @@ from userApp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.home, name='home'),
-    path("training/", include("training.urls")),
+    path("trainingApp/", include("trainingApp.urls")),
     path('userApp/', include('userApp.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

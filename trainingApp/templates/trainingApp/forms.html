@@ -4,7 +4,7 @@
 
 <main>
     
-    <form method="POST" action="{% url 'trainingApp:forms' deploy.block_id %}">
+    <form method="POST" action="{% url 'trainingApp:forms' deploy.training_id %}">
         {% csrf_token %}
         <p>ID del deploy: {{ deploy.id }}</p>
         
@@ -33,7 +33,9 @@
         </section>
         
         <!-- Agrega el botón para enviar el formulario -->
-        <button type="submit" class="btn btn-primary">Send Answer</button>
+        <button type="submit" class="btn btn-primary">
+            Naxt
+        </button>
     </form>
 
 </main>
