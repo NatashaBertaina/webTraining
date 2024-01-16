@@ -3,14 +3,14 @@ from .models import Choice, Ans
 
 
 #primer tipo de formulario
-class FormA(forms.ModelForm):
+class QuestionForm(forms.ModelForm):
 
     class Meta:
         model = Ans
         fields = ['user_response']
 
     def __init__(self, *args, **kwargs):
-        super(FormA, self).__init__(*args, **kwargs)
+        super(QuestionForm, self).__init__(*args, **kwargs)
 
         #Para obtener las opciones de choice
         choices = Choice.objects.filter(deploy_id=self.instance.id)
