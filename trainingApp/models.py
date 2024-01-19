@@ -1,9 +1,9 @@
+import datetime
 from django.db import models
 from userApp.models import Trainee
 from django.contrib.auth.models import User
-from userApp.models import Trainee
+from django.utils import timezone
 
-import datetime
 
 class Training(models.Model):
     
@@ -48,7 +48,7 @@ class DeployType(models.Model):
 
 #Tabla de despliegues:
 class Deploy(models.Model):
-    training = models.ForeignKey(Training, on_delete=models.CASCADE)
+    training = models.ForeignKey(Training, on_delete=models.CASCADE, default=1)
     deploy_type = models.ForeignKey(DeployType, on_delete=models.CASCADE, null=True)
     deploy_image = models.ImageField(upload_to='training/images', blank=True)
     deploy_sound = models.FileField(upload_to='training/sound', blank=True)
@@ -82,10 +82,8 @@ class TraineeTraining(models.Model):
         return f"User_Training: {self.id}"
 
 class Ans(models.Model):
-    trainee_Training = models.ForeignKey(TraineeTraining, on_delete=models.CASCADE)
-    deploy = models.ForeignKey(Deploy, on_delete=models.CASCADE)
-
-    #Respuesta del usuario al deploy mostrado
+    trainee_Training = models.ForeignKey(TraineeTraining, on_delete=models.CASCADE, default=1)
+    deploy = models.ForeignKey(Deploy, on_delete=models.CASCADE, default=1)
     user_response = models.CharField(max_length=50, null=True)
 
     def __str__(self):
