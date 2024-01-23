@@ -13,8 +13,8 @@ h1 {
     margin-bottom: 3rem;
 }
 
-.subtitle {
-    margin-bottom: 1rem;
+.instruction {
+    text-align: center;
 }
 
 form{

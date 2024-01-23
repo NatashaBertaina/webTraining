@@ -41,7 +41,7 @@ def signup(request):
             messages.success(request, "Your account is create successfully")
             login(request, user)
 
-            return redirect('training:list_training')
+            return redirect('home')
         
         else:
             messages.error(request, "Error")

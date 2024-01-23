@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <p class="h2">Signin</p>
+    <h2 class="display-h4">Signin</h2>
 
     <p>
         {{ error }}
@@ -10,8 +10,12 @@
 
     <form action="" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button aria-pressed="true">Signin</button>
+        <div class="card mx-auto">
+            <div class="card-body">
+                {{ form.as_p }}
+                <button aria-pressed="true" class="btn btn-primary">Signin</button>
+            </div>
+        </div>        
     </form>
 
 {% endblock %}

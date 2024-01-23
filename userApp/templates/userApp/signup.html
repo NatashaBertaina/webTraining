@@ -3,15 +3,17 @@
 {% block content %}
 
     <div class="container">
-        <p class="h2">Signup</p>
+        <h2 class="display-h4">Signup</h2>
 
         <br>
+
+        <p class="text-center">Complete all field please:</p>
+
         <form action="" method="POST">
             {% csrf_token %}
             <!--Estilos no usar en html. Moverlo al archivo css-->
             <div class="card mx-auto" style="width: 30rem;">
-                <div class="card-body">
-                    <h5 class="card-title">complete all fields please</h5>
+                <div class="card-body">                    
                     {{ form.as_p }}
                     <button aria-pressed="true" class="btn btn-primary">Signup</button>
                 </div>
