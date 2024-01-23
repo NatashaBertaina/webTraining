@@ -13,21 +13,22 @@
 
     <link rel="stylesheet" href="{% static 'trainingApp/style/style.css' %}">    <!-- Se utiliza un archivo estatico con la sintaxis  -->
 
-    <title>List of trainings</title>
+    <title>sonoTrainings</title>
 </head>
 <body>
     <!-- Se incluye la navbar -->
     {% include 'navbar.html' %}
-    
-    <div class="container my-2">
+    <main>
+        <div class="container my-4">
 
-        <!-- Se incluye mensajes -->
-        {% include 'message.html' %}  
+            <!-- Se incluye mensajes -->
+            {% include 'message.html' %}  
 
-        {% block content %}
-        {% endblock content %}
+            {% block content %}
+            {% endblock content %}
 
-    </div>
+        </div>
+    </main>
 
     <!-- Se incluye el footer -->
     {% include 'footer.html' %}

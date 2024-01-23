@@ -2,12 +2,14 @@
 
     {% block content %}
 
-    <main>
-        <h1>List of Training:</h1>
+        <h1 tabindex="7">List of Training:</h1>
 
         <div class="container">
         {% if training_available %}
             <table class="table">
+                <caption>
+                    Table of workouts available to perform
+                </caption>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -39,7 +41,6 @@
             <p>Sorry!! No training are available.</p>
         {% endif %}
         </div>
-    </main>
 
     <!-- Pagination-->
     <div class="mt-4">
