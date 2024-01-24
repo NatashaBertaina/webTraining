@@ -64,7 +64,7 @@ def signin(request):
         else:
             login(request, user)
             messages.success(request, f"Your are logged in as {request.POST['username']}")
-            return redirect('training:list_training')
+            return redirect('home')
 
 
 #Vista para modificar datos

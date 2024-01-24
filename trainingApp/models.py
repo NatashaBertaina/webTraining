@@ -1,6 +1,8 @@
 import datetime
+
 from django.db import models
 from userApp.models import Trainee
+
 from django.contrib.auth.models import User
 from django.utils import timezone
 
@@ -33,9 +35,13 @@ class Training(models.Model):
         default=StateTraining.in_Progress
     )
 
+    #Método para tener la cantidad de veces que se realizó un training por un usuario.
     def get_num_trainee_trainings(self, trainee_id):
         return TraineeTraining.objects.filter(training=self, trainee_id=trainee_id).count()
     
+    def was_published_recently(self):
+        return self.pub_date >=timezone.now() - datetime.timedelta(days=1)
+
     def __str__(self):
         return self.name_training
 
@@ -44,6 +50,9 @@ class Training(models.Model):
 class DeployType(models.Model):
     name_type = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
+
+    def __str__(self):
+        return f"{self.name_type}"
 
 
 #Tabla de despliegues:

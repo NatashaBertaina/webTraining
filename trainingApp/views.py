@@ -17,14 +17,10 @@ from .models import Training, Trainee, Deploy, DeployType, Ans, TraineeTraining,
 
 
 class IndexView(ListView):
-    model = Training
-    template_name = 'trainingApp/training_List.html'
-    context_object_name = 'training_available'
-
-    #Esto debe ir cambiando según nivel del usuario.
-    queryset = Training.objects.all()
-    
-
+    model = Training 
+    template_name = "trainingApp/training_List.html"
+    context_object_name = "training_available"
+    queryset = Training.objects.filter(state_training ='Active').order_by('id')
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
@@ -34,6 +30,7 @@ class IndexView(ListView):
 
         #Diccionario que cuenta la cantidad de veces realizado el training
         context['num_trainee_trainings'] = {training.id: training.get_num_trainee_trainings(trainee.id) for training in context['training_available']}
+        
         return context
     
 class DeployDetailView(View):
@@ -48,16 +45,16 @@ class DeployDetailView(View):
         self.initialize_trainee_training(request, training_id)
 
         form = QuestionForm(instance=current_deploy)
-        deployType = DeployType.objects.get(id=current_deploy.deploy_type.id)
+        deployType = DeployType.objects.get(id = current_deploy.deploy_type.id)
 
-        return render(request, self.template_name, {'deploy':current_deploy, 'form': form, 'deployType':deployType})
+        return render(request, self.template_name, {'deploy': current_deploy, 'form': form, 'deployType':deployType})
     
     def post(self, request, training_id):
         deploys = Deploy.objects.filter(training_id=training_id)
-
+        
         current_deploy_index = request.session.get('current_deploy_index', 0)
         current_deploy = deploys[current_deploy_index]
-
+        
         form = QuestionForm(request.POST, instance=current_deploy)
 
         if form.is_valid():
@@ -71,8 +68,9 @@ class DeployDetailView(View):
 
             #Lógica para avanzar al siguiente deploy y redirigir al inicio en caso de terminar con los deploys
             current_deploy_index += 1
+
             if current_deploy_index >= deploys.count():
-                request.session['current_deploy_index'] = 0
+                request.session['current_deploy_index'] = 0 
                 #Se obtiene el id del intento y se cambia el estado a completo
                 current_trainee_training_id = request.session.get('current_trainee_training_id')
                 trainee_training = TraineeTraining.objects.get(pk=current_trainee_training_id)
@@ -82,53 +80,56 @@ class DeployDetailView(View):
                 #Lógica para el tiempo empleado para completar un bloque de un entrenamiento
                 start_time_str = request.session.get('start_time')
                 start_time = datetime.fromisoformat(start_time_str)
-                time_passed = datetime.now() - start_time
+                time_passed =  datetime.now() - start_time
 
                 total_time = time_passed.total_seconds()
-                duration_timedelta = timedelta(seconds=total_time)
+                total_timedelta = timedelta(seconds=total_time)
 
-                trainee_training.time_spent = duration_timedelta
+                trainee_training.time_spent = total_timedelta
                 trainee_training.save()
 
                 #Borrar de la sesion los datos temporales
                 del request.session['current_trainee_training_id']
                 del request.session['start_time']
 
-                training = Training.objects.get(pk=training_id)
-                messages.success(request, f"Great! You have completes: {training.name_training}")
+                training = Training.objects.get(pk=training_id) 
+                messages.success(request, f"Great! You have completes one part of : {training.name_training}")
 
                 return redirect('home')
+            
             request.session['current_deploy_index'] = current_deploy_index
 
-            return redirect('trainingApp:form', training_id=training_id)
+            return redirect('trainingApp:forms', training_id=training_id)
         
         else:
             #Cuando el formulario no sea válido, se renderiza nuevamente resaltando lo que falta
-            return render(request, self.template_name, {'deploy':current_deploy, 'form':form})
+            return render(request, self.template_name, {'deploy': current_deploy, 'form': form})
     
     #Verificando si es la primera vez que se ingresa al training
     def initialize_trainee_training(self, request, training_id):
         if 'current_trainee_training_id' not in request.session:
-            user = request.user
-            trainee = Trainee.objects.get(user_id=user.id)
+            usuario = request.user
+            trainee= Trainee.objects.get(user_id=usuario.id)
 
             #Se genera una nueva fila en la base de trainee
             trainee_training = TraineeTraining.objects.create(
-                trainee = trainee,
-                training = get_object_or_404(Training, pk=training_id),
-                pub_date = timezone.now(),
-                state = "in_Progress"
+                trainee=trainee,
+                training=get_object_or_404(Training, pk=training_id),
+                pub_date=timezone.now(),
+                state = "in_progress"
             )
+
             request.session['current_trainee_training_id'] = trainee_training.id
             request.session['start_time'] = datetime.now().isoformat()
-        #FALTA un return
+
+            #return trainee_training
 
 
 #Vista para revisar los intentos realizados por un usuario
 class ReviewList(ListView):
-    model = TraineeTraining
-    template_name = 'trainingApp/review_list.html'
-    context_objects_name = 'trainee_training_list'
+    model = TraineeTraining 
+    template_name = "trainingApp/review_list.html"
+    context_object_name = "trainee_training_list"
     paginate_by = 10
 
     def get_queryset(self):
@@ -136,9 +137,9 @@ class ReviewList(ListView):
 
         #filtra los objetos por training_id y user_id (ambas base de datos se relacionan)
         queryset = TraineeTraining.objects.filter(
-            training_id = training_id,
-            trainee_id = self.request.user.trainee.id,
-            state = "completed"
+            training_id=training_id,
+            trainee_id=self.request.user.trainee.id,
+            state = "Completed"
         )
         #Ordenando la forma en que se verán las revisiones (desde la más nueva a la mas vieja)
         #Agregar un campo item_number a cada objeto
@@ -148,7 +149,7 @@ class ReviewList(ListView):
         queryset = sorted(queryset, key=attrgetter('item_number'), reverse=True)
 
         return queryset
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
@@ -158,7 +159,7 @@ class Review(View):
     template_name = 'trainingApp/review.html'
 
     def get(self, request, trainee_training_id):
-        trainee_training = TraineeTraining.objects.get(id=trainee_training_id)
+        trainee_training = TraineeTraining.objects.get(id= trainee_training_id)
         deploys_answer = Ans.objects.filter(trainee_Training_id=trainee_training_id)
         deploys = Deploy.objects.filter(training_id=trainee_training.training_id)
 
@@ -167,19 +168,19 @@ class Review(View):
         current_deploy = deploys[current_deploy_index]
         #Rta asociada al deploy actual
         current_deploy_answer = deploys_answer[current_deploy_index]
-        choices = Choice.objects.filter(deploy_id=current_deploy.id)
+        choices = Choice.objects.filter(deploy_id = current_deploy.id)
 
-        return render(request, self.template_name, {'deploy':current_deploy, 'choices':choices, 'deploy_answer':current_deploy_answer})
+        return render(request, self.template_name, {'deploy': current_deploy, 'choices':choices, 'deploy_answer':current_deploy_answer})
     
-    def post(self, request, trainee_training_id):
-        trainee_training = TraineeTraining.objects.get(id=trainee_training_id)
-        deploys = Deploy.objects.filter(trainig_id=trainee_training.training_id)
+    def post(self, request, trainee_training_id): 
+        trainee_training = TraineeTraining.objects.get(id= trainee_training_id)
+        deploys = Deploy.objects.filter(training_id=trainee_training.training_id)
 
         current_deploy_index = request.session.get('current_deploy_index', 0)
         current_deploy_index += 1
         #Al llegar al final de los deploy, se redirecciona a la lista de entrenamientos
         if current_deploy_index >= deploys.count():
-            request.session['current_deploy_index'] = 0
+            request.session['current_deploy_index'] = 0  
             return redirect('trainingApp:training_List')
         
         request.session['current_deploy_index'] = current_deploy_index

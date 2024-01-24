@@ -1,49 +1,49 @@
-<header>
-    <nav class="navbar navbar-expand-lg py-3 navbar-dark back">
-        <div class="container">
-            <img src="/static/trainingApp/images/logo1.png" alt="Institute of Bioengineering, ITeDA and the sonoUno project. All of them involved in this training project" width="60" height="60">
-            <a class="navbar-brand">
-                Training Web
-            </a>
-            <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-            >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">Home</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/trainingApp/">Trainings</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{% url 'userApp:profile' user.username %}">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/userApp/logout">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a href="/userApp/signin" class="nav-link">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/userApp/signup" class="nav-link">Register</a>
-                    </li>
-                    {% endif %}
-                    <li class="nav-item">
-                        <a href="https://www.sonouno.org.ar/" target="_blank" class="nav-link">Go sonoUno</a>
-                    </li>
-                </ul>
+    <header>
+        <nav class="navbar navbar-expand-lg py-3 navbar-dark back">
+            <div class="container">
+                <img src="/static/trainingApp/images/logo1.png" alt="Institute of Bioengineering, ITeDA and the sonoUno project. All of them involved in this training project" width="60" height="60">
+                <a class="navbar-brand">
+                    sonoTraining Web
+                </a>
+                <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a href="/" class="nav-link">Home</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/trainingApp/">Trainings</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{% url 'userApp:profile' user.username %}">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/userApp/logout">Logout</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a href="/userApp/signin" class="nav-link">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/userApp/signup" class="nav-link">Register</a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a href="https://www.sonouno.org.ar/" target="_blank" class="nav-link">Go sonoUno</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
