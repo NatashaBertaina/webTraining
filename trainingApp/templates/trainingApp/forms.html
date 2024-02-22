@@ -6,6 +6,7 @@
     
     <form method="POST" action="{% url 'trainingApp:forms' deploy.training_id %}">
         {% csrf_token %}
+        <p> {{ current_deploy_index }}</p>
         {% if deployType.name_type %}
         <p class="btn btn-success"> {{ deployType.name_type }}</p>
         {% endif %}

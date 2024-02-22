@@ -13,4 +13,5 @@ urlpatterns = [
     path("<int:training_id>/",  login_required(DeployDetailView.as_view()), name="forms"),
     path('reviewList/<int:training_id>/', login_required(views.ReviewList.as_view()), name="review_list"),
     path('review/<int:trainee_training_id>/', login_required(views.Review.as_view()), name="review"),
+    path('comment/<int:training_id>/', login_required(views.CommentView.as_view()), name="comment"),
 ]

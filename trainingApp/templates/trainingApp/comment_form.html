@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1 class="mb-4">Comment</h1>
+
+    <form action="" method="POST" class="mb-4">
+      {% csrf_token %}
+
+      <div class="form-group">
+        {{ form.more_liked.label_tag }}
+        {{ form.more_liked }}
+      </div>
+
+      <div class="form-group">
+        {{ form.least_liked.label_tag }}
+        {{ form.least_liked }}
+      </div>
+
+      <div class="form-group">
+        {{ form.comment_aditional.label_tag }}
+        {{ form.comment_aditional }}
+      </div>
+
+      <div class="form-group">
+        {{ form.stars.label_tag }}
+        <span class="star-rating">
+          {% for i in "12345" %}
+            <input type="radio" name="{{ form.stars.name }}" id="{{ form.stars.id_for_label }}_{{ i }}" value="{{ i }}">
+            <label for="{{ form.stars.id_for_label }}_{{ i }}"><i class="fas fa-star"></i></label>
+          {% endfor %}
+        </span>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        Send
+      </button>
+    </form>
+
+    <p class="text-danger mt-3">
+      {{ error }}
+    </p>
+  </div>
+{% endblock %}

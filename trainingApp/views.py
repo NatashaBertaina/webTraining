@@ -6,8 +6,8 @@ from django.views import generic, View
 from django.views.generic.edit import FormView
 from django.views.generic import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .forms import QuestionForm
-from .models import Training, Deploy, DeployAnswer, TraineeTraining,Trainee,TraineeTraining,DeployType,Choice,DeployType
+from .forms import QuestionForm,CommentForm
+from .models import Training, Deploy, DeployAnswer, TraineeTraining,Trainee,TraineeTraining,DeployType,Choice,DeployType,Comment
 from django.utils import timezone
 
 from django.contrib.auth.models import User
@@ -16,6 +16,8 @@ from django.contrib import messages
 from operator import attrgetter
 from datetime import datetime
 from datetime import datetime, timedelta
+from django.contrib.auth.mixins import LoginRequiredMixin  #LoginRequiredMixin se utiliza como un mixin para requerir que un usuario esté autenticado antes de acceder a una vista específica.
+from django.urls import reverse
 
 #Vista para ver la lista de trainings
 class TrainingList(ListView):
@@ -42,7 +44,8 @@ class DeployDetailView(View):
 
     def get(self, request, training_id):
         deploys = Deploy.objects.filter(training_id=training_id).order_by('deploy_type_id')
-        current_deploy_index = request.session.get('current_deploy_index', 0)
+        
+        current_deploy_index = request.session.get(f'current_deploy_index_{training_id}', 0)
         current_deploy = deploys[current_deploy_index]
         
         # Verifica si es la primera vez que el trainee ingresa al entrenamiento
@@ -51,12 +54,12 @@ class DeployDetailView(View):
         self.form = QuestionForm(instance=current_deploy)
         deployType = DeployType.objects.get(id = current_deploy.deploy_type.id)
 
-        return render(request, self.template_name, {'deploy': current_deploy, 'form':self.form, 'deployType':deployType})
+        return render(request, self.template_name, {'deploy': current_deploy, 'form':self.form, 'deployType':deployType, 'current_deploy_index':current_deploy_index})
     
     def post(self, request, training_id):
         deploys = Deploy.objects.filter(training_id=training_id)
         
-        current_deploy_index = request.session.get('current_deploy_index', 0)
+        current_deploy_index = request.session.get(f'current_deploy_index_{training_id}', 0)
         current_deploy = deploys[current_deploy_index]
         
         form = QuestionForm(request.POST, instance=current_deploy)
@@ -64,7 +67,7 @@ class DeployDetailView(View):
         if form.is_valid():
             # Guarda la respuesta del usuario en un nuevo objeto DeployAnswer
             deploy_answer = DeployAnswer(
-                trainee_Training_id=request.session.get('current_trainee_training_id'),
+                trainee_Training_id=request.session.get(f'current_trainee_training_id_{training_id}'),
                 deploy=current_deploy,
                 user_response=form.cleaned_data['user_response']
             )
@@ -74,15 +77,15 @@ class DeployDetailView(View):
             current_deploy_index += 1
             #Si se llega al final del trainings entonces se lo redicciona al home y se resetea el current_deploy_index
             if current_deploy_index >= deploys.count():
-                request.session['current_deploy_index'] = 0   
+                request.session[f'current_deploy_index_{training_id}'] = 0   
                 #Se obtiene el traineetraining del intento y se cambia el estado a complated
-                current_trainee_training_id = request.session.get('current_trainee_training_id')
+                current_trainee_training_id = request.session.get(f'current_trainee_training_id_{training_id}')
                 trainee_training = TraineeTraining.objects.get(pk=current_trainee_training_id)
                 trainee_training.state = "Completed"
                 trainee_training.save()
                 
                 # Logica para el tiempo empleado
-                start_time_str = request.session.get('start_time')
+                start_time_str = request.session.get(f'start_time_{training_id}')
                 start_time = datetime.fromisoformat(start_time_str)
                 tiempo_transcurrido = datetime.now() - start_time
 
@@ -97,19 +100,20 @@ class DeployDetailView(View):
                 trainee_training.save()
                 
                 #Se borra de la session los datos temporales
-                del request.session['current_trainee_training_id']
-                del request.session['start_time']
+                del request.session[f'current_deploy_index_{training_id}']
+                del request.session[f'start_time_{training_id}']
+                del request.session[f'current_trainee_training_id_{training_id}']
                 
                 training = Training.objects.get(pk=training_id) 
                 messages.success(request,f" You have completed:  {training.name_training}")
 
-                return redirect('home')
+                return HttpResponseRedirect(reverse('trainingApp:comment', args=[training_id]))
 
 
             # Guardar el índice actual en la sesión
-            request.session['current_deploy_index'] = current_deploy_index
+            request.session[f'current_deploy_index_{training_id}'] = current_deploy_index
 
-            return redirect('trainingApp:forms', training_id=training_id)
+            return HttpResponseRedirect(reverse('trainingApp:forms', args=[training_id]))
 
         else:
             # Si el formulario no es válido, renderizar la plantilla con el formulario nuevamente,
@@ -119,7 +123,7 @@ class DeployDetailView(View):
         
     def initialize_trainee_training(self, request, training_id):
         # Verifica si es la primera vez que el trainee ingresa al entrenamiento
-        if 'current_trainee_training_id' not in request.session:
+        if f'current_trainee_training_id_{training_id}' not in request.session:
             usuario = request.user
             trainee= Trainee.objects.get(user_id=usuario.id)
 
@@ -132,9 +136,9 @@ class DeployDetailView(View):
             )
 
             # Almacena el ID del TraineeTraining en la sesión
-            request.session['current_trainee_training_id'] = trainee_training.id
+            request.session[f'current_trainee_training_id_{training_id}'] = trainee_training.id
             # Se guarda el tiempo de inicio del training
-            request.session['start_time'] = datetime.now().isoformat()
+            request.session[f'start_time_{training_id}'] = datetime.now().isoformat()
 
 
 #Vista de todos los intentos realizados por el trainee para un training
@@ -202,3 +206,38 @@ class Review(View):
         # Guardar el índice actual en la sesión
         request.session['current_deploy_index'] = current_deploy_index
         return redirect('trainingApp:review', trainee_training_id=trainee_training_id)
+    
+#Vista para realizar un comentario a un trainee
+class CommentView(LoginRequiredMixin, View):
+    login_url = 'signup' # Esta propiedad especifica la URL a la cual se redirigirá a los usuarios no autenticados
+    template_name = "trainingApp/comment_form.html"
+
+    def get(self, request, training_id):
+        user = self.request.user
+        trainee = Trainee.objects.get(user_id= user.id)
+        
+        commentform = CommentForm()
+
+        return render(request, self.template_name, {"form": commentform})
+
+    def post(self, request, training_id):
+        user = self.request.user
+        trainee = Trainee.objects.get(user_id= user.id)
+        
+        commentform = CommentForm(request.POST)
+        
+        if commentform.is_valid():
+            comment = Comment.objects.create(
+                trainee=trainee,
+                training=get_object_or_404(Training, pk=training_id),
+                pub_date=timezone.now(),
+                more_liked = commentform.cleaned_data['more_liked'],
+                least_liked = commentform.cleaned_data['least_liked'],
+                stars = commentform.cleaned_data['stars'],
+                comment_aditional= commentform.cleaned_data['comment_aditional'],
+            )
+            return HttpResponseRedirect(reverse('home'))
+
+        else:
+            messages.error(request," error")
+            return HttpResponseRedirect(reverse('home'))

@@ -93,3 +93,41 @@ class DeployAnswer(models.Model):
     def __str__(self):
         return f"deploy_Answer: {self.id}"
     
+class Comment(models.Model):
+    #Enumeracion para el tipo de entrenamiento
+    class MostLiked(models.TextChoices):
+        WELL_EXPLAINED = 'Well explained'
+        INTERESTING = 'Interesting'
+        EASY_TO_UNDERSTAND = 'Easy to understand'
+
+    class LeastLiked(models.TextChoices):
+        TOO_DIFFICULT = 'Too difficult'
+        NOT_INTERESTING = 'Not interesting'
+        POORLY_EXPLAINED = 'Poorly explained'
+        CONFUSING = 'Confusing'
+        REPETITIVE = 'Repetitive'
+
+    #foreing Key de training
+    training = models.ForeignKey(Training, on_delete=models.CASCADE)
+    #foreing Key de trainee
+    trainee = models.ForeignKey(Trainee, on_delete=models.CASCADE)
+    more_liked =  models.CharField(
+        max_length=20,
+        choices=MostLiked.choices,
+        blank=False,
+        null=False,
+    )
+    least_liked = models.CharField(
+        max_length=20,
+        choices=LeastLiked.choices,
+        blank=False,
+        null=False,
+    )
+    comment_aditional = models.CharField(max_length=500)
+    stars = models.IntegerField(
+        choices=[(i, i) for i in range(1, 6)],
+        blank=False,
+        null=False,
+        )
+    pub_date = models.DateTimeField("upload date")
+    
