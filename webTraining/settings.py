@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,14 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = ''
+SECRET_KEY = 'django-insecure-2u@^t%bs=fuz+=xt$w8uee%u3gfx0%pmpl#=6dsit2f9czn!m4'
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-2u@^t%bs=fuz+=xt$w8uee%u3gfx0%pmpl#=6dsit2f9czn!m4')
+#SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+#DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -56,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #Para archivos estáticos en producción
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
 ]
 
 ROOT_URLCONF = 'webTraining.urls'
@@ -130,6 +132,7 @@ USE_TZ = True
 #Configuracion de archivos estáticos
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 #Config para archivos de audio e imagenes de la base de datos
 MEDIA_URL = '/media/'
