@@ -16,7 +16,7 @@ from .models import Trainee
 
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'trainingApp/home.html')
 
 
 #Lógica de registro
@@ -41,7 +41,7 @@ def signup(request):
             messages.success(request, "Your account is create successfully")
             login(request, user)
 
-            return redirect('home')
+            return redirect('trainingApp:home')
         
         else:
             messages.error(request, "Error")
