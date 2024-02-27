@@ -51,8 +51,8 @@ class DeployType(models.Model):
 class Deploy(models.Model):
     training = models.ForeignKey(Training, on_delete=models.CASCADE, default=1)
     deploy_type = models.ForeignKey(DeployType, on_delete=models.CASCADE, null=True)
-    deploy_image = models.ImageField(upload_to='training/images', blank=True)
-    deploy_sound = models.FileField(upload_to='training/sound', blank=True)
+    deploy_image = models.ImageField(upload_to='uploads/images', blank=True)
+    deploy_sound = models.FileField(upload_to='uploads/sound', blank=True)
 
     #Respuesta correcta
     correct_answer = models.CharField(max_length=50, null=True)
