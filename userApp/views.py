@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView, PasswordResetDoneView
+from django.utils.translation import gettext as _
 
 from django.db import transaction
 from django.urls import reverse_lazy
@@ -38,13 +39,13 @@ def signup(request):
                 educationalLevel = form.cleaned_data['educationalLevel'],
                 occupation = form.cleaned_data['occupation']
             )
-            messages.success(request, "Your account is create successfully")
+            messages.success(request, _("Your account is create successfully"))
             login(request, user)
 
             return redirect('home')
         
         else:
-            messages.error(request, "Error")
+            messages.error(request, _("Error"))
             return render(request, 'userApp/signup.html', {"form": form})
 
 
@@ -59,11 +60,11 @@ def signin(request):
     else:
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         if user is None:
-            messages.error(request, "Username or Password incorrect")
+            messages.error(request, _("Username or Password incorrect"))
             return render(request, 'userApp/signin.html', {"form": AuthenticationForm})
         else:
             login(request, user)
-            messages.success(request, f"Your are logged in as {request.POST['username']}")
+            messages.success(request, _(f"Your are logged in as {request.POST['username']}"))
             return redirect('training:list_training')
 
 
@@ -92,11 +93,11 @@ class ProfileView(LoginRequiredMixin, View):
         if userForm.is_valid() and traineeForm.is_valid():
             userForm.save()
             traineeForm.save()
-            messages.success(request, "Your profile has been updated")
+            messages.success(request, _("Your profile has been updated"))
             return redirect('userApp:profile', user.username)
         
         else:
-            messages.error(request, "error")
+            messages.error(request, _("error"))
             return redirect('userApp:profile', user.username)
 
 

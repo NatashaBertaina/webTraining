@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView
 from django.views import View
 from django.utils import timezone
+from django.utils.translation import gettext as _
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -95,7 +96,7 @@ class DeployDetailView(View):
                 del request.session['start_time']
 
                 training = Training.objects.get(pk=training_id)
-                messages.success(request, f"Great! You have completes: {training.name_training}")
+                messages.success(request, _(f"Great! You have completes: {training.name_training}"))
 
                 return redirect('home')
             request.session['current_deploy_index'] = current_deploy_index

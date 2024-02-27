@@ -1,0 +1,177 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-27 16:21-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\templates\footer.html:7
+msgid "Contact:"
+msgstr ""
+
+#: .\templates\home.html:10
+msgid "Exploring the Sound of Science"
+msgstr ""
+
+#: .\templates\home.html:13
+msgid ""
+"\n"
+"                        <p>\n"
+"                            Exploring the cosmos through different senses "
+"can be within your reach. That's why this platform for training in the "
+"sonification of astronomical data and more was created. In the convergence "
+"between astronomy and data sonification, we have created a unique space that "
+"goes beyond visual representation, allowing you to discover the universe in "
+"a multisensory way.\n"
+"                        </p>\n"
+"                    "
+msgstr ""
+
+#: .\templates\home.html:21
+msgid ""
+"\n"
+"                <div class=\"subtitle\">\n"
+"                    <h2 tabindex=\"7\" class=\"display-6\">About Us</h2>\n"
+"                </div>\n"
+"                <p>\n"
+"                    In sonoTrainings, we merge vision and hearing to provide "
+"you with multisensory training that not only expands your understanding of "
+"the cosmos but also enhances your auditory performance when interacting with "
+"scientific data. Inspired by innovative projects like sonoUno, our platform "
+"focuses on designing a user-centered interface to make science accessible to "
+"everyone.\n"
+"                </p>\n"
+"\n"
+"                <div class=\"subtitle\">\n"
+"                    <h2 tabindex=\"8\" class=\"display-6\">Highlighted "
+"Features:</h2>\n"
+"                </div>\n"
+"                <ul>\n"
+"                    <li>\n"
+"                        \n"
+"                        Multisensory Training:\n"
+"                        <p>Immerse yourself in unique learning experiences "
+"that combine vision and hearing to enhance understanding of astronomical and "
+"scientific data.</p>\n"
+"                    </li>\n"
+"                    <li>\n"
+"                        Accessibility:\n"
+"                        <p>Our platform was designed with the diversity of "
+"sensory styles in mind, making science accessible to everyone.</p>\n"
+"                    </li>\n"
+"                    <li>\n"
+"                        Continuous Development:\n"
+"                        <p>We are committed to the continuous improvement of "
+"our platform, ensuring user-friendly functionality that guarantees a "
+"comfortable learning experience.</p>\n"
+"                    </li>\n"
+"                </ul>\n"
+"                <p>Join us and discover the cosmos in an entirely new way on "
+"sonoTrainings.</p>\n"
+"            "
+msgstr ""
+
+#: .\templates\message.html:7 .\templates\message.html:9
+msgid "Message:"
+msgstr ""
+
+#: .\templates\navbar.html:24
+msgid "Home"
+msgstr ""
+
+#: .\templates\navbar.html:28
+msgid "Trainings"
+msgstr ""
+
+#: .\templates\navbar.html:31
+msgid "Profile"
+msgstr ""
+
+#: .\templates\navbar.html:34
+msgid "Logout"
+msgstr ""
+
+#: .\templates\navbar.html:38
+msgid "Login"
+msgstr ""
+
+#: .\templates\navbar.html:41
+msgid "Register"
+msgstr ""
+
+#: .\templates\navbar.html:45
+msgid "Go"
+msgstr ""
+
+#: .\trainingApp\models.py:12
+msgid "Easy"
+msgstr ""
+
+#: .\trainingApp\models.py:13
+msgid "Intermediate"
+msgstr ""
+
+#: .\trainingApp\models.py:14
+msgid "Advance"
+msgstr ""
+
+#: .\trainingApp\models.py:18
+msgid "Active"
+msgstr ""
+
+#: .\trainingApp\models.py:19
+msgid "Inactive"
+msgstr ""
+
+#: .\trainingApp\models.py:20
+msgid "in_Progress"
+msgstr ""
+
+#: .\trainingApp\views.py:99
+#, python-brace-format
+msgid "Great! You have completes: {training.name_training}"
+msgstr ""
+
+#: .\userApp\views.py:42
+msgid "Your account is create successfully"
+msgstr ""
+
+#: .\userApp\views.py:48
+msgid "Error"
+msgstr ""
+
+#: .\userApp\views.py:63
+msgid "Username or Password incorrect"
+msgstr ""
+
+#: .\userApp\views.py:67
+msgid "Your are logged in as {request.POST['username']}"
+msgstr ""
+
+#: .\userApp\views.py:96
+msgid "Your profile has been updated"
+msgstr ""
+
+#: .\userApp\views.py:100
+msgid "error"
+msgstr ""
+
+#: .\webTraining\settings.py:132
+msgid "Spanish"
+msgstr ""
+
+#: .\webTraining\settings.py:133
+msgid "English"
+msgstr ""

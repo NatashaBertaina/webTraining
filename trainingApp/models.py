@@ -3,20 +3,21 @@ from django.db import models
 from userApp.models import Trainee
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.utils.translation import gettext as _
 
 
 class Training(models.Model):
     
     class TrainingType(models.TextChoices):
-        Easy = 'Easy'
-        Intermediate = 'Intermediate'
-        Advance = 'Advance'
+        Easy = _('Easy')
+        Intermediate = _('Intermediate')
+        Advance = _('Advance')
     
     #Ayuda en la habilitacion de entrenamientos 
     class StateTraining(models.TextChoices):
-        Active = 'Active'
-        Inactive = 'Inactive'
-        in_Progress = 'in_Progress'
+        Active = _('Active')
+        Inactive = _('Inactive')
+        in_Progress = _('in_Progress')
 
     name_training = models.CharField(max_length=200)
     pub_date = models.DateTimeField("upload date", auto_now_add=True)
