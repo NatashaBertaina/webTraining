@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     #Apps propias
     'trainingApp.apps.TrainingappConfig',
     'userApp.apps.UserappConfig',
-    
+
+
+    #'bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -159,3 +161,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+##Si no esta autenticado se redirecciona al signup
+LOGIN_REDIRECT_URL = 'userApp:signup'
+LOGIN_URL = 'userApp:signup'

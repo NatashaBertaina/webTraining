@@ -3,6 +3,7 @@
 {% block content %}
 
 <main>
+    <p>ID del deploy: {{ deploy.id }}</p>
     <form method="POST" action="{% url 'trainingApp:review' deploy_answer.trainee_Training_id %}">
         {% csrf_token %}
         <section class="form-deploy">
@@ -16,12 +17,12 @@
                 </audio>
             </div>
             <div class="form-question">
-                <p class="h5">What you saw and/or heard is a function of what type: (check one option below)</p>
+                <p class="h5">{{ deploy.question}}</p>
             </div>
             <div class="form-choice">
-                {% for choice in choice %}
+                {% for choice in choices %}
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDisabled" id="{{ chice.choice }}" {% if deploy_answer.user_response == choice.choice %}checked{% endif %} disabled>
+                        <input class="form-check-input" type="radio" name="flexRadioDisabled" id="{{ choice.choice }}" {% if deploy_answer.user_response == choice.choice %}checked{% endif %} disabled>
                         <label class="form-check-label" for="{{ choice.choice }}">
                             {{ choice.choice }}
                         </label>

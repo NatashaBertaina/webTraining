@@ -4,10 +4,9 @@
 
 {% load tz %}
 <!-- SQLite almacena las fechas y horas en formato UTC, pero no almacena la información de la zona horaria.
-Django asume que las fechas y horas almacenadas en la base de datos son UTC y las convierte automáticamente a la zona horaria configurada en settings.py
-la biblioteca de zona horaria con {% load tz %} se usa al principio de la plantilla para poder utilizar el filtro timezone. -->
-
-<main>
+    Django asume que las fechas y horas almacenadas en la base de datos son UTC y las convierte automáticamente a la zona horaria configurada en settings.py
+    la biblioteca de zona horaria con {% load tz %} se usa al principio de la plantilla para poder utilizar el filtro timezone. -->
+<main class="mt-5">
     <h1>List of reviews</h1>
     <div class="container">
         {% if trainee_training_list %}
@@ -20,20 +19,19 @@ la biblioteca de zona horaria con {% load tz %} se usa al principio de la planti
                         <th>Number</th>
                         <th>Date</th>
                         <th>Time</th>
-                        <th>Time Used</th>
+                        <th>Time Spent</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for trainee_training in trainee_training_list %}
                         <tr>
                             <td>
-                                <a href="{% url 'trainingApp:review' trainee_training.id %}" class="text-primary">
-                                    {{ trainee_training.item_number }}
-                                </a>
+                                <a href="{% url 'trainingApp:review' trainee_training.id %}" class="text-primary"> {{ trainee_training.item_number }}</a>
                             </td>
-                            <td>{{ trainee_training.pub_date|timezone:"America/Buenos_Aires"|date: "Y-m-d" }}</td>
-                            <td>{{ trainee_training.pub_date|timezone:"America/Buenos_Aires"|time: "H:i:s" }}</td>
+                            <td>{{ trainee_training.pub_date|timezone:"America/Buenos_Aires"|date:"Y-m-d" }}</td>
+                            <td>{{ trainee_training.pub_date|timezone:"America/Buenos_Aires"|time:"H:i:s" }}</td>
                             <td>{{ trainee_training.time_spent }}</td>
+                        </tr>
                         </tr>
                     {% endfor %}
                 </tbody>

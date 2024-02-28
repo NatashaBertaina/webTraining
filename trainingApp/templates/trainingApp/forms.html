@@ -1,45 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-
 <main>
     
     <form method="POST" action="{% url 'trainingApp:forms' deploy.training_id %}">
         {% csrf_token %}
-        <fieldset>
-            <legend>Deploy: {{ deploy.id }}</legend>
-        </fieldset>
-        <fieldset>
-            <section class="form-deploy">
-                <div class="form-deploy-image">
-                    <img src="{{ form.instance.deploy_image.url }}" class="img-fluid im" alt="Displayed Image">
-                </div>
-                <div class="form-deploy-audio">
-                    <audio controls>
-                        <source  src="{{ form.instance.deploy_sound.url }}" type="audio/mpeg">
-                        Your browser does not support audio playback.
-                    </audio>
-                </div>
-                <div class="form-question">
-                    <p class="h5">What you saw and/or heard is a function of what type: (check one option below)</p>
-                </div>
-                <div class="form-choice">
-                    <ul>
-                        {% for field in form.visible_fields %}
-                            <li>
-                                {{ field }}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </section>
-        </fieldset>
-        <!-- Agrega el botón para enviar el formulario, con aria-pressed la presion del botón es expuesta a la tecnologia de asistencia. -->
-        <button type="submit" aria-pressed="true" class="btn btn-primary">
-            Naxt
-        </button>
+        <p> {{ current_deploy_index }}</p>
+        {% if deployType.name_type %}
+        <p class="btn btn-success"> {{ deployType.name_type }}</p>
+        {% endif %}
+        
+        <section class="form-deploy">
+            <div class="form-deploy-image">
+                <img src="{{ form.instance.deploy_image.url }}" class="img-fluid im" alt="Displayed Image">
+            </div>
+            <div class="form-deploy-audio">
+                <audio controls>
+                    <source  src="{{ form.instance.deploy_sound.url }}" type="audio/mpeg">
+                    Your browser does not support audio playback.
+                </audio>
+            </div>
+            <div class="form-question">
+                <p class="h5">{{ form.instance.question}}</p>
+            </div>
+            <div class="form-choice">
+                <ul>
+                    {% for field in form.visible_fields %}
+                        <li>
+                            {{ field }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Agrega el botón para enviar el formulario -->
+        <button type="submit" class="btn btn-primary">Enviar Respuesta</button>
     </form>
 
 </main>
-
 {% endblock %}
