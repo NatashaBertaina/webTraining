@@ -112,39 +112,6 @@ class DeployDetailView(View):
 
             return HttpResponseRedirect(reverse('trainingApp:forms', args=[training_id]))
 
-            #Lógica para avanzar al siguiente deploy y redirigir al inicio en caso de terminar con los deploys
-            current_deploy_index += 1
-            if current_deploy_index >= deploys.count():
-                request.session['current_deploy_index'] = 0
-                #Se obtiene el id del intento y se cambia el estado a completo
-                current_trainee_training_id = request.session.get('current_trainee_training_id')
-                trainee_training = TraineeTraining.objects.get(pk=current_trainee_training_id)
-                trainee_training.state = "Completed"
-                trainee_training.save()
-
-                #Lógica para el tiempo empleado para completar un bloque de un entrenamiento
-                start_time_str = request.session.get('start_time')
-                start_time = datetime.fromisoformat(start_time_str)
-                time_passed = datetime.now() - start_time
-
-                total_time = time_passed.total_seconds()
-                duration_timedelta = timedelta(seconds=total_time)
-
-                trainee_training.time_spent = duration_timedelta
-                trainee_training.save()
-
-                #Borrar de la sesion los datos temporales
-                del request.session['current_trainee_training_id']
-                del request.session['start_time']
-
-                training = Training.objects.get(pk=training_id)
-                messages.success(request, _(f"Great! You have completes: {training.name_training}"))
-
-                return redirect('home')
-            request.session['current_deploy_index'] = current_deploy_index
-
-            return redirect('trainingApp:form', training_id=training_id)
-        
         else:
             # Si el formulario no es válido, renderizar la plantilla con el formulario nuevamente,
             # resaltando lo que falta para poder enviarlo.
