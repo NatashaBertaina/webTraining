@@ -1,5 +1,5 @@
 .back{
-    background-color: rgb(97, 119, 59);
+    background-color: rgb(42, 44, 49);
     margin-top: auto;
 }
 
@@ -64,4 +64,8 @@ form{
 
 .container-pagination {
     grid-area: pagination;
+}
+
+.textf {
+    color:aliceblue; 
 }
