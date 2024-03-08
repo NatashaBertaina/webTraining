@@ -1,21 +1,35 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 
 <!-- Se carga un filtro para obtener la clave de un diccionario -->
 {% load custom_filters %}
 <main class="mt-5">
-    <h1>List of Trainings</h1>
+    <h1>{% trans "List of Trainings" %}</h1>
+    <div class="card">
+        <div class="card-header">
+            {% trans "Note" %}
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                {% blocktrans %}
+                    <p>A well-known quote, contained in a blockquote element.</p>
+                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                {% endblocktrans %}
+            </blockquote>
+        </div>
+    </div>
     <div class="container">
         {% if training_list %}
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Difficulty</th>
-                        <th>Duration (minutes)</th>
-                        <th>Attempts made</th>
-                        <th>Reviews</th>
+                        <th>{% trans "Name" %}</th>
+                        <th>{% trans "Difficulty" %}</th>
+                        <th>{% trans "Duration (minutes)" %}</th>
+                        <th>{% trans "Attempts made" %}</th>
+                        <th>{% "Reviews" %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,14 +42,16 @@
                             <td>{{ training.estimatedDuration }}</td>
                             <td>{{ num_trainee_trainings|get_value:training.id }}</td>
                             <td>
-                                <a href="{% url 'trainingApp:review_list' training.id %}" class="text-primary">review</a>
+                                <a href="{% url 'trainingApp:review_list' training.id %}" class="text-primary">{% trans "review" %}</a>
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         {% else %}
-            <p class="lead">Sorry, no trainings are available.</p>
+            {% blocktrans %}
+                <p class="lead">Sorry, no trainings are available.</p>
+            {% endblocktrans %}
         {% endif %}
     </div>
 </main>
