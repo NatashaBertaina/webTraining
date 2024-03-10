@@ -1,9 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
+<script>
+    function confirmation() {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Your answer will be submitted.",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Confirm",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario confirma, enviar el formulario
+                document.getElementById('myForm').submit();
+            }
+        });
+    }
+</script>
 <main>
     
-    <form method="POST" action="{% url 'trainingApp:forms' deploy.training_id %}">
+    <form id="myForm" method="POST" action="{% url 'trainingApp:forms' deploy.training_id %}">
         {% csrf_token %}
         <p> {{ current_deploy_index }}</p>
         {% if deployType.name_type %}
@@ -35,7 +52,7 @@
         </section>
         
         <!-- Agrega el botón para enviar el formulario -->
-        <button type="submit" class="btn btn-primary">Enviar Respuesta</button>
+        <button onclick="confirmation()" type="button" class="btn btn-primary">Send Answer</button>
     </form>
 
 </main>

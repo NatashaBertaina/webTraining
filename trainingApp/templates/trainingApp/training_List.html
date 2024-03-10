@@ -28,18 +28,24 @@
                         <th>{% trans "Name" %}</th>
                         <th>{% trans "Difficulty" %}</th>
                         <th>{% trans "Duration (minutes)" %}</th>
+                        <th>{% trans "Attempts allowed" %}</th>
                         <th>{% trans "Attempts made" %}</th>
-                        <th>{% "Reviews" %}</th>
+                        <th>{% trans "Reviews" %}</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for training in training_list %}
                         <tr>
                             <td>
-                                <a href="{% url 'trainingApp:forms' training.id %}" class="text-primary">{{ training.name_training }}</a>
+                                {% if training.attempts_allowed > num_trainee_trainings|get_value:training.id %}
+                                    <a href="{% url 'trainingApp:forms' training.id %}" class="text-primary">{{ training.name_training }}</a>
+                                {% else %} 
+                                    <a>{{ training.name_training }}</a>
+                                {% endif %}
                             </td>
                             <td>{{ training.difficulty }}</td>
                             <td>{{ training.estimatedDuration }}</td>
+                            <td>{{ training.attempts_allowed }}</td>
                             <td>{{ num_trainee_trainings|get_value:training.id }}</td>
                             <td>
                                 <a href="{% url 'trainingApp:review_list' training.id %}" class="text-primary">{% trans "review" %}</a>
