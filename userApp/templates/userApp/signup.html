@@ -3,14 +3,14 @@
 {% block content %}
 
 <div class="container-fluid">
-    <h2 class="display-h4">Signup</h2>
+    <h1 class="h3 mb-4">{% trans 'Signup' %}</h1>
     <br>
     <p class="text-center">{% trans "Complete all fields please:" %}</p>
 
     <form action="" method="POST">
         {% csrf_token %}
         <div class="card mx-auto border border-3">
-            <di class="card-body row gy-4 px-5 justify-content-center">
+            <div class="card-body row gy-4 px-5 justify-content-center">
                 <div class="col-12">
                     <label for="username" aria-label="{% trans 'Enter a username of your choice' %}">{{ form.username.label }}</label>
                         {{ form.username }}
@@ -70,7 +70,9 @@
             </div>
             <div class="card-body row gy-4 justify-content-start">
                 <div class="col-md-4">
-                    <button aria-pressed="true" class="btn btn-primary">Signup</button>
+                    <button aria-pressed="true" class="btn btn-primary">
+                        {% trans 'Signup' %}
+                    </button>
                 </div>
             </div>
         </div>
