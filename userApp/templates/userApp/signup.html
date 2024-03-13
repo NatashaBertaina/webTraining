@@ -1,24 +1,82 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block content %}
 
-    <div class="container">
-        <h2 class="display-h4">Signup</h2>
+<div class="container-fluid">
+    <h1 class="h3 mb-4">{% trans 'Signup' %}</h1>
+    <br>
+    <p class="text-center">{% trans "Complete all fields please:" %}</p>
 
-        <br>
-
-        <p class="text-center">Complete all field please:</p>
-
-        <form action="" method="POST">
-            {% csrf_token %}
-            <!--Estilos no usar en html. Moverlo al archivo css-->
-            <div class="card mx-auto" style="width: 30rem;">
-                <div class="card-body">                    
-                    {{ form.as_p }}
-                    <button aria-pressed="true" class="btn btn-primary">Signup</button>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="card mx-auto border border-3">
+            <div class="card-body row gy-4 px-5 justify-content-center">
+                <div class="col-12">
+                    <label for="username" aria-label="{% trans 'Enter a username of your choice' %}">{{ form.username.label }}</label>
+                        {{ form.username }}
+                    <span class="text-danger">{{ form.username.errors }}</span> 
+                    
+                </div>
+                <div class="col-md-6">
+                    <label for="first_name">{{ form.first_name.label }}</label>
+                        {{ form.first_name }}
+                    <span class="text-danger">{{ form.first_name.errors }}</span>
+                </div>
+                <div class="col-md-6">
+                    <label for="last_name">{{ form.last_name.label }}</label>
+                        {{ form.last_name }}
+                    <span class="text-danger">{{ form.last_name.errors }}</span>
+                </div>
+                <div class="col-12">
+                    <label for="email">{{ form.email.label }}</label>
+                        {{ form.email }}
+                    <span class="text-danger">{{ form.email.errors }}</span>
+                </div>
+                <div class="col-md-6">
+                    <label for="password1">{{ form.password1.label }}</label>
+                        {{ form.password1 }}
+                    <span class="text-danger">{{ form.password1.errors }}</span>
+                </div>
+                <div class="col-md-6">
+                    {% blocktranslate %}
+                        <small id="username-description" aria-hidden="true">Your username must be between 6 and 15 characters and can only contain letters, numbers, and underscores.</small>
+                    {% endblocktranslate %}
+                </div>
+                <div class="col-md-6">
+                    <label for="password2">{{ form.password2.label }}</label>
+                        {{ form.password2 }}
+                    <span class="text-danger">{{ form.password2.errors }}</span>
+                </div>
+                <div class="col-md-6">
+                    {% blocktranslate %}
+                        <small id="username-description" aria-hidden="true">Write your password one more time</small>
+                    {% endblocktranslate %}
+                </div>
+                <div class="col-12">
+                    <label for="age">{{ form.age.label }}</label>
+                        {{ form.age }}
+                    <span class="text-danger">{{ form.age.errors }}</span>
+                </div>
+                <div class="col-12">
+                    <label for="educationalLevel">{{ form.educationalLevel.label }}</label>
+                        {{ form.educationalLevel }}
+                    <span class="text-danger">{{ form.educationalLevel.errors }}</span>
+                </div>
+                <div class="col-12">
+                    <label for="occupation">{{ form.occupation.label }}</label>
+                        {{ form.occupation }}
+                    <span class="text-danger">{{ form.occupation.errors }}</span>
                 </div>
             </div>
-        </form>
-    </div>
+            <div class="card-body row gy-4 justify-content-start">
+                <div class="col-md-4">
+                    <button aria-pressed="true" class="btn btn-primary">
+                        {% trans 'Signup' %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

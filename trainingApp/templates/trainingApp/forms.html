@@ -1,42 +1,61 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block content %}
-<main>
-    
-    <form method="POST" action="{% url 'trainingApp:forms' deploy.training_id %}">
-        {% csrf_token %}
-        <p> {{ current_deploy_index }}</p>
-        {% if deployType.name_type %}
-        <p class="btn btn-success"> {{ deployType.name_type }}</p>
-        {% endif %}
-        
-        <section class="form-deploy">
-            <div class="form-deploy-image">
-                <img src="{{ form.instance.deploy_image.url }}" class="img-fluid im" alt="Displayed Image">
-            </div>
-            <div class="form-deploy-audio">
-                <audio controls>
-                    <source  src="{{ form.instance.deploy_sound.url }}" type="audio/mpeg">
-                    Your browser does not support audio playback.
-                </audio>
-            </div>
-            <div class="form-question">
-                <p class="h5">{{ form.instance.question}}</p>
-            </div>
-            <div class="form-choice">
-                <ul>
-                    {% for field in form.visible_fields %}
-                        <li>
-                            {{ field }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </section>
-        
-        <!-- Agrega el botón para enviar el formulario -->
-        <button type="submit" class="btn btn-primary">Enviar Respuesta</button>
-    </form>
 
-</main>
+    <script>
+        function confirmation() {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Your answer will be submitted.",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "Cancel"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Si el usuario confirma, enviar el formulario
+                    document.getElementById('myForm').submit();
+                }
+            });
+        }
+    </script>
+
+    <main>
+        <fieldset class="border p-3 rounded">
+            <form method="POST" action="{% url 'trainingApp:forms' deploy.training_id %}">
+                {% csrf_token %}
+                {% if deployType.name_type %}
+                <p class="btn btn-success"> {{ deployType.name_type }}</p>
+                {% endif %}            
+                <div class="form-deploy-image">
+                    <img src="{{ form.instance.deploy_image.url }}" class="img-fluid im" alt="Displayed Image">
+                </div>
+                <div class="form-deploy-audio">
+                    <audio controls>
+                        <source  src="{{ form.instance.deploy_sound.url }}" type="audio/mpeg">
+                            Your browser does not support audio playback.
+                    </audio>
+                </div>
+                <div class="form-question">
+                    <p class="h5">{{ form.instance.question}}</p>
+                </div>
+                <div class="form-choice">
+                    <fieldset>
+                        <legend>{% trans 'Select Answer' %}</legend>
+                        <ul>
+                            {% for field in form.visible_fields %}
+                                <li>
+                                    {{ field }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </fieldset>
+                </div>
+                
+                <!-- Agrega el botón para enviar el formulario -->
+                <button onclick="confirmation()" type="button" class="btn btn-primary">Send and Next</button>
+            </form>
+        </fieldset>   
+    </main>
+
 {% endblock %}

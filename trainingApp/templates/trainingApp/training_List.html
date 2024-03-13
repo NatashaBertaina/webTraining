@@ -1,41 +1,65 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 
 <!-- Se carga un filtro para obtener la clave de un diccionario -->
 {% load custom_filters %}
 <main class="mt-5">
-    <h1>List of Trainings</h1>
-    <div class="container">
+    <h1 class="h2">{% trans "List of Trainings" %}</h1>
+    <div class="card my-3 border border-3">
+        <div class="card-header">
+            {% trans "Note" %}
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                {% blocktrans %}
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Remember that at the end of a training block, which is made up of 4 displays, you can review your answers and/or repeat the block with new answers.</li>
+                    <li class="list-group-item">To start a workout you must press the name of the desired workout in the table below.</li>
+                </ul>
+                {% endblocktrans %}
+            </blockquote>
+        </div>
+    </div>
+    <div class="table-responsive">
         {% if training_list %}
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered border border-2">
                 <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Difficulty</th>
-                        <th>Duration (minutes)</th>
-                        <th>Attempts made</th>
-                        <th>Reviews</th>
+                    <tr class="table-primary">
+                        <th>{% trans "Name" %}</th>
+                        <th>{% trans "Difficulty" %}</th>
+                        <th>{% trans "Duration (minutes)" %}</th>
+                        <th>{% trans "Attempts allowed" %}</th>
+                        <th>{% trans "Attempts made" %}</th>
+                        <th>{% trans "Reviews" %}</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for training in training_list %}
                         <tr>
                             <td>
-                                <a href="{% url 'trainingApp:forms' training.id %}" class="text-primary">{{ training.name_training }}</a>
+                                {% if training.attempts_allowed > num_trainee_trainings|get_value:training.id %}
+                                    <a href="{% url 'trainingApp:forms' training.id %}" class="btn btn-info">{{ training.name_training }}</a>
+                                {% else %} 
+                                    <a>{{ training.name_training }}</a>
+                                {% endif %}
                             </td>
                             <td>{{ training.difficulty }}</td>
                             <td>{{ training.estimatedDuration }}</td>
+                            <td>{{ training.attempts_allowed }}</td>
                             <td>{{ num_trainee_trainings|get_value:training.id }}</td>
                             <td>
-                                <a href="{% url 'trainingApp:review_list' training.id %}" class="text-primary">review</a>
+                                <a href="{% url 'trainingApp:review_list' training.id %}" class="btn btn-info">{% trans "review" %}</a>
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         {% else %}
-            <p class="lead">Sorry, no trainings are available.</p>
+            {% blocktrans %}
+                <p class="lead">Sorry, no trainings are available.</p>
+            {% endblocktrans %}
         {% endif %}
     </div>
 </main>

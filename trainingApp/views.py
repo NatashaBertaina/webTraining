@@ -15,6 +15,7 @@ from datetime import datetime
 from datetime import datetime, timedelta
 from django.contrib.auth.mixins import LoginRequiredMixin  #LoginRequiredMixin se utiliza como un mixin para requerir que un usuario esté autenticado antes de acceder a una vista específica.
 from django.urls import reverse
+from django.contrib import messages
 
 #Vista para ver la lista de trainings
 class TrainingList(ListView):

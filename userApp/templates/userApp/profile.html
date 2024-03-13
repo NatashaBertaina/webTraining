@@ -1,25 +1,52 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block content %}
 
     <div class="container mt-5">
-        <h1 class="mb-4">Profile</h1>
+        <h1 class="display-h3 mb-4">Profile</h1>
 
-        <form action="" method="POST" class="mb-4">
-        {% csrf_token %}
-        {{ userform.as_p }}
-        {{ traineeform.as_p }}
-        <button type="submit" aria-pressed="true" class="btn btn-primary">
-            Update
-        </button>
-        </form>
+        <fieldset class="border p-3 rounded">
+            <legend class="h5 mb-3">{% trans 'User Information' %}</legend>
+            <form action="" method="POST" class="mb-4">
+                {% csrf_token %}
+                {{ userform.as_p }}
+                <button type="submit" aria-pressed="true" class="btn btn-primary">
+                    {% trans 'Update' %}
+                </button>
+            </form>
+            {% if userform.errors %}
+                <ul class="text-danger list-unstyled">
+                {% for error in userform.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </fieldset>
 
-        <a href="/userApp/changePassword" class="btn btn-secondary">
-        Change Password
+        <fieldset class="border p-3 rounded mt-4">
+            <legend class="h5 mb-3">{% trans 'Trainee Information' %}</legend>
+            <form action="" method="POST" class="mb-4">
+                {% csrf_token %}
+                {{ traineeform.as_p }}
+                <button type="submit" aria-pressed="true" class="btn btn-primary">
+                    {% trans 'Update' %}
+                </button>
+            </form>
+            {% if traineeform.errors %}
+                <ul class="text-danger list-unstyled">
+                {% for error in traineeform.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </fieldset>
+
+        <a href="/userApp/changePassword" class="btn btn-secondary mt-3">
+            {% trans 'Change Password' %}
         </a>
 
         <p class="text-danger mt-3">
-        {{ error }}
+            {{ error }}
         </p>
     </div>
     

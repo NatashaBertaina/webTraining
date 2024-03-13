@@ -1,5 +1,5 @@
 .back{
-    background-color: rgb(97, 119, 59);
+    background-color: rgb(42, 44, 49);
     margin-top: auto;
 }
 
@@ -22,20 +22,6 @@ form{
     padding: 0rem 4rem 0rem 4rem;
 }
 
-.form-deploy {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 2fr 1fr 1fr 1fr;
-    grid-template-areas:
-    "image image image"
-    "audio audio audio"
-    "question question question";
-}
-
-.form-deploy-image {
-    grid-area: image;
-}
-
 .im{
     margin: 1rem 0rem 1rem 0rem;
     padding-top: 1rem;
@@ -44,14 +30,6 @@ form{
     border-color: rgb(97, 119, 59);
 }
 
-.form-deploy-audio {
-    grid-area: audio;
-}
-
-.form-question{
-    grid-area: question;
-    margin: 1rem 0rem 1rem 0rem;
-}
 
 .page-button {
     display: grid;
@@ -64,4 +42,8 @@ form{
 
 .container-pagination {
     grid-area: pagination;
+}
+
+.textf {
+    color:aliceblue; 
 }

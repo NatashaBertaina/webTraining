@@ -33,11 +33,13 @@ class Training(models.Model):
         choices=StateTraining.choices,
         default=StateTraining.in_progress
     )
-
+    #Atributo que gestiona la cantidad de veces que se puede realizar el training
+    attempts_allowed = models.IntegerField(default=1)
+    
     def was_published_recently(self):
         return self.pub_date >=timezone.now() - datetime.timedelta(days=1)
     def __str__(self):
-        return self.name_training
+        return f"id: {self.id}, {self.name_training}"
     
     #Metodo que trae la cantidad de veces que se realizo un training por un trainee especifico
     def get_num_trainee_trainings(self, trainee_id):
@@ -48,7 +50,7 @@ class DeployType(models.Model):
     description = models.CharField(max_length=500)
     
     def __str__(self):
-        return f"{self.name_type}"
+        return f"id: {self.id}, {self.name_type}"
     
 class Deploy(models.Model):
     training = models.ForeignKey(Training, on_delete=models.CASCADE)
@@ -60,7 +62,7 @@ class Deploy(models.Model):
     correct_answer = models.CharField(max_length=50, null=True)
 
     def __str__(self):
-        return f"Deploy: {self.id}"
+        return f"Deploy: {self.id} {self.training.name_training}"
 
 class Choice(models.Model):
     deploy = models.ForeignKey(Deploy, on_delete=models.CASCADE)
@@ -77,7 +79,8 @@ class TraineeTraining(models.Model):
     state = models.CharField(max_length=100,default="in_progress")
     time_spent = models.DurationField(null=True, blank=True)
     
-
+    def __str__(self):
+        return f"Deploy: {self.id}, {self.training.name_training}, {self.trainee.user.first_name}"
 
 #Clase para guardar la respuesta del usuario de cada deploy
 class DeployAnswer(models.Model):
@@ -130,3 +133,5 @@ class Comment(models.Model):
         )
     pub_date = models.DateTimeField("upload date")
     
+    def __str__(self):
+        return f"Comment id: {self.id}, {self.training.name_training}, {self.trainee.user.first_name}"
