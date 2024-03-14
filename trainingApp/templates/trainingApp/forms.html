@@ -22,7 +22,7 @@
 
     <main>
         <fieldset class="border p-3 rounded">
-            <form method="POST" action="{% url 'trainingApp:forms' deploy.training_id %}">
+            <form id="myForm" method="POST" action="{% url 'trainingApp:forms' deploy.training_id %}">
                 {% csrf_token %}
                 {% if deployType.name_type %}
                 <p class="btn btn-success"> {{ deployType.name_type }}</p>
@@ -53,7 +53,7 @@
                 </div>
                 
                 <!-- Agrega el botón para enviar el formulario -->
-                <button onclick="confirmation()" type="submit" class="btn btn-primary">Send and Next</button>
+                <button onclick="confirmation()" type="button" class="btn btn-primary">Send and Next</button>
             </form>
         </fieldset>   
     </main>
