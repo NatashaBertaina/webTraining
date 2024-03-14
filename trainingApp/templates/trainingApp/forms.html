@@ -27,37 +27,6 @@
                 {% if deployType.name_type %}
                 <p class="btn btn-success"> {{ deployType.name_type }}</p>
                 {% endif %}            
-<<<<<<< HEAD
-                <section class="form-deploy">
-                    <div class="form-deploy-image">
-                        <img src="{{ form.instance.deploy_image.url }}" class="img-fluid im" alt="Displayed Image">
-                    </div>
-                    <div class="form-deploy-audio">
-                        <audio controls>
-                            <source  src="{{ form.instance.deploy_sound.url }}" type="audio/mpeg">
-                            Your browser does not support audio playback.
-                        </audio>
-                    </div>
-                    <div class="form-question">
-                        <p class="h5">{{ form.instance.question}}</p>
-                    </div>
-                    <div class="form-choice">
-                        <fieldset>
-                            <legend>{% trans 'Select Answer' %}</legend>
-                            <ul>
-                                {% for field in form.visible_fields %}
-                                    <li>
-                                        {{ field }}
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </fieldset>
-                    </div>
-                </section>
-                
-                <!-- Agrega el botón para enviar el formulario -->
-                <button onclick="confirmation()" type="submit" class="btn btn-primary">Send Answer</button>
-=======
                 <div class="form-deploy-image">
                     <img src="{{ form.instance.deploy_image.url }}" class="img-fluid im" alt="Displayed Image">
                 </div>
@@ -85,7 +54,6 @@
                 
                 <!-- Agrega el botón para enviar el formulario -->
                 <button onclick="confirmation()" type="submit" class="btn btn-primary">Send and Next</button>
->>>>>>> main
             </form>
         </fieldset>   
     </main>
