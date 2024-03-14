@@ -22,6 +22,7 @@ form{
     padding: 0rem 4rem 0rem 4rem;
 }
 
+<<<<<<< HEAD
 .form-deploy {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -37,6 +38,8 @@ form{
     grid-area: image;
 }
 
+=======
+>>>>>>> main
 .im{
     margin: 1rem 0rem 1rem 0rem;
     padding-top: 1rem;
@@ -45,14 +48,6 @@ form{
     border-color: rgb(97, 119, 59);
 }
 
-.form-deploy-audio {
-    grid-area: audio;
-}
-
-.form-question{
-    grid-area: question;
-    margin: 1rem 0rem 1rem 0rem;
-}
 
 .form-choice{
     grid-area: choice;
