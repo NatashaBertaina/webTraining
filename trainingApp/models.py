@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.contrib.auth.models import User
 from userApp.models import Trainee
-
+from django.db.models import Sum
 
 class Training(models.Model):
     #Enumeracion para el tipo de entrenamiento
@@ -43,7 +43,12 @@ class Training(models.Model):
     #Metodo que trae la cantidad de veces que se realizo un training por un trainee especifico
     def get_num_trainee_trainings(self, trainee_id):
         return TraineeTraining.objects.filter(training=self, trainee_id=trainee_id).count()
-
+    @property
+    def total_estimated_duration(self):
+        """
+        Calcula y devuelve la suma de los estimatedDuration de todos los bloques asociados a este entrenamiento.
+        """
+        return self.block_set.aggregate(total_duration=Sum('estimed_duration_block'))['total_duration'] or 0
 
 class Block(models.Model):
     class StateBlock(models.TextChoices):

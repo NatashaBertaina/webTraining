@@ -47,7 +47,7 @@
                                 {% endif %}
                             </td>
                             <td>{{ training.difficulty }}</td>
-                            <td>{{ training.estimatedDuration }}</td>
+                            <td>{{ training.total_estimated_duration }}</td>
                             <td>{{ training.attempts_allowed }}</td>
                             <!-- get_value es un filtro personalizado ubicado en templatetags/custom_filters-->
                             <td>{{ num_trainee_trainings|get_value:training.id }}</td>
