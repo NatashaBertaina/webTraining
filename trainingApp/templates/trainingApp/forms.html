@@ -3,6 +3,19 @@
 {% block content %}
 
     <script>
+        function validateAndSubmitForm() {
+        // Realizar validación del formulario
+        var form = document.getElementById('myForm');
+        if (!form.checkValidity()) {
+            // Si la validación falla, muestra los mensajes de error nativos del navegador
+            form.reportValidity();
+            return;
+        }
+
+        // Si la validación es exitosa, muestra el cuadro de diálogo de confirmación
+        confirmation();
+        }
+
         function confirmation() {
             Swal.fire({
                 title: "Are you sure?",
@@ -22,11 +35,9 @@
 
     <main>
         <fieldset class="border p-3 rounded">
-            <form id="myForm" method="POST" action="{% url 'trainingApp:forms' deploy.training_id %}">
+            <form id="myForm" method="POST" action="{% url 'trainingApp:forms' training_id block_id %}">
+
                 {% csrf_token %}
-                {% if deployType.name_type %}
-                <p class="btn btn-success"> {{ deployType.name_type }}</p>
-                {% endif %}            
                 <div class="form-deploy-image">
                     <img src="{{ form.instance.deploy_image.url }}" class="img-fluid im" alt="Displayed Image">
                 </div>
@@ -53,7 +64,7 @@
                 </div>
                 
                 <!-- Agrega el botón para enviar el formulario -->
-                <button onclick="confirmation()" type="button" class="btn btn-primary">Send and Next</button>
+                <button onclick="validateAndSubmitForm()" type="button" class="btn btn-primary">Send and Next</button>
             </form>
         </fieldset>   
     </main>
