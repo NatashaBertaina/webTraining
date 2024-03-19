@@ -97,7 +97,7 @@ class TraineeTraining(models.Model):
 class BlockAnswer(models.Model):
     class StateBlockAnswer(models.TextChoices):
         in_progress = 'In progress'
-        Complated = 'Complated'
+        Complated = 'Completed'
         
     state_block= models.CharField(
         max_length=20,

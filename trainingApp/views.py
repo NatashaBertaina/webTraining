@@ -162,21 +162,23 @@ class DeployDetailView(View):
                 block_answer = BlockAnswer.objects.get(pk=current_block_answer_id)
                 block_answer.state_block = "Completed"
                 block_answer.save()
+                del request.session[f'current_block_answer_id_{block_id}']
                 
                 current_trainee_training_id = request.session.get(f'current_trainee_training_id_{training_id}')
                 all_block_answers = BlockAnswer.objects.filter(trainee_Training= current_trainee_training_id )
                 all_blocks = Block.objects.filter(training=training_id,)
                 
+                print(f"current_block_answer_id: {current_block_answer_id}")                
+                print(f"current_trainee_training_id: {current_trainee_training_id}")
+                
                 # Verifica si todos los objetos en all_block_answer tienen state_block igual a "completed"
                 all_completed = all(block_answer.state_block == 'Completed' for block_answer in all_block_answers)
                 
-                print(f"all_completed: {all_completed}")
-                
-                for blockanswer in  all_block_answers:
-                    print(f"blockanswer_Id: {blockanswer.id}, state: {blockanswer.state_block}")
                     
                 # Verificar si la cantidad de BlockAnswer es igual a la cantidad de Block
                 correct_number_of_answers = len(all_block_answers) == len(all_blocks)
+                print(f"all_block_answers: {len(all_block_answers)}, all_blocks: {len(all_blocks)}")
+                
                 # Si todos los blocks tienen state_block igual a "completed", entonces se marca al training como completed y se lo redirecciona a home
                 if all_completed and correct_number_of_answers:               
                     trainee_training = TraineeTraining.objects.get(pk=current_trainee_training_id)
@@ -205,16 +207,20 @@ class DeployDetailView(View):
                 
                     training = Training.objects.get(pk=training_id) 
                     messages.success(request,f" You have completed:  {training.name_training}")
+                    print("Termine todo")
+                                 
                     return HttpResponseRedirect(reverse('trainingApp:comment', args=[training_id]))
                 
                 #Si completo el Block pero aun quedan mas por completar entonces lo redirecciona a la lista de blocks
                 else : 
+                    print("Termine el block pero faltan mas")
                     return HttpResponseRedirect(reverse('trainingApp:block_deploy_list', args=[training_id]))
                 
             #Si todavia no llega al final del Block entonces    
             else:
                 # Guardar el índice actual en la sesión
                 request.session[f'current_deploy_index_{block_id}'] = current_deploy_index
+                print("Todavia no termino el block")
 
                 return HttpResponseRedirect(reverse('trainingApp:forms', args=[training_id,block_id]))
 
@@ -222,7 +228,6 @@ class DeployDetailView(View):
             # Si el formulario no es válido, renderizar la plantilla con el formulario nuevamente,
             # resaltando lo que falta para poder enviarlo.
             block = Block.objects.get(pk = block_id)
-            messages.error(request, "Error")
             return render(request, self.template_name, {'deploy': current_deploy, 'form':form, 'block_id':block.id, 'training_id': training_id, 'current_deploy_index':current_deploy_index})
         
         
