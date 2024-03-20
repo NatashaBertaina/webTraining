@@ -29,3 +29,17 @@ bibliography: paper.bib
 # Summary
 
 hi, this is my first paper!!
+
+# Introduction
+
+
+# Statement of need
+
+
+# Conclusions
+
+
+# Acknowledgements
+
+
+# References
