@@ -248,9 +248,9 @@ class DeployDetailView(View):
 
 
 #Vista de todos los intentos realizados por el trainee para un training
-class ReviewList(ListView):
+class ReviewListTT(ListView):
     model = TraineeTraining 
-    template_name = "trainingApp/review_list.html"
+    template_name = "trainingApp/review_list_tt.html"
     context_object_name = "trainee_training_list"
     paginate_by = 10  # Especifica la cantidad de objetos por página
     
@@ -276,42 +276,64 @@ class ReviewList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
-
-#Vista para ver un intento de un training
-class Review(View):
-    template_name = 'trainingApp/review.html'
     
-    def get(self, request, trainee_training_id):
-        trainee_training = TraineeTraining.objects.get(id= trainee_training_id)
-        deploys_answer = DeployAnswer.objects.filter(trainee_Training_id=trainee_training_id)
-        deploys = Deploy.objects.filter(training_id=trainee_training.training_id)
+#Vista de todos los blocks de un trainee-training
+class ReviewBlock(ListView):
+    model = BlockAnswer 
+    template_name = "trainingApp/review_block.html"
+    context_object_name = "blocks_answers"
+    paginate_by = 10  # Especifica la cantidad de objetos por página
+    
+    def get_queryset(self):
+        # Obtén el trainee_training_id de la URL
+        trainee_training_id = self.kwargs['trainee_training_id']
         
-        #Indice del deploy actual
-        current_deploy_index = request.session.get('current_deploy_index', 0)
-        #Deploy actual
-        current_deploy = deploys[current_deploy_index]
-        #Respuesta asociada al deploy actual
-        current_deploy_answer = deploys_answer[current_deploy_index]
-        #Busco las choices asociadas al deploy actual
-        choices = Choice.objects.filter(deploy_id = current_deploy.id)
-        return render(request, self.template_name, {'deploy': current_deploy, 'choices':choices, 'deploy_answer':current_deploy_answer})
+        # Filtra los objetos BlockAnswer por trainee_training_id
+        queryset = BlockAnswer.objects.filter(
+            trainee_Training= trainee_training_id,
+        )
+        
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
     
-    def post(self, request, trainee_training_id): 
-        trainee_training = TraineeTraining.objects.get(id= trainee_training_id)
-        deploys = Deploy.objects.filter(training_id=trainee_training.training_id)
+#Vista para ver deploys de un block de una review
+class ReviewDeploy(View):
+    template_name = 'trainingApp/review_deploy.html'
+    
+    def get(self, request, block_answer_id):
+        deploys_answer = DeployAnswer.objects.filter(block_answer=block_answer_id)
+        deploys = [deploy_answer.deploy for deploy_answer in deploys_answer]
+        
+        #Indice del deploy actual para revision
+        current_deploy_index_review = request.session.get(f'current_deploy_index_review_{block_answer_id}', 0)
+        #Deploy actual
+        current_deploy_review = deploys[current_deploy_index_review]
+        #Respuesta asociada al deploy actual
+        current_deploy_answer = deploys_answer[current_deploy_index_review]
+        #Busco las choices asociadas al deploy actual
+        choices = Choice.objects.filter(deploy_id = current_deploy_review.id)
+        return render(request, self.template_name, {'deploy': current_deploy_review, 'choices':choices, 'deploy_answer':current_deploy_answer})
+    
+    def post(self, request, block_answer_id): 
+        block_answer= BlockAnswer.objects.get(pk=block_answer_id)
+        deploys_answer = DeployAnswer.objects.filter(block_answer=block_answer_id)
+        deploys = [deploy_answer.deploy for deploy_answer in deploys_answer]
         
         #Obtengo el indice del deploy actual
-        current_deploy_index = request.session.get('current_deploy_index', 0)
+        current_deploy_index_review = request.session.get(f'current_deploy_index_review_{block_answer_id}', 0)
         # Avanzar al siguiente deploy
-        current_deploy_index += 1
+        current_deploy_index_review += 1
         #Si se llega al final del trainings entonces se lo redicciona al home y se resetea el current_deploy_index
-        if current_deploy_index >= deploys.count():
-            request.session['current_deploy_index'] = 0  
-            return redirect('trainingApp:training_List')
+        if current_deploy_index_review >= len(deploys):
+            request.session[f'current_deploy_index_review_{block_answer_id}'] = 0  
+            return redirect('trainingApp:review_block',block_answer.trainee_Training.id)
         
         # Guardar el índice actual en la sesión
-        request.session['current_deploy_index'] = current_deploy_index
-        return redirect('trainingApp:review', trainee_training_id=trainee_training_id)
+        request.session[f'current_deploy_index_review_{block_answer_id}'] = current_deploy_index_review
+        return redirect('trainingApp:review_deploy', block_answer_id=block_answer_id)
     
 #Vista para realizar un comentario a un trainee
 class CommentView(LoginRequiredMixin, View):

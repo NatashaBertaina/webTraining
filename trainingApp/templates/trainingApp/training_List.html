@@ -52,7 +52,7 @@
                             <!-- get_value es un filtro personalizado ubicado en templatetags/custom_filters-->
                             <td>{{ num_trainee_trainings|get_value:training.id }}</td>
                             <td>
-                                <a href="{% url 'trainingApp:review_list' training.id %}" class="btn btn-info">{% trans "review" %}</a>
+                                <a href="{% url 'trainingApp:review_list_tt' training.id %}" class="btn btn-info">{% trans "review" %}</a>
                             </td>
                         </tr>
                     {% endfor %}

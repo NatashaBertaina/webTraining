@@ -26,7 +26,7 @@
                     {% for trainee_training in trainee_training_list %}
                         <tr>
                             <td>
-                                <a href="{% url 'trainingApp:review' trainee_training.id %}" class="text-primary"> {{ trainee_training.item_number }}</a>
+                                <a href="{% url 'trainingApp:review_block' trainee_training.id %}" class="text-primary"> {{ trainee_training.item_number }}</a>
                             </td>
                             <td>{{ trainee_training.pub_date|timezone:"America/Buenos_Aires"|date:"Y-m-d" }}</td>
                             <td>{{ trainee_training.pub_date|timezone:"America/Buenos_Aires"|time:"H:i:s" }}</td>
