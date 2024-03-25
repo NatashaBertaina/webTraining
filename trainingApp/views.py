@@ -297,6 +297,9 @@ class ReviewBlock(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        trainee_training_id = self.kwargs['trainee_training_id']
+        training_id= TraineeTraining.objects.get(pk=trainee_training_id).training.id
+        context['training_id'] = training_id
         return context
     
 #Vista para ver deploys de un block de una review
