@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block content %}
-
+{% block content %} 
     <script>
         function validateAndSubmitForm() {
         // Realizar validación del formulario
@@ -66,7 +65,13 @@
                 <!-- Agrega el botón para enviar el formulario -->
                 <button onclick="validateAndSubmitForm()" type="button" class="btn btn-primary">Send and Next</button>
             </form>
-        </fieldset>   
+        </fieldset> 
+        <!-- Botón para volver al anterior deploy -->
+        <div class="mt-4">
+            <a href="{% url 'trainingApp:back_deploy' training_id block_id %}" class="btn btn-primary">Back</a>
+        </div>
+        
     </main>
+
 
 {% endblock %}

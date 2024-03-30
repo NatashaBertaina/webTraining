@@ -122,6 +122,9 @@ class DeployDetailView(View):
         deploys = Deploy.objects.filter(block=block_id)
         
         current_deploy_index = request.session.get(f'current_deploy_index_{block_id}', 0)
+        # Guardar el índice actual en la sesión
+        request.session[f'current_deploy_index_{block_id}'] = current_deploy_index
+        
         current_deploy = deploys[current_deploy_index]
         
         # Verifica si es la primera vez que el trainee ingresa al entrenamiento
@@ -129,6 +132,7 @@ class DeployDetailView(View):
 
         self.form = QuestionForm(instance=current_deploy)
         block = Block.objects.get(pk = block_id)
+        print(f'{current_deploy_index}')
         return render(request, self.template_name, {'deploy': current_deploy, 'form':self.form, 'block_id':block.id, 'training_id': training_id, 'current_deploy_index':current_deploy_index})
     
     def post(self, request, training_id, block_id):
@@ -144,12 +148,15 @@ class DeployDetailView(View):
 
         if form.is_valid():
             # Guarda la respuesta del usuario en un nuevo objeto DeployAnswer
-            deploy_answer = DeployAnswer(
-                block_answer =BlockAnswer.objects.get(pk=current_block_answer_id),
+            deploy_answer, created = DeployAnswer.objects.get_or_create(
+                block_answer=BlockAnswer.objects.get(pk=current_block_answer_id),
                 deploy=current_deploy,
-                user_response=form.cleaned_data['user_response']
+                defaults={'user_response': form.cleaned_data['user_response']}
             )
-            deploy_answer.save()
+            # Si la respuesta ya existía, actualiza el campo 'user_response'
+            if not created:
+                deploy_answer.user_response = form.cleaned_data['user_response']
+                deploy_answer.save()
 
             # Avanzar al siguiente deploy
             current_deploy_index += 1
@@ -245,6 +252,19 @@ class DeployDetailView(View):
 
             # Almacena el ID del BlockAnswer en la sesión
             request.session[f'current_block_answer_id_{block_id}'] = block_answer.id
+
+#Funcion que retrocede un deploy             
+def backDeploy(request, training_id, block_id):
+        current_deploy_index = request.session.get(f'current_deploy_index_{block_id}')
+        # Retrocedo al anterior deploy
+        current_deploy_index = current_deploy_index -1
+        #Si no hay deploy al que retroceder entonces se manda a la lista de blocks
+        if current_deploy_index <0 :
+            return redirect('trainingApp:block_deploy_list', training_id=training_id)
+        else:
+            # Guardar el índice actual en la sesión
+            request.session[f'current_deploy_index_{block_id}'] = current_deploy_index
+            return redirect('trainingApp:forms', training_id=training_id, block_id=block_id)
 
 
 #Vista de todos los intentos realizados por el trainee para un training

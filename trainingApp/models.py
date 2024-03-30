@@ -38,7 +38,7 @@ class Training(models.Model):
     def was_published_recently(self):
         return self.pub_date >=timezone.now() - datetime.timedelta(days=1)
     def __str__(self):
-        return f"id: {self.id}, {self.name_training}"
+        return f"Training_Id: {self.id}, Name Training: {self.name_training}"
     
     #Metodo que trae la cantidad de veces que se realizo un training por un trainee especifico
     def get_num_trainee_trainings(self, trainee_id):
@@ -65,7 +65,7 @@ class Block(models.Model):
     training = models.ForeignKey(Training, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"id: {self.id}, {self.name_block}"
+        return f"Block_Id: {self.id}, Name Block: {self.name_block}, Training: {self.training.name_training}"
     
     
 class Deploy(models.Model):
@@ -77,7 +77,7 @@ class Deploy(models.Model):
     correct_answer = models.CharField(max_length=50, null=True) 
 
     def __str__(self):
-        return f"Deploy_id: {self.id}"
+        return f"Deploy_Id: {self.id}, Block: {self.block.name_block}"
 
 
 class Choice(models.Model):
@@ -97,7 +97,7 @@ class TraineeTraining(models.Model):
     time_spent = models.DurationField(null=True, blank=True)
     
     def __str__(self):
-        return f"Deploy: {self.id}, {self.training.name_training}, {self.trainee.user.first_name}"
+        return f"T.T_Id: {self.id}, Name Training: {self.training.name_training}, Name Trainee: {self.trainee.user.first_name}"
     
 class BlockAnswer(models.Model):
     class StateBlockAnswer(models.TextChoices):
@@ -113,7 +113,7 @@ class BlockAnswer(models.Model):
     block = models.ForeignKey(Block, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"id: {self.id}"
+        return f"Block_Answer_Id: {self.id}, Name block: {self.block.name_block}"
 
 
 #Clase para guardar la respuesta del usuario de cada deploy
@@ -127,7 +127,7 @@ class DeployAnswer(models.Model):
     user_response = models.CharField(max_length=50, null=True)
 
     def __str__(self):
-        return f"deploy_Answer: {self.id}"
+        return f"Deploy_Answer_Id: {self.id}"
     
     
 class Comment(models.Model):
@@ -169,4 +169,4 @@ class Comment(models.Model):
     pub_date = models.DateTimeField("upload date")
     
     def __str__(self):
-        return f"Comment id: {self.id}, {self.training.name_training}, {self.trainee.user.first_name}"
+        return f"Comment_Id: {self.id}, Training: {self.training.name_training}, Trainee: {self.trainee.user.first_name}"
