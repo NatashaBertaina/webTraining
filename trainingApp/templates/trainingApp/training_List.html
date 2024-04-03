@@ -5,6 +5,7 @@
 
 <!-- Se carga un filtro para obtener la clave de un diccionario -->
 {% load custom_filters %}
+
 <main class="mt-5">
     <h1 class="h2">{% trans "List of Trainings" %}</h1>
     <div class="card my-3 border border-3">
@@ -40,17 +41,18 @@
                         <tr>
                             <td>
                                 {% if training.attempts_allowed > num_trainee_trainings|get_value:training.id %}
-                                    <a href="{% url 'trainingApp:forms' training.id %}" class="btn btn-info">{{ training.name_training }}</a>
+                                    <a href="{% url 'trainingApp:block_deploy_list' training.id %}" class="btn btn-info">{{ training.name_training }}</a>
                                 {% else %} 
                                     <a>{{ training.name_training }}</a>
                                 {% endif %}
                             </td>
                             <td>{{ training.difficulty }}</td>
-                            <td>{{ training.estimatedDuration }}</td>
+                            <td>{{ training.total_estimated_duration }}</td>
                             <td>{{ training.attempts_allowed }}</td>
+                            <!-- get_value es un filtro personalizado ubicado en templatetags/custom_filters-->
                             <td>{{ num_trainee_trainings|get_value:training.id }}</td>
                             <td>
-                                <a href="{% url 'trainingApp:review_list' training.id %}" class="btn btn-info">{% trans "review" %}</a>
+                                <a href="{% url 'trainingApp:review_list_tt' training.id %}" class="btn btn-info">{% trans "review" %}</a>
                             </td>
                         </tr>
                     {% endfor %}

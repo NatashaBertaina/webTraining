@@ -19,3 +19,6 @@ class Trainee(models.Model):
         default=EducationalLevel.High_School
     )
     occupation = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"Trainee_Id: {self.id}, Name Trainee: {self.user.first_name} {self.user.last_name}, Last Login: {self.user.last_login}"

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.contrib.auth.models import User
 from userApp.models import Trainee
-
+from django.db.models import Sum
 
 class Training(models.Model):
     #Enumeracion para el tipo de entrenamiento
@@ -17,7 +17,6 @@ class Training(models.Model):
     class StateTraining(models.TextChoices):
         Active = 'Active'
         inactive = 'Inactive'
-        in_progress = 'in_progress'
         
     name_training = models.CharField(max_length=200)
     pub_date = models.DateTimeField("upload date", auto_now_add=True)
@@ -31,7 +30,7 @@ class Training(models.Model):
     state_training= models.CharField(
         max_length=20,
         choices=StateTraining.choices,
-        default=StateTraining.in_progress
+        default=StateTraining.Active
     )
     #Atributo que gestiona la cantidad de veces que se puede realizar el training
     attempts_allowed = models.IntegerField(default=1)
@@ -39,36 +38,54 @@ class Training(models.Model):
     def was_published_recently(self):
         return self.pub_date >=timezone.now() - datetime.timedelta(days=1)
     def __str__(self):
-        return f"id: {self.id}, {self.name_training}"
+        return f"Training_Id: {self.id}, Name Training: {self.name_training}"
     
     #Metodo que trae la cantidad de veces que se realizo un training por un trainee especifico
     def get_num_trainee_trainings(self, trainee_id):
         return TraineeTraining.objects.filter(training=self, trainee_id=trainee_id).count()
+    @property
+    def total_estimated_duration(self):
+        """
+        Calcula y devuelve la suma de los estimatedDuration de todos los bloques asociados a este entrenamiento.
+        """
+        return self.block_set.aggregate(total_duration=Sum('estimed_duration_block'))['total_duration'] or 0
 
-class DeployType(models.Model):
-    name_type = models.CharField(max_length=100)
+class Block(models.Model):
+    class StateBlock(models.TextChoices):
+        Active = 'Active'
+        inactive = 'Inactive'
+    name_block = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
+    estimed_duration_block = models.IntegerField(default=0)
+    state_block= models.CharField(
+        max_length=20,
+        choices=StateBlock.choices,
+        default=StateBlock.Active
+    )
+    training = models.ForeignKey(Training, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"id: {self.id}, {self.name_type}"
+        return f"Block_Id: {self.id}, Name Block: {self.name_block}, Training: {self.training.name_training}"
+    
     
 class Deploy(models.Model):
-    training = models.ForeignKey(Training, on_delete=models.CASCADE)
-    deploy_type = models.ForeignKey(DeployType, on_delete=models.CASCADE, null=True)
+    block = models.ForeignKey(Block, on_delete=models.CASCADE, null=True)
     question = models.CharField(max_length=50, null=True)
     deploy_image = models.ImageField(upload_to="trainingApp/images", blank=True)
     deploy_sound = models.FileField(upload_to="trainingApp/sound", blank=True)
     #Respuesta correcta
-    correct_answer = models.CharField(max_length=50, null=True)
+    correct_answer = models.CharField(max_length=50, null=True) 
 
     def __str__(self):
-        return f"Deploy: {self.id} {self.training.name_training}"
+        return f"Deploy_Id: {self.id}, Block: {self.block.name_block}"
+
 
 class Choice(models.Model):
     deploy = models.ForeignKey(Deploy, on_delete=models.CASCADE)
     choice = models.CharField(max_length=50, null=True)
     def __str__(self):
         return f"id: {self.id}, fk: {self.deploy}"
+    
     
 class TraineeTraining(models.Model):
     #foreing Key de training
@@ -80,20 +97,38 @@ class TraineeTraining(models.Model):
     time_spent = models.DurationField(null=True, blank=True)
     
     def __str__(self):
-        return f"Deploy: {self.id}, {self.training.name_training}, {self.trainee.user.first_name}"
+        return f"T.T_Id: {self.id}, Name Training: {self.training.name_training}, Name Trainee: {self.trainee.user.first_name}"
+    
+class BlockAnswer(models.Model):
+    class StateBlockAnswer(models.TextChoices):
+        in_progress = 'In progress'
+        Complated = 'Completed'
+        
+    state_block= models.CharField(
+        max_length=20,
+        choices=StateBlockAnswer.choices,
+        default=StateBlockAnswer.in_progress
+    )
+    trainee_Training = models.ForeignKey(TraineeTraining, on_delete=models.CASCADE)
+    block = models.ForeignKey(Block, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"Block_Answer_Id: {self.id}, Name block: {self.block.name_block}"
+
 
 #Clase para guardar la respuesta del usuario de cada deploy
 class DeployAnswer(models.Model):
-    #foreing Key de trainee_Training
-    trainee_Training = models.ForeignKey(TraineeTraining, on_delete=models.CASCADE)
+    
+    #foreing Key de B.A
+    block_answer = models.ForeignKey(BlockAnswer, on_delete=models.CASCADE, null=True)
     #foreing Key de deploy
     deploy = models.ForeignKey(Deploy, on_delete=models.CASCADE)
-
     #Respuesta a deploy
     user_response = models.CharField(max_length=50, null=True)
 
     def __str__(self):
-        return f"deploy_Answer: {self.id}"
+        return f"Deploy_Answer_Id: {self.id}"
+    
     
 class Comment(models.Model):
     #Enumeracion para el tipo de entrenamiento
@@ -134,4 +169,4 @@ class Comment(models.Model):
     pub_date = models.DateTimeField("upload date")
     
     def __str__(self):
-        return f"Comment id: {self.id}, {self.training.name_training}, {self.trainee.user.first_name}"
+        return f"Comment_Id: {self.id}, Training: {self.training.name_training}, Trainee: {self.trainee.user.first_name}"

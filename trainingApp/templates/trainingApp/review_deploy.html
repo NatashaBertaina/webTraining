@@ -4,7 +4,7 @@
 
 <main>
     <p>ID del deploy: {{ deploy.id }}</p>
-    <form method="POST" action="{% url 'trainingApp:review' deploy_answer.trainee_Training_id %}">
+    <form method="POST" action="{% url 'trainingApp:review_deploy' deploy_answer.block_answer.id %}">
         {% csrf_token %}
         <section class="form-deploy">
             <div class="form-deploy-image">
