@@ -19,7 +19,7 @@ class Trainee(models.Model):
         default=EducationalLevel.High_School
     )
     occupation = models.CharField(max_length=50)
-    group = models.OneToOneField('trainingApp.Group', on_delete=models.SET_NULL, null=True, blank=True)
+    group =  models.ForeignKey('trainingApp.Group', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f"Trainee_Id: {self.id}, Name Trainee: {self.user.first_name} {self.user.last_name}"
