@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %} 
+
     <script>
         function validateAndSubmitForm() {
         // Realizar validación del formulario
@@ -41,10 +42,12 @@
                     <img src="{{ form.instance.deploy_image.url }}" class="img-fluid im" alt="Displayed Image">
                 </div>
                 <div class="form-deploy-audio">
+                    {% blocktrans %}
                     <audio controls>
                         <source  src="{{ form.instance.deploy_sound.url }}" type="audio/mpeg">
                             Your browser does not support audio playback.
                     </audio>
+                    {% endblocktrans %}
                 </div>
                 <div class="form-question">
                     <p class="h5">{{ form.instance.question}}</p>
@@ -63,15 +66,16 @@
                 </div>
                 
                 <!-- Agrega el botón para enviar el formulario -->
-                <button onclick="validateAndSubmitForm()" type="button" class="btn btn-primary">Send and Next</button>
+                <button onclick="validateAndSubmitForm()" type="button" class="btn btn-primary">{% trans 'Send and Next' %}</button>
             </form>
         </fieldset> 
         <!-- Botón para volver al anterior deploy -->
+        {% blocktrans %}
+        <p>If you want to return to the previous display, press the back button</p>
+        {% endblocktrans %}
         <div class="mt-4">
-            <a href="{% url 'trainingApp:back_deploy' training_id block_id %}" class="btn btn-primary">Back</a>
+            <a href="{% url 'trainingApp:back_deploy' training_id block_id %}" class="btn btn-primary">{% trans 'Back' %}</a>
         </div>
-        
     </main>
-
 
 {% endblock %}
