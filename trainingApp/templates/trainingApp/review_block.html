@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block content %}
 
 {% load tz %}
@@ -7,39 +7,39 @@
     Django asume que las fechas y horas almacenadas en la base de datos son UTC y las convierte automáticamente a la zona horaria configurada en settings.py
     la biblioteca de zona horaria con {% load tz %} se usa al principio de la plantilla para poder utilizar el filtro timezone. -->
 <main class="mt-5">
-    <h1>List of reviews</h1>
+    <h1>List of Blocks</h1>
     <div class="container">
-        {% if trainee_training_list %}
+        {% if blocks_answers %}
             <table class="table table-striped table-bordered">
+                {% blocktrans %}
                 <caption>
                     Table of revisions available for viewing
                 </caption>
+                {% endblocktrans %}
                 <thead>
                     <tr>
-                        <th>Number</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Time Spent</th>
+                        <th>{% trans 'Name Block' %}</th>
+                        <th>{% trans 'Duration (minutes)' %}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for trainee_training in trainee_training_list %}
+                    {% for block_answer in blocks_answers %}
                         <tr>
                             <td>
-                                <a href="{% url 'trainingApp:review' trainee_training.id %}" class="text-primary"> {{ trainee_training.item_number }}</a>
+                                <a href="{% url 'trainingApp:review_deploy' block_answer.id %}" class="btn btn-info"> {{ block_answer.block.name_block }}</a>
                             </td>
-                            <td>{{ trainee_training.pub_date|timezone:"America/Buenos_Aires"|date:"Y-m-d" }}</td>
-                            <td>{{ trainee_training.pub_date|timezone:"America/Buenos_Aires"|time:"H:i:s" }}</td>
-                            <td>{{ trainee_training.time_spent }}</td>
+                            <td>{{ block_answer.block.estimed_duration_block }}</td>
                         </tr>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         {% else %}
+            {% blocktrans %}
             <p class="lead">
                 Sorry, no reviews available.
             </p>
+            {% endblocktrans %}
         {% endif %}
     </div>
 </main>
@@ -51,12 +51,12 @@
             {% if page_obj.has_previous %}
                 <li class="page-item">
                     <a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">
-                        <span aria-hidden="true">&laquo; Previous</span>
+                        <span aria-hidden="true">&laquo; {% trans 'Previous' %}</span>
                     </a>
                 </li>
             {% else %}
                 <li class="page-item disabled">
-                    <span class="page-link" aria-hidden="true">&laquo; Previous</span>
+                    <span class="page-link" aria-hidden="true">&laquo; {% trans 'Previous' %}</span>
                 </li>
             {% endif %}
 
@@ -69,16 +69,24 @@
             {% if page_obj.has_next %}
                 <li class="page-item">
                     <a href="?page={{ page_obj.next_page_number }}" class="page-link" aria-label="Next">
-                        <span aria-hidden="true">Next &raquo;</span>
+                        <span aria-hidden="true">{% trans 'Next' %} &raquo;</span>
                     </a>
                 </li>
             {% else %}
                 <li class="page-item disabled">
-                    <span class="page-link" aria-hidden="true">Next &raquo;</span>
+                    <span class="page-link" aria-hidden="true">{% trans 'Next' %} &raquo;</span>
                 </li>
             {% endif %}
         </ul>
     </nav>
+</div>
+
+<!-- Botón para volver a la página de reviews de intentos -->
+{% blocktrans %}
+<p>If you want to return to the training page, press the back button</p>
+{% endblocktrans %}
+<div class="mt-4">
+    <a href="{% url 'trainingApp:review_list_tt' training_id %}" class="btn btn-primary">{% trans 'Back' %}</a>
 </div>
 
 {% endblock %}

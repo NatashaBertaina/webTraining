@@ -31,6 +31,10 @@ form{
 }
 
 
+.form-choice{
+    grid-area: choice;
+}
+
 .page-button {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

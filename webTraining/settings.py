@@ -33,6 +33,9 @@ ALLOWED_HOSTS = []
 #Habilita el uso de messages
 MESSAGE_STORAGE= "django.contrib.messages.storage.cookie.CookieStorage"
 
+# Configuración de la duración de la sesión en segundos (30 minutos en este caso)
+SESSION_COOKIE_AGE = 1800
+
 # Application definition
 
 INSTALLED_APPS = [
