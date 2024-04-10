@@ -439,10 +439,8 @@ msgid "Time Spent"
 msgstr "Tiempo empleado"
 
 #: trainingApp/templates/trainingApp/training_List.html:10
-#, fuzzy
-#| msgid "Trainings"
 msgid "List of Trainings"
-msgstr "Entrenamientos disponibles"
+msgstr "Lista de entrenamientos disponibles"
 
 #: trainingApp/templates/trainingApp/training_List.html:32
 msgid "Difficulty"
