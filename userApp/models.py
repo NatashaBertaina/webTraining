@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+#from trainingApp.models import Group  # Importa Group desde trainingApp
 
-# Create your models here.
 class Trainee(models.Model):
     #Enumeracion para el nivel educativo del user
     class EducationalLevel(models.TextChoices):
@@ -19,6 +19,7 @@ class Trainee(models.Model):
         default=EducationalLevel.High_School
     )
     occupation = models.CharField(max_length=50)
+    group =  models.ForeignKey('trainingApp.Group', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return f"Trainee_Id: {self.id}, Name Trainee: {self.user.first_name} {self.user.last_name}, Last Login: {self.user.last_login}"
+        return f"Trainee_Id: {self.id}, Name Trainee: {self.user.first_name} {self.user.last_name}"

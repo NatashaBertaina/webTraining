@@ -4,9 +4,15 @@ from userApp.models import Trainee
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.contrib.auth.models import User
-from userApp.models import Trainee
 from django.db.models import Sum
 
+class Group (models.Model):
+    name_group = models.CharField(max_length=100)
+    description = models.CharField(max_length=300)
+    
+    def __str__(self):
+        return f"Gruop_Id: {self.id}, name_gruop: {self.name_group}"
+    
 class Training(models.Model):
     #Enumeracion para el tipo de entrenamiento
     class TrainingType(models.TextChoices):
@@ -34,6 +40,7 @@ class Training(models.Model):
     )
     #Atributo que gestiona la cantidad de veces que se puede realizar el training
     attempts_allowed = models.IntegerField(default=1)
+    groups = models.ManyToManyField(Group)
     
     def was_published_recently(self):
         return self.pub_date >=timezone.now() - datetime.timedelta(days=1)
