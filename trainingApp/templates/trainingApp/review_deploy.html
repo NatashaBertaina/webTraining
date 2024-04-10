@@ -31,17 +31,20 @@
                         </div>
                     {% endfor %}
 
-                    {% blocktrans %}
+                    
                     {% if deploy_answer.user_response == deploy.correct_answer %}
+                        {% blocktrans %}
                         <p class="mt-2">
                             Correct answer
                         </p>
+                        {% endblocktrans %}
                     {% elif deploy_answer.user_response %}
+                        {% blocktrans %}
                         <p class="mt-2">
                             Wrong answer. The correct answer is {{ deploy.correct_answer }}
                         </p>
+                        {% endblocktrans %}
                     {% endif %}
-                    {% endblocktrans %}
                 </div>
             </section>
 
