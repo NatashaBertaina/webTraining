@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.views import View
 from django.views.generic import ListView
 from .forms import QuestionForm,CommentForm
-from .models import Training, Deploy, DeployAnswer, TraineeTraining, Trainee, TraineeTraining, Block, Choice, Comment,BlockAnswer
+from .models import Training, Deploy, DeployAnswer, TraineeTraining, Trainee, Block, Choice, Comment,BlockAnswer
 from django.utils import timezone
 from django.utils.translation import gettext as _
 
@@ -11,11 +11,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from operator import attrgetter
-from datetime import datetime
 from datetime import datetime, timedelta
 from django.contrib.auth.mixins import LoginRequiredMixin  #LoginRequiredMixin se utiliza como un mixin para requerir que un usuario esté autenticado antes de acceder a una vista específica.
 from django.urls import reverse
-from django.contrib import messages
 
 #Vista para ver la lista de trainings
 class TrainingList(ListView):
@@ -220,7 +218,6 @@ class DeployDetailView(View):
                     training = Training.objects.get(pk=training_id) 
                     messages.success(request,f" You have completed:  {training.name_training}")
                     print("Termine todo")
-                                 
                     return HttpResponseRedirect(reverse('trainingApp:comment', args=[training_id]))
                 
                 #Si completo el Block pero aun quedan mas por completar entonces lo redirecciona a la lista de blocks

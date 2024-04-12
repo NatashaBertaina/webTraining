@@ -1,6 +1,4 @@
-import random
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic, View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -16,6 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin  #LoginRequiredMixin s
 from django.contrib.auth.views import PasswordChangeView, PasswordResetDoneView
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import PasswordChangeForm
+
 ##Logica de users 
 
 def home(request):
