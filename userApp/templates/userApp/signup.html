@@ -7,75 +7,81 @@
     <br>
     <p class="text-center">{% trans "Complete all fields please:" %}</p>
 
-    <form action="" method="POST">
+    < action="" method="POST">
         {% csrf_token %}
-        <div class="card mx-auto border border-3">
-            <div class="card-body row gy-4 px-5 justify-content-center">
-                <div class="col-12">
-                    <label for="username" aria-label="{% trans 'Enter a username of your choice' %}">{{ form.username.label }}</label>
-                        {{ form.username }}
-                    <span class="text-danger">{{ form.username.errors }}</span> 
-                    
+        <fieldset>
+            <div class="card mx-auto border border-3">
+                <div class="card-body row gy-4 px-5 justify-content-center">
+                    <div class="col-6">
+                        <label for="username" aria-label="{% trans 'Enter a username of your choice' %}">{% trans 'Username' %}</label>
+                            {{ form.username }}
+                        <span class="text-danger">{{ form.username.errors }}</span> 
+                    </div>
+                    <div class="col-md-6">
+                        {% blocktranslate %}
+                            <small id="username-description" aria-hidden="true">Your username must be between 6 and 15 characters and can only contain letters, numbers, and underscores.</small>
+                        {% endblocktranslate %}
+                    </div>
+                    <div class="col-md-12">
+                        <label for="first_name">{% trans 'First Name' %}</label>
+                            {{ form.first_name }}
+                        <span class="text-danger">{{ form.first_name.errors }}</span>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="last_name">{% trans 'Last Name' %}</label>
+                            {{ form.last_name }}
+                        <span class="text-danger">{{ form.last_name.errors }}</span>
+                    </div>
+                    <div class="col-12">
+                        <label for="email">{% trans 'Email' %}</label>
+                            {{ form.email }}
+                        <span class="text-danger">{{ form.email.errors }}</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="password1">{% trans 'Password' %}</label>
+                            {{ form.password1 }}
+                        <span class="text-danger">{{ form.password1.errors }}</span>
+                    </div>
+                    <div class="col-md-6">
+                        {% blocktranslate %}
+                            <small id="username-description" aria-hidden="true">Your password must contain at least 8 characters.</small>
+                        {% endblocktranslate %}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="password2">{% trans 'Repeat password' %}</label>
+                            {{ form.password2 }}
+                        <span class="text-danger">{{ form.password2.errors }}</span>
+                    </div>
+                    <div class="col-md-6">
+                        {% blocktranslate %}
+                            <small id="username-description" aria-hidden="true">Write your password one more time, please.</small>
+                        {% endblocktranslate %}
+                    </div>
+                    <div class="col-12">
+                        <label for="age">{% trans 'Age' %}</label>
+                            {{ form.age }}
+                        <span class="text-danger">{{ form.age.errors }}</span>
+                    </div>
+                    <div class="col-12">
+                        <label for="educationalLevel">{% trans 'Educational Level:' %}</label>
+                            {{ form.educationalLevel }}
+                        <span class="text-danger">{{ form.educationalLevel.errors }}</span>
+                    </div>
+                    <div class="col-12">
+                        <label for="occupation">{% trans 'Occupation' %}</label>
+                            {{ form.occupation }}
+                        <span class="text-danger">{{ form.occupation.errors }}</span>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label for="first_name">{{ form.first_name.label }}</label>
-                        {{ form.first_name }}
-                    <span class="text-danger">{{ form.first_name.errors }}</span>
-                </div>
-                <div class="col-md-6">
-                    <label for="last_name">{{ form.last_name.label }}</label>
-                        {{ form.last_name }}
-                    <span class="text-danger">{{ form.last_name.errors }}</span>
-                </div>
-                <div class="col-12">
-                    <label for="email">{{ form.email.label }}</label>
-                        {{ form.email }}
-                    <span class="text-danger">{{ form.email.errors }}</span>
-                </div>
-                <div class="col-md-6">
-                    <label for="password1">{{ form.password1.label }}</label>
-                        {{ form.password1 }}
-                    <span class="text-danger">{{ form.password1.errors }}</span>
-                </div>
-                <div class="col-md-6">
-                    {% blocktranslate %}
-                        <small id="username-description" aria-hidden="true">Your username must be between 6 and 15 characters and can only contain letters, numbers, and underscores.</small>
-                    {% endblocktranslate %}
-                </div>
-                <div class="col-md-6">
-                    <label for="password2">{{ form.password2.label }}</label>
-                        {{ form.password2 }}
-                    <span class="text-danger">{{ form.password2.errors }}</span>
-                </div>
-                <div class="col-md-6">
-                    {% blocktranslate %}
-                        <small id="username-description" aria-hidden="true">Write your password one more time</small>
-                    {% endblocktranslate %}
-                </div>
-                <div class="col-12">
-                    <label for="age">{{ form.age.label }}</label>
-                        {{ form.age }}
-                    <span class="text-danger">{{ form.age.errors }}</span>
-                </div>
-                <div class="col-12">
-                    <label for="educationalLevel">{{ form.educationalLevel.label }}</label>
-                        {{ form.educationalLevel }}
-                    <span class="text-danger">{{ form.educationalLevel.errors }}</span>
-                </div>
-                <div class="col-12">
-                    <label for="occupation">{{ form.occupation.label }}</label>
-                        {{ form.occupation }}
-                    <span class="text-danger">{{ form.occupation.errors }}</span>
+                <div class="card-body row gy-4 justify-content-start">
+                    <div class="col-md-4">
+                        <button aria-pressed="true" class="btn btn-primary">
+                            {% trans 'Signup' %}
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="card-body row gy-4 justify-content-start">
-                <div class="col-md-4">
-                    <button aria-pressed="true" class="btn btn-primary">
-                        {% trans 'Signup' %}
-                    </button>
-                </div>
-            </div>
-        </div>
+        </fieldset>
     </form>
 </div>
 

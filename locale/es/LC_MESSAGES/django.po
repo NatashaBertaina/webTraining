@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-12 10:54-0300\n"
+"POT-Creation-Date: 2024-04-12 15:15-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Español <LL@li.org>\n"
@@ -461,11 +461,11 @@ msgstr "Información del usuario como aprendiz"
 
 #: .\userApp\templates\userApp\signin.html:5
 #: .\userApp\templates\userApp\signin.html:20
-msgid "Sign-in"
+msgid "Signin"
 msgstr "Iniciar sesión"
 
 #: .\userApp\templates\userApp\signup.html:6
-#: .\userApp\templates\userApp\signup.html:74
+#: .\userApp\templates\userApp\signup.html:79
 msgid "Signup"
 msgstr "Registrarse"
 
@@ -473,17 +473,28 @@ msgstr "Registrarse"
 msgid "Complete all fields please:"
 msgstr "Complete todos los campos, por favor:"
 
-#: .\userApp\templates\userApp\signup.html:15
+#: .\userApp\templates\userApp\signup.html:16
 msgid "Enter a username of your choice"
 msgstr "Ingrese un nombre de usuario"
 
-#: .\userApp\templates\userApp\signup.html:41
+#: .\userApp\templates\userApp\signup.html:16
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: .\userApp\templates\userApp\signup.html:21
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "                        <small id=\"username-description\" aria-hidden="
+#| "\"true\">Your username must be between 6 and 15 characters and can only "
+#| "contain letters, numbers, and underscores.</small>\n"
+#| "                    "
 msgid ""
 "\n"
-"                        <small id=\"username-description\" aria-hidden=\"true"
-"\">Your username must be between 6 and 15 characters and can only contain "
-"letters, numbers, and underscores.</small>\n"
-"                    "
+"                            <small id=\"username-description\" aria-hidden="
+"\"true\">Your username must be between 6 and 15 characters and can only "
+"contain letters, numbers, and underscores.</small>\n"
+"                        "
 msgstr ""
 "\n"
 "                        <small id=\"username-description\" aria-hidden=\"true"
@@ -491,56 +502,65 @@ msgstr ""
 "contener letras, números y guiones bajos.</small>\n"
 "                    "
 
-#: .\userApp\templates\userApp\signup.html:51
+#: .\userApp\templates\userApp\signup.html:26
+msgid "First Name"
+msgstr "Nombre"
+
+#: .\userApp\templates\userApp\signup.html:31
+#, fuzzy
+#| msgid "Name"
+msgid "Last Name"
+msgstr "Apellido"
+
+#: .\userApp\templates\userApp\signup.html:36
+msgid "Email"
+msgstr "Email"
+
+#: .\userApp\templates\userApp\signup.html:41
+#, fuzzy
+#| msgid "Change Password"
+msgid "Password"
+msgstr "Cambiar contraseña"
+
+#: .\userApp\templates\userApp\signup.html:46
 msgid ""
 "\n"
-"                        <small id=\"username-description\" aria-hidden=\"true"
-"\">Write your password one more time</small>\n"
-"                    "
+"                            <small id=\"username-description\" aria-hidden="
+"\"true\">Your password must contain at least 8 characters.</small>\n"
+"                        "
+msgstr ""
+"\n"
+"                            <small id=\"username-description\" aria-hidden="
+"\"true\">Su contraseña debe contener al menos 8 caracteres.</small>\n"
+"                        "
+
+#: .\userApp\templates\userApp\signup.html:51
+msgid "Repeat password"
+msgstr "Repita la contraseña"
+
+#: .\userApp\templates\userApp\signup.html:56
+msgid ""
+"\n"
+"                            <small id=\"username-description\" aria-hidden="
+"\"true\">Write your password one more time, please.</small>\n"
+"                        "
 msgstr ""
 "\n"
 "                        <small id=\"username-description\" aria-hidden=\"true"
 "\">Escriba su contraseña una vez más</small>\n"
 "                    "
 
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                    <audio controls>\n"
-#~ "                        <source src=\"%(deploy.deploy_sound.url)s\" type="
-#~ "\"audio/mpeg\">\n"
-#~ "                        Your browser does not support audio playback.\n"
-#~ "                    </audio>\n"
-#~ "                    "
-#~ msgstr ""
-#~ "\n"
-#~ "                    <audio controls>\n"
-#~ "                        <source src=\"%(deploy.deploy_sound.url)s\" type="
-#~ "\"audio/mpeg\">\n"
-#~ "                        Su navegador no soporta la reproducción de "
-#~ "audio.\n"
-#~ "                    </audio>\n"
-#~ "                    "
+#: .\userApp\templates\userApp\signup.html:61
+msgid "Age"
+msgstr "Edad"
 
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                    <audio controls>\n"
-#~ "                        <source  src=\"%(form.instance.deploy_sound.url)s"
-#~ "\" type=\"audio/mpeg\">\n"
-#~ "                            Your browser does not support audio "
-#~ "playback.\n"
-#~ "                    </audio>\n"
-#~ "                    "
-#~ msgstr ""
-#~ "\n"
-#~ "                    <audio controls>\n"
-#~ "                        <source  src=\"%(form.instance.deploy_sound.url)s"
-#~ "\" type=\"audio/mpeg\">\n"
-#~ "                            Su navegador no soporta la reproducción de "
-#~ "audio.\n"
-#~ "                    </audio>\n"
-#~ "                    "
+#: .\userApp\templates\userApp\signup.html:66
+msgid "Educational Level:"
+msgstr "Nivel educativo."
+
+#: .\userApp\templates\userApp\signup.html:71
+msgid "Occupation"
+msgstr "Ocupación"
 
 #~ msgid "Easy"
 #~ msgstr "Fácil"
