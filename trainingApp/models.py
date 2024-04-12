@@ -11,7 +11,7 @@ class Group (models.Model):
     description = models.CharField(max_length=300)
     
     def __str__(self):
-        return f"Gruop_Id: {self.id}, name_gruop: {self.name_group}"
+        return f"Gruop_Id: {self.id}, name_group: {self.name_group}"
     
 class Training(models.Model):
     #Enumeracion para el tipo de entrenamiento

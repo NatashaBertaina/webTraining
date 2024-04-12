@@ -11,3 +11,4 @@ tzdata==2023.4
 virtualenv==20.24.5
 virtualenvwrapper-win==1.2.7
 whitenoise==6.6.0
+django-import-export
