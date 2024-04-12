@@ -11,12 +11,10 @@
                     <img src="{{ deploy.deploy_image.url }}" class="img-fluid im" alt="Displayed Image">
                 </div>
                 <div class="form-deploy-audio">
-                    {% blocktrans %}
                     <audio controls>
                         <source src="{{ deploy.deploy_sound.url }}" type="audio/mpeg">
-                        Your browser does not support audio playback.
+                        {% blocktrans %} Your browser does not support audio playback. {% endblocktrans %}
                     </audio>
-                    {% endblocktrans %}
                 </div>
                 <div class="form-question">
                     <p class="h5">{{ deploy.question}}</p>
