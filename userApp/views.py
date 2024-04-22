@@ -14,7 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin  #LoginRequiredMixin s
 from django.contrib.auth.views import PasswordChangeView, PasswordResetDoneView
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import PasswordChangeForm
-
+from trainingApp.models import Group
 ##Logica de users 
 
 def home(request):
@@ -29,12 +29,14 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            # Crear el objeto Trainee y se relaciona con el usuario
+            # Crear el objeto Trainee y se relaciona con el usuario y al grupo por defecto
+            group_defect = Group.objects.get(name_group = 'Group Defect')
             Trainee.objects.create(
                 user=user,
                 age=form.cleaned_data['age'],
                 educationalLevel=form.cleaned_data['educationalLevel'],
-                occupation=form.cleaned_data['occupation']
+                occupation=form.cleaned_data['occupation'],
+                group =  group_defect
             )
             messages.success(request,"Your account is crated successfully")
             login(request, user)
