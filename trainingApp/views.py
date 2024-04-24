@@ -25,7 +25,7 @@ class TrainingList(ListView):
     def get_queryset(self):
         trainee = Trainee.objects.get(user = self.request.user)
         # Filtra los objetos TraineeTraining por training_id y user_id
-        queryset = Training.objects.filter(state_training = 'Active',groups__in=[trainee.group]).order_by('id') #el subfijo __in indica que estamos buscando coincidencias en una lista de valores. 
+        queryset = Training.objects.filter(state_training = 'Activo',groups__in=[trainee.group]).order_by('id') #el subfijo __in indica que estamos buscando coincidencias en una lista de valores. 
         
         return queryset
     
