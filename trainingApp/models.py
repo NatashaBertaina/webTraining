@@ -3,7 +3,6 @@ from django.db import models
 from userApp.models import Trainee
 from django.contrib.auth.models import User
 from django.utils import timezone
-from django.contrib.auth.models import User
 from django.db.models import Sum
 
 class Group (models.Model):
@@ -16,13 +15,13 @@ class Group (models.Model):
 class Training(models.Model):
     #Enumeracion para el tipo de entrenamiento
     class TrainingType(models.TextChoices):
-        Easy = 'Easy'
-        Intemediate = 'Intemediate'
-        Advanced = 'Advanced'
+        Easy = 'Inicial'
+        Intemediate = 'Intermedio'
+        Advanced = 'Avanzado'
         
     class StateTraining(models.TextChoices):
-        Active = 'Active'
-        inactive = 'Inactive'
+        Active = 'Activo'
+        inactive = 'Inactivo'
         
     name_training = models.CharField(max_length=200)
     pub_date = models.DateTimeField("upload date", auto_now_add=True)
@@ -59,8 +58,8 @@ class Training(models.Model):
 
 class Block(models.Model):
     class StateBlock(models.TextChoices):
-        Active = 'Active'
-        inactive = 'Inactive'
+        Active = 'Activo'
+        inactive = 'Inactivo'
     name_block = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
     estimed_duration_block = models.IntegerField(default=0)
@@ -77,11 +76,11 @@ class Block(models.Model):
     
 class Deploy(models.Model):
     block = models.ForeignKey(Block, on_delete=models.CASCADE, null=True)
-    question = models.CharField(max_length=50, null=True)
+    question = models.CharField(max_length=100, null=True)
     deploy_image = models.ImageField(upload_to="trainingApp/images", blank=True)
     deploy_sound = models.FileField(upload_to="trainingApp/sound", blank=True)
     #Respuesta correcta
-    correct_answer = models.CharField(max_length=50, null=True) 
+    correct_answer = models.CharField(max_length=100, null=True) 
 
     def __str__(self):
         return f"Deploy_Id: {self.id}, Block: {self.block.name_block}"
@@ -89,7 +88,7 @@ class Deploy(models.Model):
 
 class Choice(models.Model):
     deploy = models.ForeignKey(Deploy, on_delete=models.CASCADE)
-    choice = models.CharField(max_length=50, null=True)
+    choice = models.CharField(max_length=100, null=True)
     def __str__(self):
         return f"id: {self.id}, fk: {self.deploy}"
     
@@ -108,8 +107,8 @@ class TraineeTraining(models.Model):
     
 class BlockAnswer(models.Model):
     class StateBlockAnswer(models.TextChoices):
-        in_progress = 'In progress'
-        Complated = 'Completed'
+        in_progress = 'En progreso'
+        Complated = 'Completo'
         
     state_block= models.CharField(
         max_length=20,

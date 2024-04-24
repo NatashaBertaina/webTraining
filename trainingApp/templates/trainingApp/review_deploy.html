@@ -1,50 +1,56 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block content %}
 
 <main>
-    <p>ID del deploy: {{ deploy.id }}</p>
-    <form method="POST" action="{% url 'trainingApp:review_deploy' deploy_answer.block_answer.id %}">
-        {% csrf_token %}
-        <section class="form-deploy">
-            <div class="form-deploy-image">
-                <img src="{{ deploy.deploy_image.url }}" class="img-fluid im" alt="Displayed Image">
-            </div>
-            <div class="form-deploy-audio">
-                <audio controls>
-                    <source src="{{ deploy.deploy_sound.url }}" type="audio/mpeg">
-                    Your browser does not support audio playback.
-                </audio>
-            </div>
-            <div class="form-question">
-                <p class="h5">{{ deploy.question}}</p>
-            </div>
-            <div class="form-choice">
-                {% for choice in choices %}
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDisabled" id="{{ choice.choice }}" {% if deploy_answer.user_response == choice.choice %}checked{% endif %} disabled>
-                        <label class="form-check-label" for="{{ choice.choice }}">
-                            {{ choice.choice }}
-                        </label>
-                    </div>
-                {% endfor %}
+    <fieldset class="border p-3 rounded">
+        <form method="POST" action="{% url 'trainingApp:review_deploy' deploy_answer.block_answer.id %}">
+            {% csrf_token %}
+            <section class="form-deploy">
+                <div class="form-deploy-image">
+                    <img src="{{ deploy.deploy_image.url }}" class="img-fluid im" alt="Displayed Image">
+                </div>
+                <div class="form-deploy-audio">
+                    <audio controls>
+                        <source src="{{ deploy.deploy_sound.url }}" type="audio/mpeg">
+                        {% blocktrans %} Your browser does not support audio playback. {% endblocktrans %}
+                    </audio>
+                </div>
+                <div class="form-question">
+                    <p class="h5">{{ deploy.question}}</p>
+                </div>
+                <div class="form-choice">
+                    {% for choice in choices %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDisabled" id="{{ choice.choice }}" {% if deploy_answer.user_response == choice.choice %}checked{% endif %} disabled>
+                            <label class="form-check-label" for="{{ choice.choice }}">
+                                {{ choice.choice }}
+                            </label>
+                        </div>
+                    {% endfor %}
 
-                {% if deploy_answer.user_response == deploy.correct_answer %}
-                    <p class="mt-2">
-                        Correct answer
-                    </p>
-                {% elif deploy_answer.user_response %}
-                    <p class="mt-2">
-                        Wrong answer. The correct answer is {{ deploy.correct_answer }}
-                    </p>
-                {% endif %}
-            </div>
-        </section>
+                    
+                    {% if deploy_answer.user_response == deploy.correct_answer %}
+                        {% blocktrans %}
+                        <p class="mt-2">
+                            Correct answer
+                        </p>
+                        {% endblocktrans %}
+                    {% elif deploy_answer.user_response %}
+                        {% blocktrans %}
+                        <p class="mt-2">
+                            Wrong answer. The correct answer is {{ deploy.correct_answer }}
+                        </p>
+                        {% endblocktrans %}
+                    {% endif %}
+                </div>
+            </section>
 
-        <button type="submit" aria-pressed="true" class="btn btn-primary">
-            Next
-        </button>
-    </form>
+            <button type="submit" aria-pressed="true" class="btn btn-primary">
+                {% trans 'Next' %}
+            </button>
+        </form>
+    </fieldset>
 </main>
 
 {% endblock %}

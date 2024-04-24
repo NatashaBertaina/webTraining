@@ -1,6 +1,4 @@
-import random
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic, View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 

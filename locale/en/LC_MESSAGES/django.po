@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-27 16:21-0300\n"
+"POT-Creation-Date: 2024-04-12 15:15-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: .\templates\footer.html:7
 msgid "Contact:"
-msgstr ""
+msgstr "Contact:"
 
 #: .\templates\home.html:10
 msgid "Exploring the Sound of Science"
-msgstr ""
+msgstr "Exploring the Sound of Science"
 
 #: .\templates\home.html:13
 msgid ""
@@ -38,13 +39,24 @@ msgid ""
 "                        </p>\n"
 "                    "
 msgstr ""
+"\n"
+"                        <p>\n"
+"                            Exploring the cosmos through different senses "
+"can be within your reach. That's why this platform for training in the "
+"sonification of astronomical data and more was created. In the convergence "
+"between astronomy and data sonification, we have created a unique space that "
+"goes beyond visual representation, allowing you to discover the universe in "
+"a multisensory way.\n"
+"                        </p>\n"
+"                    "
 
-#: .\templates\home.html:21
+#: .\templates\home.html:22
+msgid "About Us"
+msgstr "About Us"
+
+#: .\templates\home.html:24
 msgid ""
 "\n"
-"                <div class=\"subtitle\">\n"
-"                    <h2 tabindex=\"7\" class=\"display-6\">About Us</h2>\n"
-"                </div>\n"
 "                <p>\n"
 "                    In sonoTrainings, we merge vision and hearing to provide "
 "you with multisensory training that not only expands your understanding of "
@@ -53,11 +65,26 @@ msgid ""
 "focuses on designing a user-centered interface to make science accessible to "
 "everyone.\n"
 "                </p>\n"
+"            "
+msgstr ""
 "\n"
-"                <div class=\"subtitle\">\n"
-"                    <h2 tabindex=\"8\" class=\"display-6\">Highlighted "
-"Features:</h2>\n"
-"                </div>\n"
+"                <p>\n"
+"                    In sonoTrainings, we merge vision and hearing to provide "
+"you with multisensory training that not only expands your understanding of "
+"the cosmos but also enhances your auditory performance when interacting with "
+"scientific data. Inspired by innovative projects like sonoUno, our platform "
+"focuses on designing a user-centered interface to make science accessible to "
+"everyone.\n"
+"                </p>\n"
+"            "
+
+#: .\templates\home.html:30
+msgid "Highlighted Features:"
+msgstr "Highlighted Features:"
+
+#: .\templates\home.html:32
+msgid ""
+"\n"
 "                <ul>\n"
 "                    <li>\n"
 "                        \n"
@@ -82,96 +109,505 @@ msgid ""
 "sonoTrainings.</p>\n"
 "            "
 msgstr ""
+"\n"
+"                <ul>\n"
+"                    <li>\n"
+"                        \n"
+"                        Multisensory Training:\n"
+"                        <p>Immerse yourself in unique learning experiences "
+"that combine vision and hearing to enhance understanding of astronomical and "
+"scientific data.</p>\n"
+"                    </li>\n"
+"                    <li>\n"
+"                        Accessibility:\n"
+"                        <p>Our platform was designed with the diversity of "
+"sensory styles in mind, making science accessible to everyone.</p>\n"
+"                    </li>\n"
+"                    <li>\n"
+"                        Continuous Development:\n"
+"                        <p>We are committed to the continuous improvement of "
+"our platform, ensuring user-friendly functionality that guarantees a "
+"comfortable learning experience.</p>\n"
+"                    </li>\n"
+"                </ul>\n"
+"                <p>Join us and discover the cosmos in an entirely new way on "
+"sonoTrainings.</p>\n"
+"            "
 
 #: .\templates\message.html:7 .\templates\message.html:9
 msgid "Message:"
-msgstr ""
+msgstr "Message:"
 
 #: .\templates\navbar.html:24
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: .\templates\navbar.html:28
 msgid "Trainings"
-msgstr ""
+msgstr "Trainings"
 
-#: .\templates\navbar.html:31
+#: .\templates\navbar.html:31 .\userApp\templates\userApp\passwordChange.html:6
+#: .\userApp\templates\userApp\profile.html:6
 msgid "Profile"
-msgstr ""
+msgstr "Profile"
 
 #: .\templates\navbar.html:34
 msgid "Logout"
-msgstr ""
+msgstr "Logout"
 
 #: .\templates\navbar.html:38
+msgid "Admin"
+msgstr "Admin"
+
+#: .\templates\navbar.html:43
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
-#: .\templates\navbar.html:41
+#: .\templates\navbar.html:46
 msgid "Register"
-msgstr ""
+msgstr "Register"
 
-#: .\templates\navbar.html:45
+#: .\templates\navbar.html:50
 msgid "Go"
+msgstr "Go"
+
+#: .\trainingApp\templates\trainingApp\block_deploy_list.html:10
+msgid "List of Blocks"
+msgstr "List of Blocks"
+
+#: .\trainingApp\templates\trainingApp\block_deploy_list.html:13
+#: .\trainingApp\templates\trainingApp\comment_form.html:7
+#: .\trainingApp\templates\trainingApp\training_List.html:13
+msgid "Note"
+msgstr "Note"
+
+#: .\trainingApp\templates\trainingApp\block_deploy_list.html:17
+#: .\trainingApp\templates\trainingApp\training_List.html:17
+msgid ""
+"\n"
+"                <ul class=\"list-group list-group-flush\">\n"
+"                    <li class=\"list-group-item\">Remember that at the end "
+"of a training block, which is made up of 4 displays, you can review your "
+"answers and/or repeat the block with new answers.</li>\n"
+"                    <li class=\"list-group-item\">To start a workout you "
+"must press the name of the desired workout in the table below.</li>\n"
+"                </ul>\n"
+"                "
+msgstr ""
+"\n"
+"                <ul class=\"list-group list-group-flush\">\n"
+"                    <li class=\"list-group-item\">Remember that at the end "
+"of a training block, which is made up of 4 displays, you can review your "
+"answers and/or repeat the block with new answers.</li>\n"
+"                    <li class=\"list-group-item\">To start a workout you "
+"must press the name of the desired workout in the table below.</li>\n"
+"                </ul>\n"
+"                "
+
+#: .\trainingApp\templates\trainingApp\block_deploy_list.html:31
+#: .\trainingApp\templates\trainingApp\training_List.html:31
+msgid "Name"
+msgstr "Name"
+
+#: .\trainingApp\templates\trainingApp\block_deploy_list.html:32
+#: .\trainingApp\templates\trainingApp\review_block.html:22
+#: .\trainingApp\templates\trainingApp\training_List.html:33
+msgid "Duration (minutes)"
+msgstr "Duration (minutes)"
+
+#: .\trainingApp\templates\trainingApp\block_deploy_list.html:33
+msgid "State "
+msgstr "State "
+
+#: .\trainingApp\templates\trainingApp\block_deploy_list.html:53
+#: .\trainingApp\templates\trainingApp\training_List.html:62
+msgid ""
+"\n"
+"                <p class=\"lead\">Sorry, no trainings are available.</p>\n"
+"            "
+msgstr ""
+"\n"
+"                <p class=\"lead\">Sorry, no trainings are available.</p>\n"
+"            "
+
+#: .\trainingApp\templates\trainingApp\block_deploy_list.html:67
+#: .\trainingApp\templates\trainingApp\block_deploy_list.html:72
+#: .\trainingApp\templates\trainingApp\review_block.html:54
+#: .\trainingApp\templates\trainingApp\review_block.html:59
+#: .\trainingApp\templates\trainingApp\review_list_tt.html:58
+#: .\trainingApp\templates\trainingApp\review_list_tt.html:63
+#: .\trainingApp\templates\trainingApp\training_List.html:76
+#: .\trainingApp\templates\trainingApp\training_List.html:81
+msgid "Previous"
+msgstr "Previous"
+
+#: .\trainingApp\templates\trainingApp\block_deploy_list.html:85
+#: .\trainingApp\templates\trainingApp\block_deploy_list.html:90
+#: .\trainingApp\templates\trainingApp\review_block.html:72
+#: .\trainingApp\templates\trainingApp\review_block.html:77
+#: .\trainingApp\templates\trainingApp\review_deploy.html:50
+#: .\trainingApp\templates\trainingApp\review_list_tt.html:76
+#: .\trainingApp\templates\trainingApp\review_list_tt.html:81
+#: .\trainingApp\templates\trainingApp\training_List.html:94
+#: .\trainingApp\templates\trainingApp\training_List.html:99
+msgid "Next"
+msgstr "Next"
+
+#: .\trainingApp\templates\trainingApp\comment_form.html:11
+msgid ""
+"\n"
+"          <ul class=\"list-group list-group-flush\">\n"
+"              <li class=\"list-group-item\">If you have already answered "
+"this survey or do not wish to take it at this time, you can go to the bottom "
+"of the page and press the skip button</li>\n"
+"          </ul>\n"
+"          "
+msgstr ""
+"\n"
+"          <ul class=\"list-group list-group-flush\">\n"
+"              <li class=\"list-group-item\">If you have already answered "
+"this survey or do not wish to take it at this time, you can go to the bottom "
+"of the page and press the skip button</li>\n"
+"          </ul>\n"
+"          "
+
+#: .\trainingApp\templates\trainingApp\comment_form.html:21
+msgid "Comment"
+msgstr "Comment"
+
+#: .\trainingApp\templates\trainingApp\comment_form.html:52
+msgid "Send"
+msgstr "Send"
+
+#: .\trainingApp\templates\trainingApp\comment_form.html:62
+msgid "Skip Comment"
+msgstr "Skip Comment"
+
+#: .\trainingApp\templates\trainingApp\forms.html:47
+#: .\trainingApp\templates\trainingApp\review_deploy.html:16
+msgid " Your browser does not support audio playback. "
 msgstr ""
 
-#: .\trainingApp\models.py:12
-msgid "Easy"
+#: .\trainingApp\templates\trainingApp\forms.html:55
+msgid "Select Answer"
+msgstr "Select Answer"
+
+#: .\trainingApp\templates\trainingApp\forms.html:67
+msgid "Send and Next"
+msgstr "Send and Next"
+
+#: .\trainingApp\templates\trainingApp\forms.html:71
+msgid ""
+"\n"
+"        <p>If you want to return to the previous display, press the back "
+"button</p>\n"
+"        "
+msgstr ""
+"\n"
+"        <p>If you want to return to the previous display, press the back "
+"button</p>\n"
+"        "
+
+#: .\trainingApp\templates\trainingApp\forms.html:75
+#: .\trainingApp\templates\trainingApp\review_block.html:89
+#: .\trainingApp\templates\trainingApp\review_list_tt.html:93
+msgid "Back"
+msgstr "Back"
+
+#: .\trainingApp\templates\trainingApp\review_block.html:14
+#: .\trainingApp\templates\trainingApp\review_list_tt.html:14
+msgid ""
+"\n"
+"                <caption>\n"
+"                    Table of revisions available for viewing\n"
+"                </caption>\n"
+"                "
+msgstr ""
+"\n"
+"                <caption>\n"
+"                    Table of revisions available for viewing\n"
+"                </caption>\n"
+"                "
+
+#: .\trainingApp\templates\trainingApp\review_block.html:21
+msgid "Name Block"
+msgstr "Name Block"
+
+#: .\trainingApp\templates\trainingApp\review_block.html:38
+#: .\trainingApp\templates\trainingApp\review_list_tt.html:42
+msgid ""
+"\n"
+"            <p class=\"lead\">\n"
+"                Sorry, no reviews available.\n"
+"            </p>\n"
+"            "
+msgstr ""
+"\n"
+"            <p class=\"lead\">\n"
+"                Sorry, no reviews available.\n"
+"            </p>\n"
+"            "
+
+#: .\trainingApp\templates\trainingApp\review_block.html:85
+#: .\trainingApp\templates\trainingApp\review_list_tt.html:89
+msgid ""
+"\n"
+"<p>If you want to return to the training page, press the back button</p>\n"
+msgstr ""
+"\n"
+"<p>If you want to return to the training page, press the back button</p>\n"
+
+#: .\trainingApp\templates\trainingApp\review_deploy.html:34
+msgid ""
+"\n"
+"                        <p class=\"mt-2\">\n"
+"                            Correct answer\n"
+"                        </p>\n"
+"                        "
+msgstr ""
+"\n"
+"                        <p class=\"mt-2\">\n"
+"                            Correct answer\n"
+"                        </p>\n"
+"                        "
+
+#: .\trainingApp\templates\trainingApp\review_deploy.html:40
+#, python-format
+msgid ""
+"\n"
+"                        <p class=\"mt-2\">\n"
+"                            Wrong answer. The correct answer is "
+"%(deploy.correct_answer)s\n"
+"                        </p>\n"
+"                        "
+msgstr ""
+"\n"
+"                        <p class=\"mt-2\">\n"
+"                            Wrong answer. The correct answer is "
+"%(deploy.correct_answer)s\n"
+"                        </p>\n"
+"                        "
+
+#: .\trainingApp\templates\trainingApp\review_list_tt.html:10
+msgid "List of reviews"
+msgstr "List of reviews"
+
+#: .\trainingApp\templates\trainingApp\review_list_tt.html:21
+msgid "Number"
+msgstr "Number"
+
+#: .\trainingApp\templates\trainingApp\review_list_tt.html:22
+msgid "Date"
+msgstr "Date"
+
+#: .\trainingApp\templates\trainingApp\review_list_tt.html:23
+msgid "Time"
+msgstr "Time"
+
+#: .\trainingApp\templates\trainingApp\review_list_tt.html:24
+msgid "Time Spent"
+msgstr "Time Spent"
+
+#: .\trainingApp\templates\trainingApp\training_List.html:10
+msgid "List of Trainings"
+msgstr "List of Trainings"
+
+#: .\trainingApp\templates\trainingApp\training_List.html:32
+msgid "Difficulty"
+msgstr "Difficulty"
+
+#: .\trainingApp\templates\trainingApp\training_List.html:34
+msgid "Attempts allowed"
+msgstr "Attempts allowed"
+
+#: .\trainingApp\templates\trainingApp\training_List.html:35
+msgid "Attempts made"
+msgstr "Attempts made"
+
+#: .\trainingApp\templates\trainingApp\training_List.html:36
+msgid "Reviews"
+msgstr "Reviews"
+
+#: .\trainingApp\templates\trainingApp\training_List.html:55
+msgid "review"
+msgstr "review"
+
+#: .\userApp\templates\userApp\passwordChange.html:10
+#: .\userApp\templates\userApp\passwordChange.html:16
+#: .\userApp\templates\userApp\profile.html:45
+msgid "Change Password"
+msgstr "Change Password"
+
+#: .\userApp\templates\userApp\passwordresetDone.html:7
+msgid "Password Successfully Changed"
+msgstr "Password Successfully Changed"
+
+#: .\userApp\templates\userApp\profile.html:9
+msgid "User Information"
+msgstr "User Information"
+
+#: .\userApp\templates\userApp\profile.html:14
+#: .\userApp\templates\userApp\profile.html:32
+msgid "Update"
+msgstr "Update"
+
+#: .\userApp\templates\userApp\profile.html:27
+msgid "Trainee Information"
+msgstr "Trainee Information"
+
+#: .\userApp\templates\userApp\signin.html:5
+#: .\userApp\templates\userApp\signin.html:20
+#, fuzzy
+#| msgid "Sign-in"
+msgid "Signin"
+msgstr "Sign-in"
+
+#: .\userApp\templates\userApp\signup.html:6
+#: .\userApp\templates\userApp\signup.html:79
+msgid "Signup"
+msgstr "Signup"
+
+#: .\userApp\templates\userApp\signup.html:8
+msgid "Complete all fields please:"
+msgstr "Complete all fields please:"
+
+#: .\userApp\templates\userApp\signup.html:16
+msgid "Enter a username of your choice"
+msgstr "Enter a username of your choice"
+
+#: .\userApp\templates\userApp\signup.html:16
+msgid "Username"
 msgstr ""
 
-#: .\trainingApp\models.py:13
-msgid "Intermediate"
+#: .\userApp\templates\userApp\signup.html:21
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "                        <small id=\"username-description\" aria-hidden="
+#| "\"true\">Your username must be between 6 and 15 characters and can only "
+#| "contain letters, numbers, and underscores.</small>\n"
+#| "                    "
+msgid ""
+"\n"
+"                            <small id=\"username-description\" aria-hidden="
+"\"true\">Your username must be between 6 and 15 characters and can only "
+"contain letters, numbers, and underscores.</small>\n"
+"                        "
+msgstr ""
+"\n"
+"                        <small id=\"username-description\" aria-hidden=\"true"
+"\">Your username must be between 6 and 15 characters and can only contain "
+"letters, numbers, and underscores.</small>\n"
+"                    "
+
+#: .\userApp\templates\userApp\signup.html:26
+msgid "First Name"
 msgstr ""
 
-#: .\trainingApp\models.py:14
-msgid "Advance"
+#: .\userApp\templates\userApp\signup.html:31
+#, fuzzy
+#| msgid "Name"
+msgid "Last Name"
+msgstr "Name"
+
+#: .\userApp\templates\userApp\signup.html:36
+msgid "Email"
 msgstr ""
 
-#: .\trainingApp\models.py:18
-msgid "Active"
+#: .\userApp\templates\userApp\signup.html:41
+#, fuzzy
+#| msgid "Change Password"
+msgid "Password"
+msgstr "Change Password"
+
+#: .\userApp\templates\userApp\signup.html:46
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "                        <small id=\"username-description\" aria-hidden="
+#| "\"true\">Write your password one more time</small>\n"
+#| "                    "
+msgid ""
+"\n"
+"                            <small id=\"username-description\" aria-hidden="
+"\"true\">Your password must contain at least 8 characters.</small>\n"
+"                        "
+msgstr ""
+"\n"
+"                        <small id=\"username-description\" aria-hidden=\"true"
+"\">Write your password one more time</small>\n"
+"                    "
+
+#: .\userApp\templates\userApp\signup.html:51
+#, fuzzy
+#| msgid "Change Password"
+msgid "Repeat password"
+msgstr "Change Password"
+
+#: .\userApp\templates\userApp\signup.html:56
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "                        <small id=\"username-description\" aria-hidden="
+#| "\"true\">Write your password one more time</small>\n"
+#| "                    "
+msgid ""
+"\n"
+"                            <small id=\"username-description\" aria-hidden="
+"\"true\">Write your password one more time, please.</small>\n"
+"                        "
+msgstr ""
+"\n"
+"                        <small id=\"username-description\" aria-hidden=\"true"
+"\">Write your password one more time</small>\n"
+"                    "
+
+#: .\userApp\templates\userApp\signup.html:61
+msgid "Age"
 msgstr ""
 
-#: .\trainingApp\models.py:19
-msgid "Inactive"
+#: .\userApp\templates\userApp\signup.html:66
+msgid "Educational Level:"
 msgstr ""
 
-#: .\trainingApp\models.py:20
-msgid "in_Progress"
+#: .\userApp\templates\userApp\signup.html:71
+msgid "Occupation"
 msgstr ""
 
-#: .\trainingApp\views.py:99
-#, python-brace-format
-msgid "Great! You have completes: {training.name_training}"
-msgstr ""
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    <audio controls>\n"
+#~ "                        <source src=\"%(deploy.deploy_sound.url)s\" type="
+#~ "\"audio/mpeg\">\n"
+#~ "                        Your browser does not support audio playback.\n"
+#~ "                    </audio>\n"
+#~ "                    "
+#~ msgstr ""
+#~ "\n"
+#~ "                    <audio controls>\n"
+#~ "                        <source src=\"%(deploy.deploy_sound.url)s\" type="
+#~ "\"audio/mpeg\">\n"
+#~ "                        Your browser does not support audio playback.\n"
+#~ "                    </audio>\n"
+#~ "                    "
 
-#: .\userApp\views.py:42
-msgid "Your account is create successfully"
-msgstr ""
-
-#: .\userApp\views.py:48
-msgid "Error"
-msgstr ""
-
-#: .\userApp\views.py:63
-msgid "Username or Password incorrect"
-msgstr ""
-
-#: .\userApp\views.py:67
-msgid "Your are logged in as {request.POST['username']}"
-msgstr ""
-
-#: .\userApp\views.py:96
-msgid "Your profile has been updated"
-msgstr ""
-
-#: .\userApp\views.py:100
-msgid "error"
-msgstr ""
-
-#: .\webTraining\settings.py:132
-msgid "Spanish"
-msgstr ""
-
-#: .\webTraining\settings.py:133
-msgid "English"
-msgstr ""
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    <audio controls>\n"
+#~ "                        <source  src=\"%(form.instance.deploy_sound.url)s"
+#~ "\" type=\"audio/mpeg\">\n"
+#~ "                            Your browser does not support audio "
+#~ "playback.\n"
+#~ "                    </audio>\n"
+#~ "                    "
+#~ msgstr ""
+#~ "\n"
+#~ "                    <audio controls>\n"
+#~ "                        <source  src=\"%(form.instance.deploy_sound.url)s"
+#~ "\" type=\"audio/mpeg\">\n"
+#~ "                            Your browser does not support audio "
+#~ "playback.\n"
+#~ "                    </audio>\n"
+#~ "                    "

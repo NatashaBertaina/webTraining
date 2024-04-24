@@ -1,8 +1,24 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
+<div class="card my-3 border border-3">
+  <div class="card-header">
+      {% trans "Note" %}
+  </div>
+  <div class="card-body">
+      <blockquote class="blockquote mb-0">
+          {% blocktrans %}
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item">If you have already answered this survey or do not wish to take it at this time, you can go to the bottom of the page and press the skip button</li>
+          </ul>
+          {% endblocktrans %}
+      </blockquote>
+  </div>
+</div>
+
   <div class="container mt-5">
-    <h1 class="mb-4">Comment</h1>
+    <h1 class="mb-4">{% trans 'Comment' %}</h1>
 
     <form action="" method="POST" class="mb-4">
       {% csrf_token %}
@@ -33,7 +49,7 @@
       </div>
 
       <button type="submit" class="btn btn-primary">
-        Send
+        {% trans 'Send' %}
       </button>
     </form>
 
@@ -43,6 +59,6 @@
   </div>
   <!-- Botón para omitir el comentario-->
 <div class="mt-4">
-  <a href="{% url 'trainingApp:training_List' %}" class="btn btn-primary">Skip Comment</a>
+  <a href="{% url 'trainingApp:training_List' %}" class="btn btn-primary">{% trans 'Skip Comment' %}</a>
 </div>
 {% endblock %}
