@@ -15,6 +15,8 @@ from django.contrib.auth.views import PasswordChangeView, PasswordResetDoneView
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import PasswordChangeForm
 from trainingApp.models import Group
+
+
 ##Logica de users 
 
 def home(request):
