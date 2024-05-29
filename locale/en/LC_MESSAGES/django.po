@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-12 15:15-0300\n"
+"POT-Creation-Date: 2024-05-29 09:54-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -245,7 +245,7 @@ msgstr "Previous"
 #: .\trainingApp\templates\trainingApp\block_deploy_list.html:90
 #: .\trainingApp\templates\trainingApp\review_block.html:72
 #: .\trainingApp\templates\trainingApp\review_block.html:77
-#: .\trainingApp\templates\trainingApp\review_deploy.html:50
+#: .\trainingApp\templates\trainingApp\review_deploy.html:48
 #: .\trainingApp\templates\trainingApp\review_list_tt.html:76
 #: .\trainingApp\templates\trainingApp\review_list_tt.html:81
 #: .\trainingApp\templates\trainingApp\training_List.html:94
@@ -371,22 +371,9 @@ msgstr ""
 "                        </p>\n"
 "                        "
 
-#: .\trainingApp\templates\trainingApp\review_deploy.html:40
-#, python-format
-msgid ""
-"\n"
-"                        <p class=\"mt-2\">\n"
-"                            Wrong answer. The correct answer is "
-"%(deploy.correct_answer)s\n"
-"                        </p>\n"
-"                        "
+#: .\trainingApp\templates\trainingApp\review_deploy.html:41
+msgid " Wrong answer. The correct answer is: "
 msgstr ""
-"\n"
-"                        <p class=\"mt-2\">\n"
-"                            Wrong answer. The correct answer is "
-"%(deploy.correct_answer)s\n"
-"                        </p>\n"
-"                        "
 
 #: .\trainingApp\templates\trainingApp\review_list_tt.html:10
 msgid "List of reviews"
@@ -573,6 +560,22 @@ msgstr ""
 #: .\userApp\templates\userApp\signup.html:71
 msgid "Occupation"
 msgstr ""
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                        <p class=\"mt-2\">\n"
+#~ "                            Wrong answer. The correct answer is "
+#~ "%(deploy.correct_answer)s\n"
+#~ "                        </p>\n"
+#~ "                        "
+#~ msgstr ""
+#~ "\n"
+#~ "                        <p class=\"mt-2\">\n"
+#~ "                            Wrong answer. The correct answer is "
+#~ "%(deploy.correct_answer)s\n"
+#~ "                        </p>\n"
+#~ "                        "
 
 #, python-format
 #~ msgid ""

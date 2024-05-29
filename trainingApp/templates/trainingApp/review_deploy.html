@@ -37,11 +37,9 @@
                         </p>
                         {% endblocktrans %}
                     {% elif deploy_answer.user_response %}
-                        {% blocktrans %}
                         <p class="mt-2">
-                            Wrong answer. The correct answer is {{ deploy.correct_answer }}
+                            {% blocktrans %} Wrong answer. The correct answer is: {% endblocktrans %}{{ deploy.correct_answer }}
                         </p>
-                        {% endblocktrans %}
                     {% endif %}
                 </div>
             </section>
