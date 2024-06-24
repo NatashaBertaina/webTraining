@@ -63,11 +63,11 @@ sonoTrainings is a web platform specifically designed to host and manage sonific
 
 The design of the sonoTrainings web platform’s training exercises drew inspiration from previous desktop training experiences developed using PsychoPy. In these desktop trainings, an image and sound were presented on the screen for a short duration, followed by a prompt asking participants to identify any detected signals. Each type of signal was presented in separate blocks, with brief intervals between blocks of different characteristics. Adapting this approach to the web platform, sonoTrainings divides each training session into at least two distinct blocks, each containing a group of signal presentations that share common characteristics.
 
-The training deployment system is implemented using forms. This approach enables the recording of user responses in a database, ensuring that every training is completed. Each deployment constitutes a page of the form, allowing users to resume the training in case of interruptions. Previously provided responses are stored, and the system displays the pending deployments. To optimize the user experience, each page of the form presents a signal with its corresponding audio, image, and question n (\autoref{fig:fig1}). This reduces the cognitive load and facilitates the comprehension of the material.
+The training deployment system is implemented using forms. This approach enables the recording of user responses in a database, ensuring that every training is completed. Each deployment constitutes a page of the form, allowing users to resume the training in case of interruptions. Previously provided responses are stored, and the system displays the pending deployments. To optimize the user experience, each page of the form presents a signal with its corresponding audio, image, and question (\autoref{fig:fig1}). This reduces the cognitive load and facilitates the comprehension of the material.
 
 To ensure the readability of the forms by assistive technologies, the development of sonoTrainings adheres to the Web Content Accessibility Guidelines (WCAG\footnote{\url{https://www.w3.org/WAI/standards-guidelines/wcag/es}}), implementing the recommendations outlined therein. Additionally, functionalities from the Bootstrap framework\footnote{\url{https://getbootstrap.com/}} were integrated to enhance the fluidity, responsiveness, and overall user experience, catering to both users with or without assistive technologies.  
 
-![description figure. \label{fig:fig1}](figures/fig1.png)
+![Paginated form view for training deployment. \label{fig:fig1}](figures/fig1.png)
 
 ## Database
 
@@ -86,7 +86,7 @@ This database is used to support the functionalities of a) training storage and 
 
 The entire website will be tested in the course on Multisensory Analysis of Scientific Data, which will be held between May and June 2024, and will consist of 8 weekly sessions [@casado2024].
 
-![description figure. \label{fig:fig2}](figures/fig2.png)
+![. \label{fig:fig2}](figures/fig2.png)
 
 # Conclusions
 
