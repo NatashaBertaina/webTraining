@@ -86,7 +86,7 @@ This database is used to support the functionalities of a) training storage and 
 
 The entire website will be tested in the course on Multisensory Analysis of Scientific Data, which will be held between May and June 2024, and will consist of 8 weekly sessions [@casado2024].
 
-![. \label{fig:fig2}](figures/fig2.png)
+![Database class diagram. \label{fig:fig2}](figures/fig2.png)
 
 # Conclusions
 
