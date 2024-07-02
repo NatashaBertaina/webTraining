@@ -28,7 +28,7 @@ bibliography: paper.bib
 
 # Summary
 
-
+The natural world's comprehension is often hindered by a predominant reliance on visual learning styles, creating a gap between conventional and unconventional teaching methods. This emphasis on visual modalities limits understanding for those who struggle with visual information. To address this, a multi-sensory approach that integrates all senses is crucial. Sonification emerges as a powerful tool to enhance learning and accessibility, demonstrated by software like sonoUno, xSonify, and StarSound. However, effective implementation of sonification requires systematic training, leading to the development of sonoTrainings, a web platform built on Django for sonification training. The platform's design, inspired by PsychoPy desktop trainings, includes a database to manage training data and user information. Future implementation in courses will evaluate the platform’s accessibility and usability, aiming to optimize sonification training for diverse scientific fields.
 
 # Introduction
 
