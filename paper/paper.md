@@ -5,7 +5,7 @@ tags:
 authors:
   - given-names: Natasha
     surname: Bertaina Lucero
-    orcid: 
+    orcid: 0009-0001-2722-4675
     corresponding: true 
     affiliation: "1, 2" # (Multiple affiliations must be quoted)
   - name: Gonzalo Cayo
@@ -16,7 +16,7 @@ authors:
     equal-contrib: true 
     affiliation: "1, 3"
   - name: Johanna Casado
-    orcid: 
+    orcid: 0000-0001-9528-5034
     equal-contrib: true 
     affiliation: "2"
 affiliations:
