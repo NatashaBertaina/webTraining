@@ -1,5 +1,5 @@
 ---
-title: 'Advances in training for data sonorization: The sonoTrainings web platform'
+title: 'Advances in training for data sonification: The sonoTrainings web platform'
 tags:
   - 
 authors:
@@ -14,6 +14,10 @@ authors:
     orcid: 0000-0003-0919-2734
     equal-contrib: true 
     affiliation: "1, 3"
+  - name: Johanna Casado
+    orcid: 
+    equal-contrib: true 
+    affiliation: "2"
 affiliations:
  - name: Instituto en Tecnologías de Detección y Astropartículas (CNEA, CONICET, UNSAM), Mendoza, Argentina
    index: 1
