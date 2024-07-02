@@ -3,7 +3,8 @@ title: 'Advances in training for data sonification: The sonoTrainings web platfo
 tags:
   - 
 authors:
-  - name: Natasha Bertaina Lucero
+  - given-names: Natasha
+    surname: Bertaina Lucero
     orcid: 
     corresponding: true 
     affiliation: "1, 2" # (Multiple affiliations must be quoted)
