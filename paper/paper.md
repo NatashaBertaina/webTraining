@@ -1,5 +1,5 @@
 ---
-title: ''
+title: 'Advances in training for data sonorization: The sonoTrainings web platform'
 tags:
   - 
 authors:
