@@ -45,11 +45,7 @@ The overemphasis on visual modalities in education and scientific research restr
 
 On the way to achieving this, sonification emerges as a powerful tool to expand learning opportunities and accessibility. Software such as sonoUno\footnote{\url{https://www.sonouno.org.ar/}}, xSonify\footnote{\url{https://sourceforge.net/projects/xsonify/}}, and StarSound\footnote{\url{https://www.jeffreyhannam.com/starsound/}}, among others, demonstrate the potential of this form of data representation. Backing this notion there are research studies such as @wanda2011 and @foran2022, which showcase the effectiveness of these tools in the interpretation of astronomical data.
 
-Like any other new technique, sonification requires a process of teaching and training. For this reason, training tests were developed using tools such as PsychoPy\footnote{\url{https://www.psychopy.org/}} [@bertainaA2022]. This tool, intended for use in experiments in Python, is mainly used in behavioral sciences. Its desktop application is free and, due to its versatility,  it was a viable option for designing the first set of training exercises. Its disadventage came with the web implementation. For running the same desktop-designed training exercises, a library called PJs was needed, which is not open source and does not allow to use files outside of the page offered by the PsychoPy project. To overcome these limitations, a new web platform, named sonoTrainings was specifically designed to host sonification training [@bertainaB2023; @bertainaA2023].
-
-@fusco2015 employed tactile graphs as a multisensory learning technique, enabling the representation of diverse STEM educational resources for visually impaired students. Integrating sound with these tactile representations could further enhance multisensory learning.
-
-The utilization of tactile graphs and sound integration, as proposed for visually impaired individuals, can be extended to create a preparatory course for sighted individuals. This approach aims to facilitate data analysis from various sources by incorporating not only the sense of sight but also hearing and touch.
+Like any other new technique, sonification requires a process of teaching and training. For this reason, training tests were developed using tools such as PsychoPy\footnote{\url{https://www.psychopy.org/}} [@bertainaA2022]. This tool, intended for use in experiments in Python, is mainly used in behavioral sciences. Its desktop application is free and, due to its versatility,  it was a viable option for designing the first set of training exercises. Its disadventage came with the web implementation. For running the same desktop-designed training exercises, a library called PJs was needed, which is not open source and does not allow to use files outside of the page offered by the PsychoPy project. To overcome these limitations, a new web platform, named sonoTrainings was specifically designed to host sonification training [@bertainaB2023; @bertainaA2023]. The development and completion of it is described in this work.
 
 
 # Statement of need
@@ -58,7 +54,9 @@ Data sonification has emerged as an innovative technique that complements data e
 
 Pioneering research in the field of astronomy has focused on assessing the effectiveness of sonification for data analysis. Studies like @tucker2022 and @trayford2023 have evaluated participants’abilities to identify variations in light curves and emission line properties using sonification tools like Astronify and STRAUSS. The findings consistently demonstrated the successful detection of signals in sonified data.
 
-While these initial studies lay the groundwork for the application of sonification tests in astronomy for its subsequent use as a data analysis tool, there is a clear need to develop systematic training to optimize the use of this technique. It is in this sense that the design of a sonification training program began, which was presented in 2022 as part of an international training course under the REINFORCE project [@bertainaB2023]. The attendees of this course were researchers and educators. Various improvements for future training were extracted from this course, most of which could not be implemented with the version of the PsychoPy tool at the time. In addition, it was in this course that the need for a web-based rather than a desktop-based training became evident. When installing the PsychoPy application, some personal computers had problems in the process, which led to the participants’ frustration and demotivation.Furthermore, in order to collect the data, users were required to send the csv file that collected their responses, which is not acceptable for this type of proposal. The solution to this was to use Pavlovia, the web service offered by the PsychoPy project. As the latter is not open source, its long-term implementation was not an option, which is why a custom-built design began.
+While these initial studies lay the groundwork for the application of sonification tests in astronomy for its subsequent use as a data analysis tool, there is a clear need to develop systematic training to optimize the use of this technique. It is in this sense that the design of a sonification training program began, which was presented in 2022 as part of an international training course under the REINFORCE project [@bertainaB2023]. The attendees of this course were researchers and educators. Various improvements for future training were extracted from this course, most of which could not be implemented with the version of the PsychoPy tool at the time. In addition, it was in this course that the need for a web-based rather than a desktop-based training became evident.
+
+When installing the PsychoPy application, some personal computers had problems in the process, which led to the participants’ frustration and demotivation.Furthermore, in order to collect the data, users were required to send the csv file that collected their responses, which is not acceptable for this type of proposal. The solution to this was to use Pavlovia, the web service offered by the PsychoPy project. As the latter is not open source, its long-term implementation was not an option, which is why a custom-built design began.
 
 # Web development
 
@@ -72,7 +70,7 @@ The training deployment system is implemented using forms. This approach enables
 
 To ensure the readability of the forms by assistive technologies, the development of sonoTrainings adheres to the Web Content Accessibility Guidelines (WCAG\footnote{\url{https://www.w3.org/WAI/standards-guidelines/wcag/es}}), implementing the recommendations outlined therein. Additionally, functionalities from the Bootstrap framework\footnote{\url{https://getbootstrap.com/}} were integrated to enhance the fluidity, responsiveness, and overall user experience, catering to both users with or without assistive technologies.  
 
-![Paginated form view for training deployment. \label{fig:fig1}](figures/fig1.png){height="50%"}
+![Screenshot of the paginated form view on the training website. The website is currently undergoing translation into English \label{fig:fig1}](figures/fig1.png){height="50%"}
 
 ## Database
 
@@ -89,7 +87,6 @@ The sonoTrainings platform’s database structure comprises six primary entities
 
 This database is used to support the functionalities of a) training storage and management, b) user registration and management, and c) recording user responses during training. It is a prototype that will allow for scalability and the handling of large amounts of data, with the ability to add new entities and relationships as required by the project. Another important factor for migrating the database to another management system is the security that SQLite does not provide. 
 
-The entire website will be tested in the course on Multisensory Analysis of Scientific Data, which will be held between May and June 2024, and will consist of 8 weekly sessions [@casado2024].
 
 ![Database class diagram. \label{fig:fig2}](figures/fig2.png)
 
@@ -99,7 +96,12 @@ Data sonification is an innovative tool with great potential to complement and e
 
 The development platform enables the implementation of training with sonified data from various fields of knowledge, transcending the scope of astronomy and opening up a range of possibilities for its application in multiple disciplines. In this way, sonoTrainings facilitates the creation of personalized training for a wide range of users who seek to incorporate sonification as a fundamental tool in their data analysis.
 
+@fusco2015 employed tactile graphs as a multisensory learning technique, enabling the representation of diverse STEM educational resources for visually impaired students. Integrating sound with these tactile representations could further enhance multisensory learning.
+
+The utilization of tactile graphs and sound integration, as proposed for visually impaired individuals, can be extended to create a preparatory course for sighted individuals. This approach aims to facilitate data analysis from various sources by incorporating not only the sense of sight but also hearing and touch.
+
 The implementation of sonoTrainings in a course will enable the evaluation of the platform’s accessibility and usability, as well as the adjustment and optimization of the developed training. Through the collection of statistical data on the learning achieved by users, valuable information can be obtained to understand how multisensory information is perceived by humans.
 
+The complete website, which will be tested in the multisensory analysis of scientific data course developed between May and June 2024 (Casado et al., 2024), aims to provide users with a complete and accessible experience for learning data sonification.
 
 # References
