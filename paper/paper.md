@@ -70,7 +70,7 @@ The training deployment system is implemented using forms. This approach enables
 
 To ensure the readability of the forms by assistive technologies, the development of sonoTrainings adheres to the Web Content Accessibility Guidelines (WCAG\footnote{\url{https://www.w3.org/WAI/standards-guidelines/wcag/es}}), implementing the recommendations outlined therein. Additionally, functionalities from the Bootstrap framework\footnote{\url{https://getbootstrap.com/}} were integrated to enhance the fluidity, responsiveness, and overall user experience, catering to both users with or without assistive technologies.  
 
-![Screenshot of the paginated form view on the training website. The website is currently undergoing translation into English \label{fig:fig1}](figures/fig1.png){height="50%"}
+![Screenshot of the paginated form view on the training website \label{fig:fig1}](figures/fig1-a.png){height="50%"}
 
 ## Database
 
