@@ -11,7 +11,7 @@ This development is powered by CONICET-Argentina, Universidad de Mendoza-Argenti
 
 
 
-Web available at: sonotraining.um.edu.ar
+Web available at: https://sonotraining.um.edu.ar
 
 ## Installation
 
