@@ -7,14 +7,11 @@ This development is powered by CONICET-Argentina, Universidad de Mendoza-Argenti
 
 ## Description
 
-
+This repository contains the source code for the sonoTrainings website, an innovative platform dedicated to multisensory training in the sonification of astronomical and scientific data. The project includes two main applications: one that manages user authentication and another that handles the training system. Through this structure, we provide an accessible and continuous learning experience that integrates vision and hearing to explore the universe in an inclusive way.
 
 
 
 Web available at: https://sonotraining.um.edu.ar
-
-## Installation
-
 
 
 ## How to contribute to the software 
