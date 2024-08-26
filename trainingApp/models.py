@@ -4,6 +4,7 @@ from userApp.models import Trainee
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db.models import Sum
+from django.utils.translation import gettext_lazy as _
 
 class Group (models.Model):
     name_group = models.CharField(max_length=100)
@@ -15,13 +16,13 @@ class Group (models.Model):
 class Training(models.Model):
     #Enumeracion para el tipo de entrenamiento
     class TrainingType(models.TextChoices):
-        Easy = 'Inicial'
-        Intemediate = 'Intermedio'
-        Advanced = 'Avanzado'
+        Easy = 'Easy', _('Easy')
+        Intemediate = 'Intermediate', _('Intermediate')
+        Advanced = 'Advanced', _('Advanced')
         
     class StateTraining(models.TextChoices):
-        Active = 'Activo'
-        inactive = 'Inactivo'
+        Active = 'Active', _('Active')
+        inactive = 'Inactive', _('Inactive')
         
     name_training = models.CharField(max_length=200)
     pub_date = models.DateTimeField("upload date", auto_now_add=True)
@@ -58,8 +59,9 @@ class Training(models.Model):
 
 class Block(models.Model):
     class StateBlock(models.TextChoices):
-        Active = 'Activo'
-        inactive = 'Inactivo'
+        Active = 'Active', _('Active')
+        inactive = 'Inactive', _('Inactive')
+        
     name_block = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
     estimed_duration_block = models.IntegerField(default=0)
@@ -71,7 +73,7 @@ class Block(models.Model):
     training = models.ForeignKey(Training, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"Block_Id: {self.id}, Name Block: {self.name_block}, Training: {self.training.name_training}"
+        return f"BlockID: {self.id}, Name Block: {self.name_block}, Training: {self.training.name_training}"
     
     
 class Deploy(models.Model):
@@ -80,17 +82,18 @@ class Deploy(models.Model):
     deploy_image = models.ImageField(upload_to="trainingApp/images", blank=True)
     deploy_sound = models.FileField(upload_to="trainingApp/sound", blank=True)
     #Respuesta correcta
-    correct_answer = models.CharField(max_length=100, null=True) 
+    #correct_answer = models.CharField(max_length=100, null=True) 
 
     def __str__(self):
-        return f"Deploy_Id: {self.id}, Block: {self.block.name_block}"
+        return f"DeployID: {self.id}, {self.block}"
 
 
 class Choice(models.Model):
     deploy = models.ForeignKey(Deploy, on_delete=models.CASCADE)
     choice = models.CharField(max_length=100, null=True)
+    correctChoice = models.BooleanField(default=False)
     def __str__(self):
-        return f"id: {self.id}, fk: {self.deploy}"
+        return f"ChoiceID: {self.id}, {self.choice}, DeployID: {self.deploy.id}"
     
     
 class TraineeTraining(models.Model):
@@ -107,8 +110,8 @@ class TraineeTraining(models.Model):
     
 class BlockAnswer(models.Model):
     class StateBlockAnswer(models.TextChoices):
-        in_progress = 'En progreso'
-        Complated = 'Completo'
+        in_progress = 'In progress', _('In progress')
+        Completed = 'Completed', _('Completed')
         
     state_block= models.CharField(
         max_length=20,
@@ -130,7 +133,10 @@ class DeployAnswer(models.Model):
     #foreing Key de deploy
     deploy = models.ForeignKey(Deploy, on_delete=models.CASCADE)
     #Respuesta a deploy
-    user_response = models.CharField(max_length=50, null=True)
+    #user_response = models.CharField(max_length=50, null=True)
+    
+    #foreing Key de choice seleccionada
+    selectedChoice = models.ForeignKey(Choice, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Deploy_Answer_Id: {self.id}"
@@ -139,16 +145,16 @@ class DeployAnswer(models.Model):
 class Comment(models.Model):
     #Enumeracion para el tipo de entrenamiento
     class MostLiked(models.TextChoices):
-        WELL_EXPLAINED = 'Well explained'
-        INTERESTING = 'Interesting'
-        EASY_TO_UNDERSTAND = 'Easy to understand'
+        WELL_EXPLAINED = 'Well explained', _('Well explained')
+        INTERESTING = 'Interesting', _('Interesting')
+        EASY_TO_UNDERSTAND = 'Easy to understand', _('Easy to understand')
 
     class LeastLiked(models.TextChoices):
-        TOO_DIFFICULT = 'Too difficult'
-        NOT_INTERESTING = 'Not interesting'
-        POORLY_EXPLAINED = 'Poorly explained'
-        CONFUSING = 'Confusing'
-        REPETITIVE = 'Repetitive'
+        TOO_DIFFICULT = 'Too difficult', _('Too difficult')
+        NOT_INTERESTING = 'Not interesting', _('Not interesting')
+        POORLY_EXPLAINED = 'Poorly explained', _('Poorly explained')
+        CONFUSING = 'Confusing', _('Confusing')
+        REPETITIVE = 'Repetitive', _('Repetitive')
 
     #foreing Key de training
     training = models.ForeignKey(Training, on_delete=models.CASCADE)

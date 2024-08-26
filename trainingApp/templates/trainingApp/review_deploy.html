@@ -22,23 +22,27 @@
                 <div class="form-choice">
                     {% for choice in choices %}
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDisabled" id="{{ choice.choice }}" {% if deploy_answer.user_response == choice.choice %}checked{% endif %} disabled>
+                            <input class="form-check-input" type="radio" name="flexRadioDisabled" id="{{ choice.id }}" {% if deploy_answer.selectedChoice.id == choice.id %}checked{% endif %} disabled>
                             <label class="form-check-label" for="{{ choice.choice }}">
                                 {{ choice.choice }}
                             </label>
                         </div>
                     {% endfor %}
-
                     
-                    {% if deploy_answer.user_response == deploy.correct_answer %}
+                    {% if deploy_answer.selectedChoice.correctChoice %}
                         {% blocktrans %}
                         <p class="mt-2">
                             Correct answer
                         </p>
                         {% endblocktrans %}
-                    {% elif deploy_answer.user_response %}
+                    {% else %}
                         <p class="mt-2">
-                            {% blocktrans %} Wrong answer. The correct answer is: {% endblocktrans %}{{ deploy.correct_answer }}
+                            {% blocktrans %} Wrong answer. The correct answer is: {% endblocktrans %}
+                            {% for choice in choices %}
+                                {% if choice.correctChoice %}
+                                    {{ choice.choice }}
+                                {% endif %}
+                            {% endfor %}
                         </p>
                     {% endif %}
                 </div>

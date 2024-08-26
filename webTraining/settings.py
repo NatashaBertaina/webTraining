@@ -39,7 +39,8 @@ SESSION_COOKIE_AGE = 1800
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    'modeltranslation',
+    'django.contrib.admin', 
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -49,8 +50,6 @@ INSTALLED_APPS = [
     #Apps propias
     'trainingApp.apps.TrainingappConfig',
     'userApp.apps.UserappConfig',
-
-
     #'bootstrap5',
 ]
 
@@ -135,13 +134,23 @@ USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = [
-    ('es', 'Español'),
     ('en', 'English'),
+    ('es', 'Español'),
 ]
 
 LOCALE_PATHS = [
     BASE_DIR / 'locale/',
 ]
+
+#Configuracion de model translation
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
+MODELTRANSLATION_LANGUAGES = ('en', 'es')
+MODELTRANSLATION_AUTO_POPULATE = 'required'
+
+# Configuración para omitir los campos originales y solo usar los traducidos
+MODELTRANSLATION_FALLBACK_LANGUAGES = {
+    'default': ('en', 'es'),  # Define los idiomas de fallback
+}
 
 
 # Static files (CSS, JavaScript, Images)
@@ -149,6 +158,7 @@ LOCALE_PATHS = [
 
 #Configuracion de archivos estáticos
 STATIC_URL = '/static/'
+#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STORAGES = {
@@ -172,3 +182,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ##Si no esta autenticado se redirecciona al signup
 LOGIN_REDIRECT_URL = 'userApp:signup'
 LOGIN_URL = 'userApp:signup'
+

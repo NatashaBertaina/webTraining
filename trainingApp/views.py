@@ -15,6 +15,7 @@ from datetime import datetime, timedelta
 from django.contrib.auth.mixins import LoginRequiredMixin  #LoginRequiredMixin se utiliza como un mixin para requerir que un usuario esté autenticado antes de acceder a una vista específica.
 from django.urls import reverse
 
+
 #Vista para ver la lista de trainings
 class TrainingList(ListView):
     model = Training 
@@ -25,7 +26,7 @@ class TrainingList(ListView):
     def get_queryset(self):
         trainee = Trainee.objects.get(user = self.request.user)
         # Filtra los objetos TraineeTraining por training_id y user_id
-        queryset = Training.objects.filter(state_training = 'Activo',groups__in=[trainee.group]).order_by('id') #el subfijo __in indica que estamos buscando coincidencias en una lista de valores. 
+        queryset = Training.objects.filter(state_training = 'Active',groups__in=[trainee.group]).order_by('id') #el subfijo __in indica que estamos buscando coincidencias en una lista de valores. 
         
         return queryset
     
@@ -37,6 +38,10 @@ class TrainingList(ListView):
         # Añado un diccionario al context donde esta el id de cada training con la cantidad de veces realizado por el trainee
         context['num_trainee_trainings'] = {training.id: training.get_num_trainee_trainings(trainee.id)      for training in context['training_list']}
         
+        # Traducir las dificultades antes de pasarlas al contexto
+        for training in context['training_list']:
+            training.difficulty = _(training.get_difficulty_display())
+            
         return context
     
 class BlockDeployList(ListView):
@@ -109,11 +114,13 @@ class BlockDeployList(ListView):
                 states_blocks_answers[f'{block.id}'] = blockAnswer.state_block
             except BlockAnswer.DoesNotExist:
                 # Si no se encuentra un BlockAnswer asociado al Block, establecer el estado como "not started"
-                states_blocks_answers[f'{block.id}'] = "not started"
+                states_blocks_answers[f'{block.id}'] =  _('not started')
 
         # Añadir el diccionario states_blocks al contexto
-        context['states_blocks_answers'] = states_blocks_answers
-    
+        context['states_blocks_answers'] = states_blocks_answers 
+          
+        # Añadir la clase BlockAnswer a context
+        context['BlockAnswer'] = BlockAnswer 
         return context
 
 
@@ -135,7 +142,6 @@ class DeployDetailView(View):
 
         self.form = QuestionForm(instance=current_deploy)
         block = Block.objects.get(pk = block_id)
-        print(f'{current_deploy_index}')
         return render(request, self.template_name, {'deploy': current_deploy, 'form':self.form, 'block_id':block.id, 'training_id': training_id, 'current_deploy_index':current_deploy_index})
     
     def post(self, request, training_id, block_id):
@@ -151,14 +157,26 @@ class DeployDetailView(View):
 
         if form.is_valid():
             # Guarda la respuesta del usuario en un nuevo objeto DeployAnswer
-            deploy_answer, created = DeployAnswer.objects.get_or_create(
+            # Obtener el ID de la opción seleccionada
+            selected_choice_id = form.cleaned_data['selectedChoice']
+
+            # Obtener el objeto Choice correspondiente
+            selected_choice = Choice.objects.get(id=selected_choice_id)
+            
+            deploy_answer, created = DeployAnswer.objects.get_or_create(   #Get or create busca un objeto y si no lo encuentra lo crea con los atributos en default
                 block_answer=BlockAnswer.objects.get(pk=current_block_answer_id),
                 deploy=current_deploy,
-                defaults={'user_response': form.cleaned_data['user_response']}
+                defaults={'selectedChoice': selected_choice}
             )
-            # Si la respuesta ya existía, actualiza el campo 'user_response'
+            # Si la respuesta ya existía, actualiza el campo 'selectedChoice'
             if not created:
-                deploy_answer.user_response = form.cleaned_data['user_response']
+                # Obtener el ID de la opción seleccionada
+                selected_choice_id = form.cleaned_data['selectedChoice']
+
+                # Obtener el objeto Choice correspondiente
+                selected_choice = Choice.objects.get(id=selected_choice_id)
+                #Sobreescribo la selected_choice
+                deploy_answer.selectedChoice = selected_choice
                 deploy_answer.save()
 
             # Avanzar al siguiente deploy
@@ -170,7 +188,7 @@ class DeployDetailView(View):
                 #Se obtiene el blockAnswer del intento y se cambia el estado a completed
                 current_block_answer_id = request.session.get(f'current_block_answer_id_{block_id}')
                 block_answer = BlockAnswer.objects.get(pk=current_block_answer_id)
-                block_answer.state_block = "Completed"
+                block_answer.state_block = BlockAnswer.StateBlockAnswer.Completed
                 block_answer.save()
                 del request.session[f'current_block_answer_id_{block_id}']
                 
@@ -178,16 +196,12 @@ class DeployDetailView(View):
                 all_block_answers = BlockAnswer.objects.filter(trainee_Training= current_trainee_training_id )
                 all_blocks = Block.objects.filter(training=training_id,)
                 
-                print(f"current_block_answer_id: {current_block_answer_id}")                
-                print(f"current_trainee_training_id: {current_trainee_training_id}")
-                
                 # Verifica si todos los objetos en all_block_answer tienen state_block igual a "completed"
-                all_completed = all(block_answer.state_block == 'Completed' for block_answer in all_block_answers)
+                all_completed = all(block_answer.state_block == BlockAnswer.StateBlockAnswer.Completed for block_answer in all_block_answers)
                 
                     
                 # Verificar si la cantidad de BlockAnswer es igual a la cantidad de Block
                 correct_number_of_answers = len(all_block_answers) == len(all_blocks)
-                print(f"all_block_answers: {len(all_block_answers)}, all_blocks: {len(all_blocks)}")
                 
                 # Si todos los blocks tienen state_block igual a "completed", entonces se marca al training como completed y se lo redirecciona a home
                 if all_completed and correct_number_of_answers:               
@@ -217,12 +231,10 @@ class DeployDetailView(View):
                 
                     training = Training.objects.get(pk=training_id) 
                     messages.success(request,f" You have completed:  {training.name_training}")
-                    print("Termine todo")
                     return HttpResponseRedirect(reverse('trainingApp:comment', args=[training_id]))
                 
                 #Si completo el Block pero aun quedan mas por completar entonces lo redirecciona a la lista de blocks
                 else : 
-                    print("Termine el block pero faltan mas")
                     return HttpResponseRedirect(reverse('trainingApp:block_deploy_list', args=[training_id]))
                 
             #Si todavia no llega al final del Block entonces    
@@ -249,7 +261,7 @@ class DeployDetailView(View):
             block_answer = BlockAnswer.objects.create(
                 trainee_Training= get_object_or_404(TraineeTraining, pk=current_trainee_training),
                 block= get_object_or_404(Block, pk=block_id),
-                state_block = "in_progress"
+                state_block = BlockAnswer.StateBlockAnswer.in_progress
             )
 
             # Almacena el ID del BlockAnswer en la sesión

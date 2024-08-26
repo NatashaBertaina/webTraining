@@ -37,7 +37,7 @@
                     {% for block in block_list %}
                         <tr>
                             <td>
-                            {% if states_blocks_answers|get_state:block.id == "Completed" %}
+                            {% if states_blocks_answers|get_state:block.id == BlockAnswer.StateBlockAnswer.Completed %}
                                 <a>{{ block.name_block }}</a>
                             {% else %} 
                                 <a href="{% url 'trainingApp:forms' block.training.id block.id %}" class="btn btn-info">{{ block.name_block }}</a>

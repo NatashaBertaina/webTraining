@@ -18,12 +18,12 @@
 
         function confirmation() {
             Swal.fire({
-                title: "Are you sure?",
-                text: "Your answer will be submitted.",
+                title: "{% trans 'Are you sure?' %}",
+                text: "{% trans 'Your answer will be submitted.' %}",
                 icon: "question",
                 showCancelButton: true,
-                confirmButtonText: "Confirm",
-                cancelButtonText: "Cancel"
+                confirmButtonText: "{% trans 'Confirm' %}",
+                cancelButtonText: "{% trans 'Cancel' %}"
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Si el usuario confirma, enviar el formulario
@@ -63,7 +63,7 @@
                     </fieldset>
                 </div>
                 
-                <!-- Agrega el botón para enviar el formulario -->
+                <!--  Botón para enviar el formulario -->
                 <button onclick="validateAndSubmitForm()" type="button" class="btn btn-primary">{% trans 'Send and Next' %}</button>
             </form>
         </fieldset> 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-29 09:54-0300\n"
+"POT-Creation-Date: 2024-08-28 14:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Español <LL@li.org>\n"
@@ -172,6 +172,66 @@ msgstr "Registrarse"
 msgid "Go"
 msgstr "Ir"
 
+#: .\trainingApp\models.py:19
+msgid "Easy"
+msgstr "Fácil"
+
+#: .\trainingApp\models.py:20
+msgid "Intermediate"
+msgstr "Intermedio"
+
+#: .\trainingApp\models.py:21
+msgid "Advanced"
+msgstr "Avanzado"
+
+#: .\trainingApp\models.py:24 .\trainingApp\models.py:62
+msgid "Active"
+msgstr "Activo"
+
+#: .\trainingApp\models.py:25 .\trainingApp\models.py:63
+msgid "Inactive"
+msgstr "Inactivo"
+
+#: .\trainingApp\models.py:113
+msgid "In progress"
+msgstr "En progreso"
+
+#: .\trainingApp\models.py:114
+msgid "Completed"
+msgstr "Completado"
+
+#: .\trainingApp\models.py:148
+msgid "Well explained"
+msgstr "Bien explicado"
+
+#: .\trainingApp\models.py:149
+msgid "Interesting"
+msgstr "Interesante"
+
+#: .\trainingApp\models.py:150
+msgid "Easy to understand"
+msgstr "Fácil de entender"
+
+#: .\trainingApp\models.py:153
+msgid "Too difficult"
+msgstr "Demasiado difícil"
+
+#: .\trainingApp\models.py:154
+msgid "Not interesting"
+msgstr "No es interesante"
+
+#: .\trainingApp\models.py:155
+msgid "Poorly explained"
+msgstr "Pobremente explicado"
+
+#: .\trainingApp\models.py:156
+msgid "Confusing"
+msgstr "Confuso"
+
+#: .\trainingApp\models.py:157
+msgid "Repetitive"
+msgstr "Repetitivo"
+
 #: .\trainingApp\templates\trainingApp\block_deploy_list.html:10
 msgid "List of Blocks"
 msgstr "Lista de Bloques"
@@ -248,7 +308,7 @@ msgstr "Previo"
 #: .\trainingApp\templates\trainingApp\block_deploy_list.html:90
 #: .\trainingApp\templates\trainingApp\review_block.html:72
 #: .\trainingApp\templates\trainingApp\review_block.html:77
-#: .\trainingApp\templates\trainingApp\review_deploy.html:48
+#: .\trainingApp\templates\trainingApp\review_deploy.html:52
 #: .\trainingApp\templates\trainingApp\review_list_tt.html:76
 #: .\trainingApp\templates\trainingApp\review_list_tt.html:81
 #: .\trainingApp\templates\trainingApp\training_List.html:94
@@ -278,6 +338,18 @@ msgstr ""
 msgid "Comment"
 msgstr "Comentario"
 
+#: .\trainingApp\templates\trainingApp\comment_form.html:27
+msgid "More liked:"
+msgstr "Lo más Gustado"
+
+#: .\trainingApp\templates\trainingApp\comment_form.html:32
+msgid "Least liked:"
+msgstr "Lo menos Gustado"
+
+#: .\trainingApp\templates\trainingApp\comment_form.html:37
+msgid "Comment aditional:"
+msgstr "Comentario Adicional "
+
 #: .\trainingApp\templates\trainingApp\comment_form.html:52
 msgid "Send"
 msgstr "Enviar"
@@ -285,6 +357,22 @@ msgstr "Enviar"
 #: .\trainingApp\templates\trainingApp\comment_form.html:62
 msgid "Skip Comment"
 msgstr "Omitir"
+
+#: .\trainingApp\templates\trainingApp\forms.html:21
+msgid "Are you sure?"
+msgstr "¿Estás seguro?"
+
+#: .\trainingApp\templates\trainingApp\forms.html:22
+msgid "Your answer will be submitted."
+msgstr "Tu respuesta será enviada."
+
+#: .\trainingApp\templates\trainingApp\forms.html:25
+msgid "Confirm"
+msgstr "Confirmar"
+
+#: .\trainingApp\templates\trainingApp\forms.html:26
+msgid "Cancel"
+msgstr "Cancelar"
 
 #: .\trainingApp\templates\trainingApp\forms.html:47
 #: .\trainingApp\templates\trainingApp\review_deploy.html:16
@@ -361,7 +449,7 @@ msgstr ""
 "<p>si desea regresar a la página de entrenamientos disponibles, presione el "
 "botón Atrás</p>\n"
 
-#: .\trainingApp\templates\trainingApp\review_deploy.html:34
+#: .\trainingApp\templates\trainingApp\review_deploy.html:33
 msgid ""
 "\n"
 "                        <p class=\"mt-2\">\n"
@@ -371,11 +459,11 @@ msgid ""
 msgstr ""
 "\n"
 "                        <p class=\"mt-2\">\n"
-"                            respuesta correcta\n"
+"                            Respuesta correcta\n"
 "                        </p>\n"
 "                        "
 
-#: .\trainingApp\templates\trainingApp\review_deploy.html:41
+#: .\trainingApp\templates\trainingApp\review_deploy.html:40
 msgid " Wrong answer. The correct answer is: "
 msgstr "Respuesta incorrecta. La respuesta correcta es:"
 
@@ -422,6 +510,38 @@ msgstr "Revisiones"
 #: .\trainingApp\templates\trainingApp\training_List.html:55
 msgid "review"
 msgstr "Revisiones"
+
+#: .\trainingApp\views.py:117
+msgid "not started"
+msgstr "No iniciado"
+
+#: .\userApp\models.py:9
+msgid "Primary School"
+msgstr "Primaria"
+
+#: .\userApp\models.py:10
+msgid "High School"
+msgstr "Secundaria"
+
+#: .\userApp\models.py:11
+msgid "Associate"
+msgstr "Terciario"
+
+#: .\userApp\models.py:12
+msgid "University"
+msgstr "Universidad"
+
+#: .\userApp\models.py:13
+msgid "Doctoral Student"
+msgstr "Estudiante de doctoradoz"
+
+#: .\userApp\models.py:14
+msgid "Magister"
+msgstr "Magister"
+
+#: .\userApp\models.py:15
+msgid "Doctor"
+msgstr "Doctor/Doctora"
 
 #: .\userApp\templates\userApp\passwordChange.html:10
 #: .\userApp\templates\userApp\passwordChange.html:16
@@ -564,24 +684,6 @@ msgstr "Ocupación"
 #~ "es: %(deploy.correct_answer)s\n"
 #~ "                        </p>\n"
 #~ "                        "
-
-#~ msgid "Easy"
-#~ msgstr "Fácil"
-
-#~ msgid "Intermediate"
-#~ msgstr "Intermedio"
-
-#~ msgid "Advance"
-#~ msgstr "Avanzado"
-
-#~ msgid "Active"
-#~ msgstr "Activo"
-
-#~ msgid "Inactive"
-#~ msgstr "Inactivo"
-
-#~ msgid "in_Progress"
-#~ msgstr "En_progreso"
 
 #, python-brace-format
 #~ msgid "Great! You have completes: {training.name_training}"

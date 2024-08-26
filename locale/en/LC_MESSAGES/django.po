@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-29 09:54-0300\n"
+"POT-Creation-Date: 2024-08-28 14:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -171,6 +171,68 @@ msgstr "Register"
 msgid "Go"
 msgstr "Go"
 
+#: .\trainingApp\models.py:19
+msgid "Easy"
+msgstr "Easy"
+
+#: .\trainingApp\models.py:20
+msgid "Intermediate"
+msgstr "Intermediate"
+
+#: .\trainingApp\models.py:21
+msgid "Advanced"
+msgstr "Advanced"
+
+#: .\trainingApp\models.py:24 .\trainingApp\models.py:62
+msgid "Active"
+msgstr "Active"
+
+#: .\trainingApp\models.py:25 .\trainingApp\models.py:63
+msgid "Inactive"
+msgstr "Inactive"
+
+#: .\trainingApp\models.py:113
+#, fuzzy
+#| msgid "in_progress"
+msgid "In progress"
+msgstr "in_progress"
+
+#: .\trainingApp\models.py:114
+msgid "Completed"
+msgstr "Completed"
+
+#: .\trainingApp\models.py:148
+msgid "Well explained"
+msgstr "Well explained"
+
+#: .\trainingApp\models.py:149
+msgid "Interesting"
+msgstr "Interesting"
+
+#: .\trainingApp\models.py:150
+msgid "Easy to understand"
+msgstr "Easy to understand"
+
+#: .\trainingApp\models.py:153
+msgid "Too difficult"
+msgstr "Too difficult"
+
+#: .\trainingApp\models.py:154
+msgid "Not interesting"
+msgstr "Not interesting"
+
+#: .\trainingApp\models.py:155
+msgid "Poorly explained"
+msgstr "Poorly explained"
+
+#: .\trainingApp\models.py:156
+msgid "Confusing"
+msgstr "Confusing"
+
+#: .\trainingApp\models.py:157
+msgid "Repetitive"
+msgstr "Repetitive"
+
 #: .\trainingApp\templates\trainingApp\block_deploy_list.html:10
 msgid "List of Blocks"
 msgstr "List of Blocks"
@@ -245,7 +307,7 @@ msgstr "Previous"
 #: .\trainingApp\templates\trainingApp\block_deploy_list.html:90
 #: .\trainingApp\templates\trainingApp\review_block.html:72
 #: .\trainingApp\templates\trainingApp\review_block.html:77
-#: .\trainingApp\templates\trainingApp\review_deploy.html:48
+#: .\trainingApp\templates\trainingApp\review_deploy.html:52
 #: .\trainingApp\templates\trainingApp\review_list_tt.html:76
 #: .\trainingApp\templates\trainingApp\review_list_tt.html:81
 #: .\trainingApp\templates\trainingApp\training_List.html:94
@@ -275,6 +337,18 @@ msgstr ""
 msgid "Comment"
 msgstr "Comment"
 
+#: .\trainingApp\templates\trainingApp\comment_form.html:27
+msgid "More liked:"
+msgstr "More liked:"
+
+#: .\trainingApp\templates\trainingApp\comment_form.html:32
+msgid "Least liked:"
+msgstr "Least liked:"
+
+#: .\trainingApp\templates\trainingApp\comment_form.html:37
+msgid "Comment aditional:"
+msgstr "Comment aditional:"
+
 #: .\trainingApp\templates\trainingApp\comment_form.html:52
 msgid "Send"
 msgstr "Send"
@@ -282,6 +356,22 @@ msgstr "Send"
 #: .\trainingApp\templates\trainingApp\comment_form.html:62
 msgid "Skip Comment"
 msgstr "Skip Comment"
+
+#: .\trainingApp\templates\trainingApp\forms.html:21
+msgid "Are you sure?"
+msgstr "Are you sure?"
+
+#: .\trainingApp\templates\trainingApp\forms.html:22
+msgid "Your answer will be submitted."
+msgstr "Your answer will be submitted."
+
+#: .\trainingApp\templates\trainingApp\forms.html:25
+msgid "Confirm"
+msgstr "Confirm"
+
+#: .\trainingApp\templates\trainingApp\forms.html:26
+msgid "Cancel"
+msgstr "Cancel"
 
 #: .\trainingApp\templates\trainingApp\forms.html:47
 #: .\trainingApp\templates\trainingApp\review_deploy.html:16
@@ -357,7 +447,7 @@ msgstr ""
 "\n"
 "<p>If you want to return to the training page, press the back button</p>\n"
 
-#: .\trainingApp\templates\trainingApp\review_deploy.html:34
+#: .\trainingApp\templates\trainingApp\review_deploy.html:33
 msgid ""
 "\n"
 "                        <p class=\"mt-2\">\n"
@@ -371,7 +461,7 @@ msgstr ""
 "                        </p>\n"
 "                        "
 
-#: .\trainingApp\templates\trainingApp\review_deploy.html:41
+#: .\trainingApp\templates\trainingApp\review_deploy.html:40
 msgid " Wrong answer. The correct answer is: "
 msgstr ""
 
@@ -418,6 +508,38 @@ msgstr "Reviews"
 #: .\trainingApp\templates\trainingApp\training_List.html:55
 msgid "review"
 msgstr "review"
+
+#: .\trainingApp\views.py:117
+msgid "not started"
+msgstr "not started"
+
+#: .\userApp\models.py:9
+msgid "Primary School"
+msgstr "Primary School"
+
+#: .\userApp\models.py:10
+msgid "High School"
+msgstr "High School"
+
+#: .\userApp\models.py:11
+msgid "Associate"
+msgstr "Associate"
+
+#: .\userApp\models.py:12
+msgid "University"
+msgstr "University"
+
+#: .\userApp\models.py:13
+msgid "Doctoral Student"
+msgstr "Doctoral Student"
+
+#: .\userApp\models.py:14
+msgid "Magister"
+msgstr "Magister"
+
+#: .\userApp\models.py:15
+msgid "Doctor"
+msgstr "Doctor"
 
 #: .\userApp\templates\userApp\passwordChange.html:10
 #: .\userApp\templates\userApp\passwordChange.html:16

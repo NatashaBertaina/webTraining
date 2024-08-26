@@ -24,17 +24,17 @@
       {% csrf_token %}
 
       <div class="form-group">
-        {{ form.more_liked.label_tag }}
+        <label for="id_more_liked">{% trans 'More liked:' %}</label>
         {{ form.more_liked }}
       </div>
 
       <div class="form-group">
-        {{ form.least_liked.label_tag }}
+        <label for="id_more_liked">{% trans 'Least liked:' %}</label>
         {{ form.least_liked }}
       </div>
 
       <div class="form-group">
-        {{ form.comment_aditional.label_tag }}
+        <label for="id_more_liked">{% trans 'Comment aditional:' %}</label>
         {{ form.comment_aditional }}
       </div>
 
