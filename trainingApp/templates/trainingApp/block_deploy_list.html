@@ -44,7 +44,7 @@
                             {% endif %}
                             </td>
                             <td>{{ block.estimed_duration_block }}</td>
-                            <td>{{ states_blocks_answers|get_state:block.id }}</td>
+                            <td>{{ states_blocks_answers|get_state_trans:block.id }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

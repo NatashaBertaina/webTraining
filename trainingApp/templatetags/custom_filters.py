@@ -1,6 +1,6 @@
 # trainingApp/templatetags/custom_filters.py
 from django import template
-
+from django.utils.translation import gettext_lazy as _
 register = template.Library()
 
 #Metodo para obtener la clave de un diccionario
@@ -12,3 +12,7 @@ def get_value(dictionary, key):
 @register.filter
 def get_state(dictionary, key):
     return dictionary[f'{key}']
+
+@register.filter
+def get_state_trans(dictionary, key):
+    return _(dictionary[f'{key}'])
