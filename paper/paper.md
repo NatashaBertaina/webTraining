@@ -64,7 +64,7 @@ The course consisted of a weekly in-person session of 2 hours over 8 weeks (16 h
 
 In both cases, simple topics were started, which all participants had previously worked on in their formal education. The first training covered the sonification of mathematical functions, followed by the sonification of the same functions but with added noise. This served as preparation for the following topics: light curves, galaxy spectra, and, finally, particle sonification. The five training sessions were combined to create a review training session, which prepared participants for a final training session with the same structure. During the course, the number of correct answers achieved by each participant was evaluated, with the results shown in \autoref{fig:fig1}.
 
-![Chart of each participant's successes throughout the training sessions \label{fig:fig1}](figures/fig1-a.png){height="50%"}
+![Chart of each participant's successes throughout the training sessions \label{fig:fig1}](figures/resultados.png){height="50%"}
 
 
 
