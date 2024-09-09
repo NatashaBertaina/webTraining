@@ -1,5 +1,5 @@
 ---
-title: ''
+title: 'Learning from a multimodal approach with sonoTraining platform'
 tags:
   - 
 authors:
@@ -43,9 +43,9 @@ Sonification is a technique that expands the possibilities of learning and acces
 For this technique to be effectively adopted, it is essential to have an adequate teaching and training process. In response to this need, sonoTraining was developed, a web platform specifically designed to host sonification training that does not require expensive installations, an issue highlighted during a previous development with PsychoPy\footnote{\url{https://www.psychopy.org/}} desktop in an International Training Course under the REINFORCE project [bertainaB2023]. The new website facilitates learning the technique, offering an accessible and flexible environment for users of various experience levels to acquire and refine their skills in sonified data analysis. 
 
 
-# sonoTraining platform\footnote{\url{Website available: https://sonotraining.um.edu.ar}}
+# sonoTraining platform
 
-sonoTraining is a web platform developed to host and manage data sonification training, based on the Django framework\footnote{\url{https://www.djangoproject.com/}}, a high-level, open-source web development environment. Each data deployment (including sonification and the graph) corresponds to a page of a form, which represents a training block. This organization allows the storage of responses in the database, and form verification ensures that the entire training is completed even in case of interruptions.
+sonoTraining\footnote{\url{Website available: https://sonotraining.um.edu.ar}} is a web platform developed to host and manage data sonification training, based on the Django framework\footnote{\url{https://www.djangoproject.com/}}, a high-level, open-source web development environment. Each data deployment (including sonification and the graph) corresponds to a page of a form, which represents a training block. This organization allows the storage of responses in the database, and form verification ensures that the entire training is completed even in case of interruptions.
 
 
 To ensure that the forms are readable by assistive technologies, the Web Content Accessibility Guidelines (WCAG\footnote{\url{https://www.w3.org/WAI/standards-guidelines/wcag/es}}) were followed, implementing the recommendations detailed therein. Some functionalities of the Bootstrap framework were also integrated to make the design more fluid, responsive, and without additional loads, helping users with or without assistive technologies to navigate.
