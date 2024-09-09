@@ -1,6 +1,8 @@
 MIT license
 
 
+Copyright (c) 2024 Natasha Bertaina Lucero, Gonzalo Cayo. This development is powered by CONICET-Argentina, Universidad de Mendoza-Argentina and Universidad Tecnológica Nacional-Facultad Regional Mendoza-Argentina.
+
 
 Permission is hereby granted, free of charge, to any person obtaining a copy 
 of this software and associated documentation files (the “Software”), to deal 
