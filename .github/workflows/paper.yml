@@ -16,7 +16,7 @@ jobs:
           # Bibliography file, if existing
           #bibtex: paper/paper.bib
       - name: Upload
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: paper
           # This is the output path where Pandoc will write the compiled
