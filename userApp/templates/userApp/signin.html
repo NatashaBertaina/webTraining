@@ -24,4 +24,10 @@
         </div>        
     </form>
 
+    <div class="text-center mt-3"></div>
+        <a href="{% url 'userApp:password_reset' %}" class="btn btn-link">
+            {% trans 'Forgot your password?' %}
+        </a>
+    </div>
+
 {% endblock %}

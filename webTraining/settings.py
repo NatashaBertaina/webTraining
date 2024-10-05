@@ -184,6 +184,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'userApp:signup'
 LOGIN_URL = 'userApp:signup'
 
+
 #Configuracion de envios email
 #Cargar las variables de entorno desde el archivo .env
 load_dotenv()
