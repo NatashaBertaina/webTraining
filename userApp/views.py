@@ -57,8 +57,7 @@ def signup(request):
     else:
         form = SignupForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = False  # Desactiva la cuenta hasta que se confirme el email
+            user = form.save()
             # Crear el objeto Trainee y se relaciona con el usuario y al grupo por defecto
             group_defect, created = Group.objects.get_or_create(name_group='Group Defect')
             trainee = Trainee(
@@ -68,29 +67,13 @@ def signup(request):
                     occupation=form.cleaned_data['occupation'],
                     group=group_defect
                 )
-            user.save()
             trainee.save()
-            # Enviar email de confirmación
-            try:
-                current_site = get_current_site(request)
-                mail_subject = 'Activate your account.'
-                mail_transmitter = os.getenv('EMAIL_HOST_USER')
-                message = render_to_string('userApp/acc_active_email.html', {
-                    'user': user,
-                    'domain': current_site.domain,
-                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),  # uid se utiliza para identificar de manera única al usuario en el enlace de activación sin exponer directamente el ID del usuario en la URL.
-                    'token': default_token_generator.make_token(user),  # Crea un token único basado en el usuario y otros factores
-                })
-                send_mail(mail_subject, message, mail_transmitter, [user.email]) 
-            except Exception as e:
-                messages.error(request, "There was an error sending the confirmation email. Please try again later.")
-                return redirect('home')
-            
-            messages.success(request, "Please confirm your email address to complete the registration")
+            login(request, user)
+            messages.success(request, "Usuario creado exitosamente")
             return redirect('home')
         
         else:
-            messages.error(request, "Error")
+            messages.error(request, "Error al crear el usuario")
             return render(request, 'userApp/signup.html', {"form": form})
 import traceback        
 def activate(request, uidb64, token):
