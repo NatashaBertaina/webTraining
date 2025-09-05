@@ -348,12 +348,12 @@ INSERT INTO trainingApp_choice (choice, deploy_id, choice_en, choice_es, correct
 ('Seno', (SELECT id FROM trainingApp_deploy WHERE deploy_sound = 'trainingApp/sound/cuadratica2_noise.mp3'), 'Sine', 'Seno', FALSE),
 ('Cúbica', (SELECT id FROM trainingApp_deploy WHERE deploy_sound = 'trainingApp/sound/cuadratica2_noise.mp3'), 'Cubic', 'Cúbica', FALSE);
 
--- Para Cre-Cte-Decr_sound.mp3 (deploy 28 - último de Funciones Tipo 3)
+-- Para Cre-Cte-Decr_sound.mp3 (deploy - último de Funciones Tipo 3)
 INSERT INTO trainingApp_choice (choice, deploy_id, choice_en, choice_es, correctChoice) VALUES
-('Creciente, Constante, Decreciente', (SELECT id FROM trainingApp_deploy WHERE deploy_sound = 'trainingApp/sound/Cre-Cte-Decr_sound.mp3' AND block_id = 8), 'Increasing, Constant, Decreasing', 'Creciente, Constante, Decreciente', TRUE),
-('Constante, Creciente, Decreciente', (SELECT id FROM trainingApp_deploy WHERE deploy_sound = 'trainingApp/sound/Cre-Cte-Decr_sound.mp3' AND block_id = 8), 'Constant, Increasing, Decreasing', 'Constante, Creciente, Decreciente', FALSE),
-('Decreciente, Constante, Decreciente', (SELECT id FROM trainingApp_deploy WHERE deploy_sound = 'trainingApp/sound/Cre-Cte-Decr_sound.mp3' AND block_id = 8), 'Decreasing, Constant, Decreasing', 'Decreciente, Constante, Decreciente', FALSE),
-('Constante, Decreciente, Creciente', (SELECT id FROM trainingApp_deploy WHERE deploy_sound = 'trainingApp/sound/Cre-Cte-Decr_sound.mp3' AND block_id = 8), 'Constant, Decreasing, Increasing', 'Constante, Decreciente, Creciente', FALSE),
-('Ninguna de las anteriores', (SELECT id FROM trainingApp_deploy WHERE deploy_sound = 'trainingApp/sound/Cre-Cte-Decr_sound.mp3' AND block_id = 8), 'None of the above', 'Ninguna de las anteriores', FALSE);
+('Creciente, Constante, Decreciente', (SELECT d.id FROM trainingApp_deploy d INNER JOIN trainingApp_block b ON d.block_id = b.id WHERE d.deploy_sound = 'trainingApp/sound/Cre-Cte-Decr_sound.mp3' AND b.name_block = 'Funciones Tipo 3'), 'Increasing, Constant, Decreasing', 'Creciente, Constante, Decreciente', TRUE),
+('Constante, Creciente, Decreciente', (SELECT d.id FROM trainingApp_deploy d INNER JOIN trainingApp_block b ON d.block_id = b.id WHERE d.deploy_sound = 'trainingApp/sound/Cre-Cte-Decr_sound.mp3' AND b.name_block = 'Funciones Tipo 3'), 'Constant, Increasing, Decreasing', 'Constante, Creciente, Decreciente', FALSE),
+('Decreciente, Constante, Decreciente', (SELECT d.id FROM trainingApp_deploy d INNER JOIN trainingApp_block b ON d.block_id = b.id WHERE d.deploy_sound = 'trainingApp/sound/Cre-Cte-Decr_sound.mp3' AND b.name_block = 'Funciones Tipo 3'), 'Decreasing, Constant, Decreasing', 'Decreciente, Constante, Decreciente', FALSE),
+('Constante, Decreciente, Creciente', (SELECT d.id FROM trainingApp_deploy d INNER JOIN trainingApp_block b ON d.block_id = b.id WHERE d.deploy_sound = 'trainingApp/sound/Cre-Cte-Decr_sound.mp3' AND b.name_block = 'Funciones Tipo 3'), 'Constant, Decreasing, Increasing', 'Constante, Decreciente, Creciente', FALSE),
+('Ninguna de las anteriores', (SELECT d.id FROM trainingApp_deploy d INNER JOIN trainingApp_block b ON d.block_id = b.id WHERE d.deploy_sound = 'trainingApp/sound/Cre-Cte-Decr_sound.mp3' AND b.name_block = 'Funciones Tipo 3'), 'None of the above', 'Ninguna de las anteriores', FALSE);
 
 
