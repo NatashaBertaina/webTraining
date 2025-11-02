@@ -1,4 +1,4 @@
--- ========================================
+﻿-- ========================================
 -- TRAININGS Parte 1 (trainingApp_training)
 -- ========================================
 
@@ -141,7 +141,7 @@ INSERT INTO `trainingApp_deploy` (
 SELECT
     B.id,
     'Ha detectado sonido?',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/noise.wav',
     'Have you detected sound?',
     'Ha detectado sonido?'
@@ -165,7 +165,7 @@ UNION ALL
 SELECT
     B.id,
     'Ha detectado sonido?',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_Qo0FGyT.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/sound-noise.260-280.SNR85.wav',
     'Have you detected sound?',
     'Ha detectado sonido?'
@@ -178,7 +178,7 @@ UNION ALL
 SELECT
     B.id,
     'Identifica la función mostrada como:',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_YTU17UW.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/fc-constante_sound.mp3',
     'Identify the function shown as:',
     'Identifica la función mostrada como:'
@@ -190,7 +190,7 @@ UNION ALL
 SELECT
     B.id,
     'Identifica la función mostrada como:',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_Gg4QrRB.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/decreciente_sound.mp3',
     'Identify the function shown as:',
     'Identifica la función mostrada como:'
@@ -202,7 +202,7 @@ UNION ALL
 SELECT
     B.id,
     'Identifica la función mostrada como:',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_4yKTBGs.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/triangular_sound.mp3',
     'Identify the function shown as:',
     'Identifica la función mostrada como:'
@@ -214,7 +214,7 @@ UNION ALL
 SELECT
     B.id,
     'Identifica la función mostrada como:',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_gfd2XMb.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/creciente_sound.mp3',
     'Identify the function shown as:',
     'Identifica la función mostrada como:'
@@ -226,7 +226,7 @@ UNION ALL
 SELECT
     B.id,
     'Identifica la función mostrada como:',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_RONyiuK.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/sierra_sound.mp3',
     'Identify the function shown as:',
     'Identifica la función mostrada como:'
@@ -238,7 +238,7 @@ UNION ALL
 SELECT
     B.id,
     'Identifica la función mostrada como:',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_l7ETuKJ.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/cuadrada_sound.mp3',
     'Identify the function shown as:',
     'Identifica la función mostrada como:'
@@ -336,7 +336,7 @@ UNION ALL
 SELECT
     B.id,
     'Lo que usted escuchó fue una combinación de:',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_GDDFj6D.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/Cte-Decr-Cre_sound.mp3',
     'What you heard was a combination of:',
     'Lo que usted escuchó fue una combinación de:'
@@ -348,7 +348,7 @@ UNION ALL
 SELECT
     B.id,
     'Lo que usted escuchó fue una combinación de:',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_ROtWlQT.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/Cre-Cte-Decr_sound.mp3',
     'What you heard was a combination of:',
     'Lo que usted escuchó fue una combinación de:'
@@ -373,7 +373,7 @@ UNION ALL
 SELECT
     B.id,
     'Lo que escuchó fue una combinación de funciones:',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_qdZSMY6.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/Decr-Cte-Cre_sound.mp3',
     'What you heard was a combination of functions:',
     'Lo que escuchó fue una combinación de funciones:'
@@ -397,7 +397,7 @@ UNION ALL
 SELECT
     B.id,
     'Lo que escuchó fue una combinación de funciones:',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_XaaViXI.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/Cre-Seno-Cte_sound.mp3',
     'What you heard was a combination of functions:',
     'Lo que escuchó fue una combinación de funciones:'
@@ -410,7 +410,7 @@ UNION ALL
 SELECT
     B.id,
     'Lo que escuchó fue una función:',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_NvioE1Y.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/creciente_noise.mp3',
     'What you heard was a function:',
     'Lo que escuchó fue una función:'
@@ -434,7 +434,7 @@ UNION ALL
 SELECT
     B.id,
     'Lo que escuchó fue una función:',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_Oe98uxS.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/triangular_noise.mp3',
     'What you heard was a function:',
     'Lo que escuchó fue una función:'
@@ -446,7 +446,7 @@ UNION ALL
 SELECT
     B.id,
     'Lo que escuchó fue una función:',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_h6VWvdr.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/decreciente_noise.mp3',
     'What you heard was a function:',
     'Lo que escuchó fue una función:'
@@ -458,7 +458,7 @@ UNION ALL
 SELECT
     B.id,
     'Lo que escuchó fue una función:',
-    'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_5VNDlaz.png',
+    'trainingApp/images/sin_imagen.png',
     'trainingApp/sound/cuadrada_noise.mp3',
     'What you heard was a function:',
     'Lo que escuchó fue una función:'
@@ -1134,3 +1134,5 @@ SELECT 'Ninguna de las anteriores', D.id, 'None of the above', 'Ninguna de las a
 FROM `trainingApp_deploy` D
 INNER JOIN `trainingApp_block` B ON D.block_id = B.id
 WHERE D.`deploy_sound` = 'trainingApp/sound/Cre-Cte-Decr_sound.mp3' AND B.`name_block` = 'Funciones Tipo 3';
+
+

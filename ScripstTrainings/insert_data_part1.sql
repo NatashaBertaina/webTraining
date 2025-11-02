@@ -1,4 +1,4 @@
-
+﻿
 -- ========================================
 -- TRAININGS Parte 1
 -- ========================================
@@ -44,17 +44,17 @@ INSERT INTO trainingApp_deploy (
     question_en, question_es
 ) VALUES
 -- Para Block "Bloque muestra"
-((SELECT id FROM trainingApp_block WHERE name_block = 'Bloque muestra'), 'Ha detectado sonido?', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido.png', 'trainingApp/sound/noise.wav', 'Have you detected sound?', 'Ha detectado sonido?'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Bloque muestra'), 'Ha detectado sonido?', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/noise.wav', 'Have you detected sound?', 'Ha detectado sonido?'),
 ((SELECT id FROM trainingApp_block WHERE name_block = 'Bloque muestra'), 'Ha detectado sonido?', 'trainingApp/images/SNR40.300-320.png', 'trainingApp/sound/sound-noise.300-320.SNR40.wav', 'Have you detected sound?', 'Ha detectado sonido?'),
-((SELECT id FROM trainingApp_block WHERE name_block = 'Bloque muestra'), 'Ha detectado sonido?', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_Qo0FGyT.png', 'trainingApp/sound/sound-noise.260-280.SNR85.wav', 'Have you detected sound?', 'Ha detectado sonido?'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Bloque muestra'), 'Ha detectado sonido?', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/sound-noise.260-280.SNR85.wav', 'Have you detected sound?', 'Ha detectado sonido?'),
 
 -- Para Block "Funciones Tipo 1"
-((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 1'), 'Identifica la función mostrada como:', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_YTU17UW.png', 'trainingApp/sound/fc-constante_sound.mp3', 'Identify the function shown as:', 'Identifica la función mostrada como:'),
-((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 1'), 'Identifica la función mostrada como:', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_Gg4QrRB.png', 'trainingApp/sound/decreciente_sound.mp3', 'Identify the function shown as:', 'Identifica la función mostrada como:'),
-((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 1'), 'Identifica la función mostrada como:', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_4yKTBGs.png', 'trainingApp/sound/triangular_sound.mp3', 'Identify the function shown as:', 'Identifica la función mostrada como:'),
-((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 1'), 'Identifica la función mostrada como:', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_gfd2XMb.png', 'trainingApp/sound/creciente_sound.mp3', 'Identify the function shown as:', 'Identifica la función mostrada como:'),
-((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 1'), 'Identifica la función mostrada como:', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_RONyiuK.png', 'trainingApp/sound/sierra_sound.mp3', 'Identify the function shown as:', 'Identifica la función mostrada como:'),
-((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 1'), 'Identifica la función mostrada como:', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_l7ETuKJ.png', 'trainingApp/sound/cuadrada_sound.mp3', 'Identify the function shown as:', 'Identifica la función mostrada como:'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 1'), 'Identifica la función mostrada como:', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/fc-constante_sound.mp3', 'Identify the function shown as:', 'Identifica la función mostrada como:'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 1'), 'Identifica la función mostrada como:', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/decreciente_sound.mp3', 'Identify the function shown as:', 'Identifica la función mostrada como:'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 1'), 'Identifica la función mostrada como:', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/triangular_sound.mp3', 'Identify the function shown as:', 'Identifica la función mostrada como:'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 1'), 'Identifica la función mostrada como:', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/creciente_sound.mp3', 'Identify the function shown as:', 'Identifica la función mostrada como:'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 1'), 'Identifica la función mostrada como:', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/sierra_sound.mp3', 'Identify the function shown as:', 'Identifica la función mostrada como:'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 1'), 'Identifica la función mostrada como:', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/cuadrada_sound.mp3', 'Identify the function shown as:', 'Identifica la función mostrada como:'),
 
 -- Para Block "Funciones Tipo 2"
 ((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 2'), 'Identifica la función mostrada como:', 'trainingApp/images/cuadratica2plot.png', 'trainingApp/sound/cuadratica2_sound.mp3', 'Identify the function shown as:', 'Identifica la función mostrada como:'),
@@ -66,21 +66,21 @@ INSERT INTO trainingApp_deploy (
 -- Para Block "Funciones Tipo 3"
 ((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 3'), 'Lo que usted escuchó fue una combinación de:', 'trainingApp/images/Decr-Cte-Decrplot.png', 'trainingApp/sound/Decr-Cte-Decr_sound.wav', 'What you heard was a combination of:', 'Lo que usted escuchó fue una combinación de:'),
 ((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 3'), 'Lo que usted escuchó fue una combinación de:', 'trainingApp/images/Cte-Cre-Decr-Cteplot.png', 'trainingApp/sound/Cte-Cre-Decr-Cte_sound.mp3', 'What you heard was a combination of:', 'Lo que usted escuchó fue una combinación de:'),
-((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 3'), 'Lo que usted escuchó fue una combinación de:', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_GDDFj6D.png', 'trainingApp/sound/Cte-Decr-Cre_sound.mp3', 'What you heard was a combination of:', 'Lo que usted escuchó fue una combinación de:'),
-((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 3'), 'Lo que usted escuchó fue una combinación de:', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_ROtWlQT.png', 'trainingApp/sound/Cre-Cte-Decr_sound.mp3', 'What you heard was a combination of:', 'Lo que usted escuchó fue una combinación de:'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 3'), 'Lo que usted escuchó fue una combinación de:', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/Cte-Decr-Cre_sound.mp3', 'What you heard was a combination of:', 'Lo que usted escuchó fue una combinación de:'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 3'), 'Lo que usted escuchó fue una combinación de:', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/Cre-Cte-Decr_sound.mp3', 'What you heard was a combination of:', 'Lo que usted escuchó fue una combinación de:'),
 
 -- Para Block "Funciones Tipo 4"
 ((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 4'), 'Lo que escuchó fue una combinación de funciones:', 'trainingApp/images/Cubica-Cte-Decrplot.png', 'trainingApp/sound/Cubica-Cte-Decr_sound.mp3', 'What you heard was a combination of functions:', 'Lo que escuchó fue una combinación de funciones:'),
-((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 4'), 'Lo que escuchó fue una combinación de funciones:', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_qdZSMY6.png', 'trainingApp/sound/Decr-Cte-Cre_sound.mp3', 'What you heard was a combination of functions:', 'Lo que escuchó fue una combinación de funciones:'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 4'), 'Lo que escuchó fue una combinación de funciones:', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/Decr-Cte-Cre_sound.mp3', 'What you heard was a combination of functions:', 'Lo que escuchó fue una combinación de funciones:'),
 ((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 4'), 'Lo que escuchó fue una combinación de funciones:', 'trainingApp/images/Coseno-Cre-Decrplot.png', 'trainingApp/sound/Coseno-Cre-Decr_sound.mp3', 'What you heard was a combination of functions:', 'Lo que escuchó fue una combinación de funciones:'),
-((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 4'), 'Lo que escuchó fue una combinación de funciones:', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_XaaViXI.png', 'trainingApp/sound/Cre-Seno-Cte_sound.mp3', 'What you heard was a combination of functions:', 'Lo que escuchó fue una combinación de funciones:'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones Tipo 4'), 'Lo que escuchó fue una combinación de funciones:', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/Cre-Seno-Cte_sound.mp3', 'What you heard was a combination of functions:', 'Lo que escuchó fue una combinación de funciones:'),
 
 -- Para Block "Funciones tipo 1" (con ruido)
-((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones tipo 1' AND description LIKE '%ruido%'), 'Lo que escuchó fue una función:', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_NvioE1Y.png', 'trainingApp/sound/creciente_noise.mp3', 'What you heard was a function:', 'Lo que escuchó fue una función:'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones tipo 1' AND description LIKE '%ruido%'), 'Lo que escuchó fue una función:', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/creciente_noise.mp3', 'What you heard was a function:', 'Lo que escuchó fue una función:'),
 ((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones tipo 1' AND description LIKE '%ruido%'), 'Lo que escuchó fue una función:', 'trainingApp/images/fc-constanteplot_noise.png', 'trainingApp/sound/fc-constante_noise.mp3', 'What you heard was a function:', 'Lo que escuchó fue una función:'),
-((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones tipo 1' AND description LIKE '%ruido%'), 'Lo que escuchó fue una función:', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_Oe98uxS.png', 'trainingApp/sound/triangular_noise.mp3', 'What you heard was a function:', 'Lo que escuchó fue una función:'),
-((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones tipo 1' AND description LIKE '%ruido%'), 'Lo que escuchó fue una función:', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_h6VWvdr.png', 'trainingApp/sound/decreciente_noise.mp3', 'What you heard was a function:', 'Lo que escuchó fue una función:'),
-((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones tipo 1' AND description LIKE '%ruido%'), 'Lo que escuchó fue una función:', 'trainingApp/images/Entrenamiento_sin_imagen_-_Sólo_sonido_5VNDlaz.png', 'trainingApp/sound/cuadrada_noise.mp3', 'What you heard was a function:', 'Lo que escuchó fue una función:'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones tipo 1' AND description LIKE '%ruido%'), 'Lo que escuchó fue una función:', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/triangular_noise.mp3', 'What you heard was a function:', 'Lo que escuchó fue una función:'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones tipo 1' AND description LIKE '%ruido%'), 'Lo que escuchó fue una función:', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/decreciente_noise.mp3', 'What you heard was a function:', 'Lo que escuchó fue una función:'),
+((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones tipo 1' AND description LIKE '%ruido%'), 'Lo que escuchó fue una función:', 'trainingApp/images/sin_imagen.png', 'trainingApp/sound/cuadrada_noise.mp3', 'What you heard was a function:', 'Lo que escuchó fue una función:'),
 ((SELECT id FROM trainingApp_block WHERE name_block = 'Funciones tipo 1' AND description LIKE '%ruido%'), 'Lo que escuchó fue una función:', 'trainingApp/images/sierraplot_noise.png', 'trainingApp/sound/sierra_noise.mp3', 'What you heard was a function:', 'Lo que escuchó fue una función:'),
 
 -- Para Block "Funciones tipo 2" (con ruido)
@@ -355,5 +355,7 @@ INSERT INTO trainingApp_choice (choice, deploy_id, choice_en, choice_es, correct
 ('Decreciente, Constante, Decreciente', (SELECT d.id FROM trainingApp_deploy d INNER JOIN trainingApp_block b ON d.block_id = b.id WHERE d.deploy_sound = 'trainingApp/sound/Cre-Cte-Decr_sound.mp3' AND b.name_block = 'Funciones Tipo 3'), 'Decreasing, Constant, Decreasing', 'Decreciente, Constante, Decreciente', FALSE),
 ('Constante, Decreciente, Creciente', (SELECT d.id FROM trainingApp_deploy d INNER JOIN trainingApp_block b ON d.block_id = b.id WHERE d.deploy_sound = 'trainingApp/sound/Cre-Cte-Decr_sound.mp3' AND b.name_block = 'Funciones Tipo 3'), 'Constant, Decreasing, Increasing', 'Constante, Decreciente, Creciente', FALSE),
 ('Ninguna de las anteriores', (SELECT d.id FROM trainingApp_deploy d INNER JOIN trainingApp_block b ON d.block_id = b.id WHERE d.deploy_sound = 'trainingApp/sound/Cre-Cte-Decr_sound.mp3' AND b.name_block = 'Funciones Tipo 3'), 'None of the above', 'Ninguna de las anteriores', FALSE);
+
+
 
 
