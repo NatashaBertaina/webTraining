@@ -96,19 +96,8 @@ WSGI_APPLICATION = 'webTraining.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test',          # nombre de la base de datos principal
-        'USER': 'root',
-        'PASSWORD': '1290',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
-        # Configuración específica para pruebas (Django creará/usarará esta BD de test)
-        'TEST': {
-            'NAME': 'test',
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
