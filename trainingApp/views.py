@@ -3,7 +3,8 @@ from django.http import HttpResponseRedirect
 from django.views import View
 from django.views.generic import ListView
 from .forms import QuestionForm,CommentForm
-from .models import Training, Deploy, DeployAnswer, TraineeTraining, Trainee, Block, Choice, Comment,BlockAnswer
+from .models import Training, Deploy, DeployAnswer, TraineeTraining, Block, Choice, Comment,BlockAnswer
+from userApp.models import Trainee
 from django.utils import timezone
 from django.utils.translation import gettext as _
 
