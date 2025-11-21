@@ -45,7 +45,7 @@ class Training(models.Model):
     def was_published_recently(self):
         return self.pub_date >=timezone.now() - datetime.timedelta(days=1)
     def __str__(self):
-        return f"Training_Id: {self.id}, Name Training: {self.name_training}"
+        return self.name_training
     
     #Metodo que trae la cantidad de veces que se realizo un training por un trainee especifico
     def get_num_trainee_trainings(self, trainee_id):
@@ -85,7 +85,9 @@ class Deploy(models.Model):
     #correct_answer = models.CharField(max_length=100, null=True) 
 
     def __str__(self):
-        return f"DeployID: {self.id}, {self.block}"
+        if self.question:
+            return f"Deploy {self.id}: {self.question}"
+        return f"Deploy {self.id}"
 
 
 class Choice(models.Model):
@@ -93,7 +95,10 @@ class Choice(models.Model):
     choice = models.CharField(max_length=100, null=True)
     correctChoice = models.BooleanField(default=False)
     def __str__(self):
-        return f"ChoiceID: {self.id}, {self.choice}, DeployID: {self.deploy.id}"
+        # Mostrar una etiqueta concisa: id + texto de la opción (+ marcar si es correcta)
+        text = self.choice or ''
+        suffix = ' (correct)' if self.correctChoice else ''
+        return f"Choice {self.id}: {text}{suffix}"
     
     
 class TraineeTraining(models.Model):
