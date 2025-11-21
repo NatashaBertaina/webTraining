@@ -12,11 +12,21 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-# Cargar las variables de entorno del archivo .env
-load_dotenv()
+import logging
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Cargar las variables de entorno desde el archivo .env localizado en la raiz
+dotenv_path = BASE_DIR / '.env'
+logger = logging.getLogger(__name__)
+if dotenv_path.exists():
+    load_dotenv(dotenv_path)
+    print(f"INFO .env file loaded successfully from {dotenv_path}.")
+else:
+    print(f"INFO .env file not found at {dotenv_path}. Make sure it exists.")
+
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-2u@^t%bs=fuz+=xt$w8uee%u3gfx0%pmpl#=6dsit2f9czn!m4')
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True')
