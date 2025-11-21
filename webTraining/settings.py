@@ -11,23 +11,15 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
+# Cargar las variables de entorno del archivo .env
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2u@^t%bs=fuz+=xt$w8uee%u3gfx0%pmpl#=6dsit2f9czn!m4'
-
-#SECRET_KEY = os.environ["SECRET_KEY"]
-
-# SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
-DEBUG = True
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-2u@^t%bs=fuz+=xt$w8uee%u3gfx0%pmpl#=6dsit2f9czn!m4')
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True')
 
 ALLOWED_HOSTS = []
 
@@ -38,7 +30,6 @@ MESSAGE_STORAGE= "django.contrib.messages.storage.cookie.CookieStorage"
 SESSION_COOKIE_AGE = 1800
 
 # Application definition
-
 INSTALLED_APPS = [
     'modeltranslation',
     'django.contrib.admin', 
@@ -185,11 +176,31 @@ LOGIN_REDIRECT_URL = 'userApp:signup'
 LOGIN_URL = 'userApp:signup'
 
 
-#Configuracion de envios email
-# load_dotenv()
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+# Configuracion de envios email
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend',)
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587)) # Asegurar que el puerto sea un entero
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',  # o 'DEBUG' para más verbosidad
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}

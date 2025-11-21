@@ -21,6 +21,8 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_decode
 from dotenv import load_dotenv
 import os
+import logging
+import smtplib
 from django.contrib.auth import REDIRECT_FIELD_NAME, get_user_model
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView
@@ -172,6 +174,12 @@ class CustomPasswordResetView(PasswordResetView):
         return super().dispatch(*args, **kwargs)
 
     def form_valid(self, form):
+        # Validación: comprobar si el email ingresado está registrado
+        email = form.cleaned_data.get('email')
+        if not get_user_model()._default_manager.filter(email__iexact=(email or '')).exists():
+            messages.error(self.request, _("El correo ingresado no está registrado."))
+            return self.form_invalid(form)
+
         opts = {
             "use_https": self.request.is_secure(),
             "token_generator": self.token_generator,
@@ -182,7 +190,19 @@ class CustomPasswordResetView(PasswordResetView):
             "html_email_template_name": self.html_email_template_name,
             "extra_email_context": self.extra_email_context,
         }
-        form.save(**opts)
+        try:
+            form.save(**opts)
+        except (ConnectionRefusedError, smtplib.SMTPAuthenticationError, smtplib.SMTPException, Exception) as e:
+            logger = logging.getLogger(__name__)
+            logger.exception("Error sending password reset email: %s", e)
+            messages.error(
+                self.request,
+                _(
+                    "Se produjo un error al intentar enviar el correo, contacta al administrador."
+                ),
+            )
+            return super().form_valid(form)
+
         return super().form_valid(form)
     
     
