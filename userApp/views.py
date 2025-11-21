@@ -59,6 +59,12 @@ def signup(request):
     else:
         form = SignupForm(request.POST)
         if form.is_valid():
+            # Verificar si el email ya fue usado por otro usuario
+            email = form.cleaned_data.get('email')
+            if email and User.objects.filter(email__iexact=email).exists():
+                messages.error(request, "El correo ingresado ya está registrado.")
+                return render(request, 'userApp/signup.html', {"form": form})
+
             user = form.save()
             # Crear el objeto Trainee y se relaciona con el usuario y al grupo por defecto
             group_defect, created = Group.objects.get_or_create(name_group='Group Defect')
