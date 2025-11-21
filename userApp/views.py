@@ -155,7 +155,7 @@ class MyPasswordChangeView(PasswordChangeView):
     
 #Vista una vez modificada la password exisitamente
 class MyPasswordResetDoneView(PasswordResetDoneView):
-    template_name= "userApp/passwordResetDone.html"
+    template_name= "userApp/password_change_done.html"
 
 class CustomPasswordResetView(PasswordResetView):
     email_template_name = "registration/password_reset_email.html"
